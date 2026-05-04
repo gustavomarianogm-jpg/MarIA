@@ -211,7 +211,7 @@ footer{background:#0F0920;padding:40px 24px}
 .footer-copy{color:rgba(255,255,255,0.3);font-size:12px;margin-top:20px;text-align:center;max-width:960px;margin-left:auto;margin-right:auto}
 
 /* ════ AUTH ════ */
-#pg-auth{background:var(--bg);display:flex;align-items:center;justify-content:center;min-height:100vh;padding:80px 24px}
+#pg-auth{background:var(--bg);align-items:center;justify-content:center;min-height:100vh;padding:80px 24px}
 .auth-wrap{width:100%;max-width:440px}
 .auth-logo{display:flex;align-items:center;gap:8px;justify-content:center;margin-bottom:24px}
 .auth-tabs{display:flex;background:#F0E8FF;border-radius:14px;padding:4px;margin-bottom:22px}
@@ -455,6 +455,15 @@ footer{background:#0F0920;padding:40px 24px}
 .spin{width:14px;height:14px;border:2px solid rgba(255,255,255,.3);border-top-color:white;border-radius:50%;animation:spin .7s linear infinite;display:inline-block}
 
 /* responsivo */
+.ham{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:6px;margin-left:auto}
+.ham span{display:block;width:22px;height:2px;background:var(--dark);border-radius:2px;transition:all .25s}
+.ham.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.ham.open span:nth-child(2){opacity:0}
+.ham.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+.mobile-menu{display:none;position:fixed;top:60px;left:0;right:0;background:white;border-bottom:1px solid var(--border);padding:12px 16px;z-index:999;flex-direction:column;gap:4px;box-shadow:0 8px 24px rgba(0,0,0,.08)}
+.mobile-menu.open{display:flex}
+.mob-btn{padding:11px 16px;border-radius:12px;font-size:14px;font-weight:600;text-align:left;border:none;background:transparent;color:var(--dark);cursor:pointer;font-family:'Poppins','Segoe UI',sans-serif;width:100%;transition:background .15s}
+.mob-btn:hover{background:#F5F0FF;color:var(--lilas)}
 @media(max-width:768px){
   .stats-section,.steps-grid,.cases-grid,.plans-grid{grid-template-columns:1fr}
   .metrics,.met4{grid-template-columns:repeat(2,1fr)}
@@ -463,6 +472,11 @@ footer{background:#0F0920;padding:40px 24px}
   .t-hd,.t-rw{grid-template-columns:1fr 70px 60px}
   .t-hd span:nth-child(2),.t-rw>div:nth-child(2),
   .t-hd span:nth-child(4),.t-rw>div:nth-child(4){display:none}
+  .nav-links{display:none}
+  #nav-user span{display:none}
+  .ham{display:flex}
+  .hero-btns{flex-direction:column;align-items:center}
+  .hero-btns .btn-primary,.hero-btns .btn-secondary{width:100%;max-width:320px;justify-content:center}
 }
 </style>
 </head>
@@ -479,14 +493,26 @@ footer{background:#0F0920;padding:40px 24px}
     <button class="nav-btn" onclick="goTo('auth',this)">Entrar</button>
     <button class="nav-btn" onclick="goTo('dash',this)">Dashboard</button>
     <button class="nav-btn" onclick="goTo('chat',this)">Chat MarIA</button>
-    <button class="nav-btn" onclick="goTo('admin',this)" style="color:#854F0B;background:rgba(239,159,39,0.08)">⚙ Admin</button>
+    <button class="nav-btn" id="nav-admin-btn" onclick="goTo('admin',this)" style="color:#854F0B;background:rgba(239,159,39,0.08);display:none">⚙ Admin</button>
   </div>
+  <button class="ham" id="ham-btn" onclick="togMobile()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
   <div id="nav-user">
     <div class="nav-av" id="nav-av">U</div>
     <span id="nav-name"></span>
     <div id="nav-cred">3 créditos</div>
   </div>
 </nav>
+
+<!-- MENU MOBILE -->
+<div class="mobile-menu" id="mobile-menu">
+  <button class="mob-btn" onclick="goMob('home')">🏠 Início</button>
+  <button class="mob-btn" onclick="goMob('auth')">🔑 Entrar / Cadastrar</button>
+  <button class="mob-btn" onclick="goMob('dash')">📊 Dashboard</button>
+  <button class="mob-btn" onclick="goMob('chat')">💬 Chat MarIA</button>
+  <button class="mob-btn" id="mob-admin-btn" style="display:none;color:#854F0B" onclick="goMob('admin')">⚙️ Admin</button>
+</div>
 
 <!-- ══════════════════ HOME ══════════════════ -->
 <div id="pg-home" class="page on">
@@ -915,10 +941,24 @@ function saveWL(d){try{localStorage.setItem(DB_KEY,JSON.stringify(d));}catch{}}
 function getWL(){let d=loadWL();if(!d){d=[...WL_SEED];saveWL(d);}return d;}
 
 /* ══ NAVEGAÇÃO ══ */
+function togMobile(){
+  const m=document.getElementById('mobile-menu');
+  const h=document.getElementById('ham-btn');
+  m.classList.toggle('open');
+  h.classList.toggle('open');
+}
+function goMob(pg){
+  const m=document.getElementById('mobile-menu');
+  const h=document.getElementById('ham-btn');
+  m.classList.remove('open');
+  h.classList.remove('open');
+  goTo(pg,null);
+}
 function goTo(pg, btn){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));
   document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
   document.getElementById('pg-'+pg).classList.add('on');
+  window.scrollTo({top:0,behavior:'instant'});
   if(btn)btn.classList.add('active');
   currentPage=pg;
   if(pg==='home'){renderFAQ();renderRecent();updateHomeCount();}
@@ -1065,7 +1105,7 @@ function renderAuth(){
       <div class="field"><label>Nome completo</label><input type="text" id="r-name" placeholder="Ex: Ana Beatriz Costa"></div>
       <div class="field"><label>E-mail profissional</label><input type="email" id="r-email" placeholder="seu@empresa.com.br"></div>
       <div class="field"><label>Senha</label><input type="password" id="r-pass" placeholder="Mínimo 8 caracteres" minlength="8"></div>
-      <button class="btn-primary" style="width:100%;padding:11px;border-radius:14px;font-size:13px;margin-top:6px" onclick="authStep=2;renderAuth()">Continuar →</button>
+      <button class="btn-primary" style="width:100%;padding:11px;border-radius:14px;font-size:13px;margin-top:6px" onclick="validateStep1()">Continuar →</button>
       <div class="auth-link">Já tem conta? <button onclick="swAuth('log')">Fazer login</button></div>`;
   }else{
     card.innerHTML=`<div class="step-ind"><div class="si" style="background:var(--rosa)"></div><div class="si" style="background:var(--rosa)"></div><span style="font-size:11px;color:var(--muted);margin-left:6px">Etapa 2 de 2</span></div>
@@ -1078,6 +1118,24 @@ function renderAuth(){
         <button class="btn-primary" style="flex:1;padding:11px;border-radius:14px;font-size:13px" id="finish-btn" onclick="doRegister()">Criar conta com 3 créditos grátis 🎉</button>
       </div>`;
   }
+}
+function validateStep1(){
+  const name=document.getElementById('r-name');
+  const email=document.getElementById('r-email');
+  const pass=document.getElementById('r-pass');
+  let ok=true;
+  [name,email,pass].forEach(f=>{if(f)f.style.borderColor='var(--border)';});
+  if(!name||!name.value.trim()){if(name){name.style.borderColor='#EF4444';name.focus();}ok=false;}
+  if(!email||!validateEmail(email.value)){if(email)email.style.borderColor='#EF4444';if(ok&&email)email.focus();ok=false;}
+  if(!pass||pass.value.length<8){if(pass)pass.style.borderColor='#EF4444';if(ok&&pass)pass.focus();ok=false;}
+  if(!ok){
+    let msg=document.getElementById('auth-err');
+    if(!msg){msg=document.createElement('p');msg.id='auth-err';msg.style.cssText='color:#EF4444;font-size:12px;text-align:center;margin-top:8px;font-weight:600';
+    document.getElementById('auth-card').appendChild(msg);}
+    msg.textContent='Preencha todos os campos corretamente.';
+    return;
+  }
+  authStep=2;renderAuth();
 }
 function togSch(el,s){
   if(selSectors.includes(s)){selSectors=selSectors.filter(x=>x!==s);el.classList.remove('sel');}
@@ -1098,6 +1156,7 @@ function doRegister(){
 function completeLogin(u){
   currentUser=u;
   document.getElementById('nav-user').style.display='flex';
+  const adminBtn=document.getElementById('nav-admin-btn');if(adminBtn)adminBtn.style.display='inline-block';
   document.getElementById('nav-av').textContent=u.name[0];
   document.getElementById('nav-name').textContent=u.name.split(' ')[0];
   document.getElementById('sb-av').textContent=u.name[0];
@@ -1261,8 +1320,8 @@ async function doSend(text){
   document.getElementById('send-btn').disabled=true;showTyping();
   try{
     const sys=`Você é a MarIA, assessora de imprensa virtual do Brasil. Jornalista experiente, empática e direta. Missão: entrevistar para criar release profissional. Regras: 1 pergunta por vez. Português BR. Emojis ocasionais. Colete: o quê, por que agora, quem fala, dados, contato. Após 4+ respostas, diga: "Pronto! Tenho tudo para escrever um release incrível. ✍️ Clique em **Gerar release** para ver o resultado!"`;
-    const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:500,system:sys,messages:msgs})});
-    const data=await r.json();const reply=data.content?.[0]?.text||'Desculpe, tente novamente.';
+    const r=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({system:sys,messages:msgs,max_tokens:500})});
+    const data=await r.json();const reply=data.content?.[0]?.text||data.reply||'Desculpe, tente novamente.';
     rmTyping();appendMsg('assistant',reply);msgs.push({role:'assistant',content:reply});
     if(userMsgCount>=4||reply.includes('Gerar release')||reply.includes('Pronto!')){document.getElementById('gen-btn').classList.add('vis');}
   }catch(e){rmTyping();appendMsg('assistant','Erro de conexão. Tente novamente em instantes.');}
@@ -1273,8 +1332,8 @@ async function genRelease(){
   document.getElementById('gen-btn').innerHTML='<div class="spin"></div> Gerando...';document.getElementById('gen-btn').disabled=true;
   try{
     const pr=`Com base na conversa, escreva um release jornalístico profissional em português do Brasil.\n\nESTRUTURA:\n# [Título chamativo até 12 palavras]\n**[Cidade, Estado] — [Data]** — [Lead: 2-3 linhas respondendo Quem, O quê, Quando, Onde, Por quê]\n\n[Parágrafo 1 — fato principal]\n\n[Parágrafo 2 — gancho: por que importa agora?]\n\n"[Citação marcante do porta-voz]", afirma [Nome], [Cargo].\n\n[Parágrafo 3 — dados e impacto]\n\n[Parágrafo 4 — background]\n\n## Sobre [empresa]\n[Parágrafo institucional]\n\n## Contato para imprensa\nNome: | Tel: | E-mail:\n\n---\n*Release gerado pela MarIA — A 1ª Assessora de Imprensa Virtual do Brasil*\n\nUSE APENAS dados fornecidos. Se algo não foi informado, escreva [a informar].`;
-    const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:2000,messages:[...msgs,{role:'user',content:pr}]})});
-    const data=await r.json();releaseText=data.content?.[0]?.text||'';
+    const r=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:[...msgs,{role:'user',content:pr}],max_tokens:2000})});
+    const data=await r.json();releaseText=data.content?.[0]?.text||data.reply||'';
     credits--;updateCredUI();showRelease(releaseText);
     const tm=releaseText.match(/^#\s+(.+)$/m);addStory(tm?tm[1]:'Nova pauta');
     const nc={id:'c'+Date.now(),title:tm?tm[1]:'Nova pauta',source:(currentUser?.company||'Minha empresa')+' · Goiânia, GO',status:'pending',excerpt:releaseText.slice(0,250)+'...'};
