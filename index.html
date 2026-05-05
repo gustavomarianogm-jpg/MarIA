@@ -509,8 +509,8 @@ html,body{max-width:100%;overflow-x:hidden}
   </div>
   <div class="nav-links">
     <button class="nav-btn active" onclick="goTo('home',this)">Início</button>
-    <button class="nav-btn" onclick="goTo('auth',this)">Entrar</button>
-    <button class="nav-btn" onclick="goTo('dash',this)">Dashboard</button>
+    <button class="nav-btn" id="nav-login-btn" onclick="goTo('auth',this)">Entrar</button>
+    <button class="nav-btn" id="nav-dash-btn" onclick="goTo('dash',this)" style="display:none">Dashboard</button>
     <button class="nav-btn" onclick="goTo('chat',this)">Chat MarIA</button>
     <button class="nav-btn" id="nav-admin-btn" onclick="goTo('admin',this)" style="color:#854F0B;background:rgba(239,159,39,0.08);display:none">⚙ Admin</button>
   </div>
@@ -527,8 +527,8 @@ html,body{max-width:100%;overflow-x:hidden}
 <!-- MENU MOBILE -->
 <div class="mobile-menu" id="mobile-menu">
   <button class="mob-btn" onclick="goMob('home')">🏠 Início</button>
-  <button class="mob-btn" onclick="goMob('auth')">🔑 Entrar / Cadastrar</button>
-  <button class="mob-btn" onclick="goMob('dash')">📊 Dashboard</button>
+  <button class="mob-btn" id="mob-login-btn" onclick="goMob('auth')">🔑 Entrar / Cadastrar</button>
+  <button class="mob-btn" id="mob-dash-btn" style="display:none" onclick="goMob('dash')">📊 Dashboard</button>
   <button class="mob-btn" onclick="goMob('chat')">💬 Chat MarIA</button>
   <button class="mob-btn" id="mob-admin-btn" style="display:none;color:#854F0B" onclick="goMob('admin')">⚙️ Admin</button>
 </div>
@@ -965,6 +965,10 @@ function goMob(pg){
   goTo(pg,null);
 }
 function goTo(pg, btn){
+  if(pg==='dash' && !currentUser){
+    goTo('auth', document.getElementById('nav-login-btn'));
+    return;
+  }
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));
   document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
   document.getElementById('pg-'+pg).classList.add('on');
@@ -1152,6 +1156,10 @@ function doLogin(){
 function completeLogin(u){
   currentUser=u;
   document.getElementById('nav-user').style.display='flex';
+  document.getElementById('nav-login-btn').style.display='none';
+  document.getElementById('mob-login-btn').style.display='none';
+  document.getElementById('nav-dash-btn').style.display='inline-block';
+  document.getElementById('mob-dash-btn').style.display='block';
   const adminBtn=document.getElementById('nav-admin-btn');if(adminBtn)adminBtn.style.display='inline-block';
   document.getElementById('nav-av').textContent=u.name[0];
   document.getElementById('nav-name').textContent=u.name.split(' ')[0];
@@ -1159,7 +1167,7 @@ function completeLogin(u){
   document.getElementById('sb-name').textContent=u.name;
   document.getElementById('sb-email').textContent=u.email;
   document.getElementById('dash-name').textContent=u.name.split(' ')[0];
-  goTo('dash',null);
+  goTo('dash',document.getElementById('nav-dash-btn'));
 }
 
 /* ══ DASHBOARD ══ */
