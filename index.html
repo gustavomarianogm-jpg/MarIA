@@ -694,9 +694,9 @@ html,body{max-width:100%;overflow-x:hidden}
       <div class="nav-icon" style="width:40px;height:40px;font-size:20px">&#8734;</div>
       <div class="nav-brand" style="font-size:22px">Mar<em>IA</em></div>
     </div>
-    <div class="auth-tabs">
-      <button class="auth-tab on" id="tab-reg" onclick="swAuth('reg')">Criar conta grátis</button>
-      <button class="auth-tab" id="tab-log" onclick="swAuth('log')">Já tenho conta</button>
+    <div class="auth-tabs" style="display: none;">
+      <button class="auth-tab" id="tab-reg" onclick="swAuth('reg')">Criar conta grátis</button>
+      <button class="auth-tab on" id="tab-log" onclick="swAuth('log')">Já tenho conta</button>
     </div>
     <div class="auth-card" id="auth-card"></div>
     <div class="jrn-link">É jornalista? <a href="#" onclick="goTo('jornalista',null)">Acesse o portal da imprensa →</a></div>
@@ -925,7 +925,7 @@ async function apiDeleteWL(id) {
 
 let credits=3, msgs=[], userMsgCount=0, releaseText='';
 let liked=[], stories=[], curationQueue=[], currentUser=null;
-let authMode='reg', authStep=1, selSector='PME / Empreendedor', selSectors=[];
+let authMode='log', authStep=1, selSector='PME / Empreendedor', selSectors=[];
 let currentPage='home';
 
 const FEED_DATA=[
@@ -1110,40 +1110,11 @@ async function renderRecent(){
 const SECTORS=['Tecnologia','Agrotech','Gastronomia','Moda','Saúde','Educação','Cultura','ESG','Varejo','Social'];
 function swAuth(m){authMode=m;authStep=1;selSectors=[];renderAuth();}
 function renderAuth(){
-  document.getElementById('tab-reg').classList.toggle('on',authMode==='reg');
-  document.getElementById('tab-log').classList.toggle('on',authMode==='log');
   const card=document.getElementById('auth-card');
-  if(authMode==='log'){
-    card.innerHTML=`<h3>Bem-vinda de volta! 👋</h3><p class="sub"Continue criando pautas incríveis.</p>
-      <button class="oauth-btn" onclick="oLogin('Google')"><svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>Entrar com Google</button>
-      <div class="divider"><hr><span>ou com e-mail</span><hr></div>
-      <div class="field"><label>E-mail</label><input type="email" id="l-email" placeholder="seu@email.com.br"></div>
-      <div class="field"><label>Senha</label><input type="password" id="l-pass" placeholder="Sua senha"></div>
-      <button class="btn-primary" style="width:100%;padding:11px;border-radius:14px;font-size:13px;margin-top:6px" onclick="doLogin()">Entrar na minha conta</button>
-      <div class="auth-link">Não tem conta? <button onclick="swAuth('reg')">Começar grátis</button></div>`;
-    return;
-  }
-  if(authStep===1){
-    card.innerHTML=`<div class="step-ind"><div class="si" style="background:var(--rosa)"></div><div class="si" style="background:var(--border)"></div><span style="font-size:11px;color:var(--muted);margin-left:6px">Etapa 1 de 2</span></div>
-      <h3>Comece gratuitamente</h3><p class="sub">3 créditos grátis. Sem cartão.</p>
-      <button class="oauth-btn" onclick="oLogin('Google')"><svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>Continuar com Google</button>
-      <div class="divider"><hr><span>ou com e-mail</span><hr></div>
-      <div class="field"><label>Nome completo</label><input type="text" id="r-name" placeholder="Ex: Ana Beatriz Costa"></div>
-      <div class="field"><label>E-mail profissional</label><input type="email" id="r-email" placeholder="seu@empresa.com.br"></div>
-      <div class="field"><label>Senha</label><input type="password" id="r-pass" placeholder="Mínimo 8 caracteres" minlength="8"></div>
-      <button class="btn-primary" style="width:100%;padding:11px;border-radius:14px;font-size:13px;margin-top:6px" onclick="validateStep1()">Continuar →</button>
-      <div class="auth-link">Já tem conta? <button onclick="swAuth('log')">Fazer login</button></div>`;
-  }else{
-    card.innerHTML=`<div class="step-ind"><div class="si" style="background:var(--rosa)"></div><div class="si" style="background:var(--rosa)"></div><span style="font-size:11px;color:var(--muted);margin-left:6px">Etapa 2 de 2</span></div>
-      <h3>Sobre você</h3><p class="sub"Ajuda a MarIA a personalizar seus releases</p>
-      <div class="field"><label>Empresa / projeto</label><input type="text" id="r-company" placeholder="Ex: Padaria Família Costa"></div>
-      <div class="field"><label>Estado</label><select id="r-state">${['GO','SP','RJ','MG','BA','PR','RS','SC','PE','CE','MT','MS','DF'].map(s=>`<option${s==='GO'?' selected':''}>${s}</option>`).join('')}</select></div>
-      <div class="field"><label>Setor</label><div class="sch-wrap">${SECTORS.map(s=>`<button class="sch" onclick="togSch(this,'${s}')">${s}</button>`).join('')}</div></div>
-      <div style="display:flex;gap:8px;margin-top:14px">
-        <button class="btn-secondary" style="font-size:12px;padding:9px 16px" onclick="authStep=1;renderAuth()">← Voltar</button>
-        <button class="btn-primary" style="flex:1;padding:11px;border-radius:14px;font-size:13px" id="finish-btn" onclick="doRegister()">Criar conta com 3 créditos grátis 🎉</button>
-      </div>`;
-  }
+  card.innerHTML=`<h3>Acesso Restrito 🔒</h3><p class="sub">Por enquanto, novos cadastros estão pausados. Apenas administradores podem entrar.</p>
+    <div class="field"><label>E-mail</label><input type="email" id="l-email" placeholder="admin@maria.com.br"></div>
+    <div class="field"><label>Senha</label><input type="password" id="l-pass" placeholder="Sua senha"></div>
+    <button class="btn-primary" style="width:100%;padding:11px;border-radius:14px;font-size:13px;margin-top:6px" onclick="doLogin()">Entrar no sistema</button>`;
 }
 function validateStep1(){
   const name=document.getElementById('r-name');
@@ -1168,16 +1139,15 @@ function togSch(el,s){
   else{selSectors.push(s);el.classList.add('sel');}
 }
 function oLogin(p){completeLogin({name:p==='Google'?'Ana Beatriz Costa':'Roberto Mendes',email:'demo@maria.com.br',company:'Demo Goiás',sector:'Tecnologia'});}
-function doLogin(){completeLogin({name:'Empreendedor Demo',email:document.getElementById('l-email')?.value||'demo@maria.com.br',company:'Empresa Demo',sector:'Tecnologia'});}
-function doRegister(){
-  const btn=document.getElementById('finish-btn');
-  btn.innerHTML='<div class="spin"></div> Criando...';btn.disabled=true;
-  setTimeout(()=>{
-    const name=document.getElementById('r-name')?.value||'Empreendedor';
-    const email=document.getElementById('r-email')?.value||'demo@maria.com.br';
-    const company=document.getElementById('r-company')?.value||'Minha Empresa';
-    completeLogin({name,email,company,sector:selSectors[0]||'Tecnologia'});
-  },1200);
+function doLogin(){
+  const email = document.getElementById('l-email')?.value;
+  const pass = document.getElementById('l-pass')?.value;
+  
+  if (email === 'admin@maria.com.br' && pass === 'admin123') {
+    completeLogin({name:'Administrador',email:'admin@maria.com.br',company:'MarIA Admin',sector:'Tecnologia'});
+  } else {
+    alert('Acesso negado. Por enquanto apenas o administrador pode acessar o sistema.');
+  }
 }
 function completeLogin(u){
   currentUser=u;
