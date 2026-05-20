@@ -30,18 +30,23 @@ function App() {
   }, []);
 
   const [queryClient] = useState(() => new QueryClient());
-  const [trpcClient] = useState(() =>
-    trpc.createClient({
+  const [trpcClient] = useState(() => {
+    let trpcUrl = import.meta.env.VITE_API_URL || 'http://localhost:4000/trpc';
+    if (trpcUrl && !trpcUrl.endsWith('/trpc')) {
+      trpcUrl = `${trpcUrl}/trpc`;
+    }
+    
+    return trpc.createClient({
       links: [
         httpBatchLink({
-          url: import.meta.env.VITE_API_URL || 'http://localhost:4000/trpc',
+          url: trpcUrl,
           headers() {
             return session ? { Authorization: `Bearer ${session.access_token}` } : {};
           },
         }),
       ],
-    }),
-  );
+    });
+  });
 
   const [currentRoute, setCurrentRoute] = useState(() => {
     const params = new URLSearchParams(window.location.search);

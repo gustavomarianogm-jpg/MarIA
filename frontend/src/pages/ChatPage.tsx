@@ -166,7 +166,7 @@ export function ChatPage({ session, onNavigate }: { session: any, onNavigate: (r
                 {m.role === 'assistant' && <div className="msg-av">M</div>}
                 {m.role === 'user' && <div className="msg-av u">{session ? (userName?.[0] || 'U') : 'V'}</div>}
                 <div className="msg-b">
-                  <ReleaseMarkdown content={m.content} variant="chat" />
+                  <ReleaseMarkdown content={m.content} variant="chat" role={m.role} />
                 </div>
               </div>
             ))}
