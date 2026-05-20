@@ -85,23 +85,65 @@ export const chatRouter = router({
           await supabase.from('messages').insert(msgsToInsert);
         }
 
-        // 3. Desconta crédito e salva a pauta
-        await Promise.all([
-          supabase.from('credits').update({ 
-            balance: creditData.balance - 1,
-            totalUsed: creditData.totalUsed + 1
-          }).eq('userId', ctx.user.id),
-          
-          supabase.from('stories').insert({
+        // 3. OPERAÇÃO ATÔMICA: Cria Story -> Debita Crédito -> Notifica
+        let createdStoryId: string | null = null;
+        let creditDebited = false;
+
+        try {
+          // A. Cria a Story (valida schemas e salva o conteúdo)
+          const { data: storyData, error: storyError } = await supabase.from('stories').insert({
             userId: ctx.user.id,
             conversationId: conv?.id || null,
             title: releaseTitle,
             content: releaseText,
             status: 'review'
-          })
-        ]);
+          }).select('id').single();
 
-        // 3.5 Extrai tags da pauta via IA (fire-and-forget para não atrasar o response)
+          if (storyError || !storyData) throw new Error('Erro ao salvar pauta no banco de dados.');
+          createdStoryId = storyData.id;
+
+          // B. Debita o crédito
+          const { error: creditUpdateError } = await supabase.from('credits').update({ 
+            balance: creditData.balance - 1,
+            totalUsed: creditData.totalUsed + 1
+          }).eq('userId', ctx.user.id);
+
+          if (creditUpdateError) throw new Error('Erro ao debitar crédito.');
+          creditDebited = true;
+
+          // C. Notifica curadoria de forma SÍNCRONA
+          const { data: userProfile } = await supabase
+            .from('users')
+            .select('name')
+            .eq('id', ctx.user.id)
+            .single();
+
+          const notifyResult = await notifyCuradoria({
+            clientName: userProfile?.name || 'Cliente',
+            title: releaseTitle,
+            content: releaseText,
+            storyId: conv?.id || undefined
+          });
+
+          if (!notifyResult.ok) {
+            throw new Error(notifyResult.error || 'Falha ao notificar equipe de curadoria.');
+          }
+
+        } catch (txnError: any) {
+          // Lógica de ROLLBACK
+          if (creditDebited) {
+            await supabase.from('credits').update({ 
+              balance: creditData.balance,
+              totalUsed: creditData.totalUsed
+            }).eq('userId', ctx.user.id);
+          }
+          if (createdStoryId) {
+            await supabase.from('stories').delete().eq('id', createdStoryId);
+          }
+          throw new Error('Falha na transação. Nenhum crédito foi cobrado. ' + txnError.message);
+        }
+
+        // 4. Extrai tags da pauta via IA (fire-and-forget, sem impacto na transação)
         (async () => {
           try {
             const tagsResponse = await anthropic.messages.create({
@@ -124,20 +166,6 @@ export const chatRouter = router({
             console.error('[CHAT] Falha ao extrair tags:', tagErr);
           }
         })();
-
-        // 4. Notifica equipe de curadoria por e-mail (fire-and-forget)
-        const { data: userProfile } = await supabase
-          .from('users')
-          .select('name')
-          .eq('id', ctx.user.id)
-          .single();
-
-        notifyCuradoria({
-          clientName: userProfile?.name || 'Cliente',
-          title: releaseTitle,
-          content: releaseText,
-          storyId: conv?.id || undefined
-        }).catch(err => console.error('[CHAT] Falha ao notificar curadoria:', err));
 
         return { ok: true, text: releaseText, title: releaseTitle };
       } catch (err: any) {
