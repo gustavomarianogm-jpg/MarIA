@@ -1,8 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { trpc } from '@/utils/trpc';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Card } from '@/components/ui/card';
 import { ReleaseMarkdown } from '@/components/ReleaseMarkdown';
 
 type Message = { role: 'user' | 'assistant'; content: string };
@@ -10,6 +8,7 @@ type Message = { role: 'user' | 'assistant'; content: string };
 export function ChatPage() {
   const userQuery = trpc.user.me.useQuery();
   const userName = userQuery.data?.name?.split(' ')[0] || '';
+  const credits = userQuery.data?.credits || 0;
 
   const [messages, setMessages] = useState<Message[]>([
     { role: 'assistant', content: 'Olá! 👋 Sou a **MarIA**, sua assessora de imprensa virtual. Vou te ajudar a transformar sua história em uma pauta profissional que vai chegar nos jornalistas certos.\n\nSobre o que vamos falar hoje?' }
@@ -38,8 +37,8 @@ export function ChatPage() {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  const handleSend = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSend = async (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
     if (!input.trim()) return;
 
     const userMsg = input.trim();
@@ -56,10 +55,15 @@ export function ChatPage() {
     }
   };
 
+  const handleChipClick = (text: string) => {
+    setInput(text);
+  };
+
   const handleGenerateRelease = async () => {
     try {
       const res = await generateReleaseMutation.mutateAsync({ messages });
       setRelease(res.text);
+      userQuery.refetch(); // Refetch credits after generating release
     } catch (err: any) {
       alert(err.message);
     }
@@ -67,16 +71,20 @@ export function ChatPage() {
 
   if (release) {
     return (
-      <div className="flex-1 w-full flex flex-col items-center p-6 bg-slate-50">
-        <div className="w-full max-w-4xl bg-white shadow-xl rounded-2xl overflow-hidden border border-slate-200">
-          <div className="bg-slate-900 text-white p-4 flex justify-between items-center">
-            <Button variant="ghost" className="text-white hover:text-white/80" onClick={() => setRelease('')}>
-              &larr; Voltar ao Chat
-            </Button>
-            <h2 className="font-semibold flex items-center gap-2">✍️ Release Profissional</h2>
-          </div>
-          <div className="p-8 md:p-12">
-            <ReleaseMarkdown content={release} variant="release" />
+      <div id="pg-chat" className="page on" style={{ display: 'block' }}>
+        <div className="chat-outer" style={{ maxWidth: '800px' }}>
+          <div className="rel-wrap vis">
+            <div className="rel-hdr">
+              <button onClick={() => setRelease('')}>&larr;</button>
+              <span>Release Profissional</span>
+            </div>
+            <div className="rel-acts">
+              <button className="act-btn" onClick={() => navigator.clipboard.writeText(release)}>📋 Copiar Texto</button>
+              <button className="act-btn p" onClick={() => alert('Feature em breve!')}>🚀 Enviar para Curadoria (Match)</button>
+            </div>
+            <div id="rel-content">
+              <ReleaseMarkdown content={release} variant="release" />
+            </div>
           </div>
         </div>
       </div>
@@ -84,79 +92,81 @@ export function ChatPage() {
   }
 
   return (
-    <div className="flex-1 w-full flex flex-col items-center justify-end p-4 bg-slate-50 max-h-screen">
-      <div className="w-full max-w-3xl bg-white shadow-xl rounded-t-2xl flex flex-col h-[85vh] border border-slate-200 overflow-hidden">
-        
-        {/* Header */}
-        <div className="p-4 border-b border-slate-100 flex justify-between items-center bg-white/50 backdrop-blur-md z-10">
-          <div className="flex items-center gap-3">
-            <div className="h-10 w-10 rounded-full bg-primary text-white flex items-center justify-center font-bold">
-              M
+    <div id="pg-chat" className="page on" style={{ display: 'block' }}>
+      <div className="chat-outer">
+        <div className="chat-wrap">
+          <div className="chat-hdr">
+            <div className="av-m">M</div>
+            <div className="info">
+              <div className="name">MarIA</div>
+              <div className="status"><div className="dot-on"></div> Assessora Virtual • Online</div>
             </div>
-            <div>
-              <h2 className="font-bold text-slate-800">MarIA</h2>
-              <p className="text-xs text-green-600 font-medium flex items-center gap-1">
-                <span className="h-2 w-2 rounded-full bg-green-500"></span> Online
-              </p>
+            <div className="chat-cred">
+              <div className="cl">Créditos</div>
+              <div className="cv">{credits}</div>
             </div>
           </div>
-        </div>
 
-        {/* Messages */}
-        <div className="flex-1 overflow-y-auto p-4 space-y-4">
-          {messages.map((m, i) => (
-            <div key={i} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-              <div className={`max-w-[80%] rounded-2xl px-5 py-3 ${
-                m.role === 'user' 
-                  ? 'bg-slate-900 text-white rounded-br-none' 
-                  : 'bg-slate-100 text-slate-800 rounded-bl-none'
-              }`}>
-                <ReleaseMarkdown content={m.content} variant="chat" />
+          <div id="msgs">
+            {messages.map((m, i) => (
+              <div key={i} className={`msg ${m.role}`}>
+                {m.role === 'assistant' && <div className="msg-av">M</div>}
+                {m.role === 'user' && <div className="msg-av u">{userName?.[0] || 'U'}</div>}
+                <div className="msg-b">
+                  <ReleaseMarkdown content={m.content} variant="chat" />
+                </div>
               </div>
-            </div>
-          ))}
-          {chatMutation.isPending && (
-            <div className="flex justify-start">
-              <div className="bg-slate-100 text-slate-500 rounded-2xl px-5 py-3 rounded-bl-none italic text-sm">
-                MarIA está digitando...
+            ))}
+            {chatMutation.isPending && (
+              <div className="msg assistant">
+                <div className="msg-av">M</div>
+                <div className="msg-b">
+                  <div className="typing-ind">
+                    <div className="td"></div><div className="td"></div><div className="td"></div>
+                  </div>
+                </div>
               </div>
+            )}
+            <div ref={messagesEndRef} />
+          </div>
+
+          {canGenerateRelease ? (
+            <button 
+              id="gen-btn" 
+              className="vis" 
+              onClick={handleGenerateRelease}
+              disabled={generateReleaseMutation.isPending}
+              style={{ opacity: generateReleaseMutation.isPending ? 0.5 : 1 }}
+            >
+              {generateReleaseMutation.isPending ? '⏳ Escrevendo Release...' : '✨ Gerar release profissional (1 crédito)'}
+            </button>
+          ) : (
+            <div id="chips">
+              <div className="chip" onClick={() => handleChipClick('Lançamento de produto')}>Lançamento de produto</div>
+              <div className="chip" onClick={() => handleChipClick('Nova parceria')}>Nova parceria</div>
+              <div className="chip" onClick={() => handleChipClick('Prêmio conquistado')}>Prêmio conquistado</div>
+              <div className="chip" onClick={() => handleChipClick('Evento corporativo')}>Evento corporativo</div>
             </div>
           )}
-          <div ref={messagesEndRef} />
-        </div>
 
-        {/* Actions */}
-        <div className="p-4 border-t border-slate-100 bg-white">
-          {canGenerateRelease && (
-            <div className="mb-4">
-              <Button 
-                onClick={handleGenerateRelease} 
-                className="w-full bg-primary hover:bg-primary/90 text-white py-6 text-lg rounded-xl shadow-lg shadow-primary/20"
-                disabled={generateReleaseMutation.isPending}
-              >
-                {generateReleaseMutation.isPending ? '⏳ Escrevendo Release...' : '✨ Gerar release profissional (1 crédito)'}
-              </Button>
-            </div>
-          )}
-          
-          <form onSubmit={handleSend} className="flex gap-2">
-            <Input 
+          <form id="inp-area" onSubmit={handleSend}>
+            <input 
+              type="text" 
+              id="msg-inp" 
+              placeholder="Responda à MarIA..." 
               value={input}
               onChange={e => setInput(e.target.value)}
-              placeholder="Digite sua resposta..."
-              className="flex-1 rounded-xl h-12"
               disabled={chatMutation.isPending || generateReleaseMutation.isPending}
             />
-            <Button 
-              type="submit" 
-              className="h-12 px-6 rounded-xl bg-slate-900 hover:bg-slate-800"
-              disabled={!input.trim() || chatMutation.isPending || generateReleaseMutation.isPending}
-            >
-              Enviar
-            </Button>
+            <button type="submit" id="send-btn" disabled={!input.trim() || chatMutation.isPending || generateReleaseMutation.isPending}>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+              </svg>
+            </button>
           </form>
-        </div>
 
+        </div>
       </div>
     </div>
   );
