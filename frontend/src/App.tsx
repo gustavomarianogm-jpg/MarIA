@@ -11,6 +11,7 @@ import { AdminPage } from './pages/AdminPage';
 import { LandingPage } from './pages/LandingPage';
 import { JournalistSignupPage } from './pages/JournalistSignupPage';
 import { StoryPublicPage } from './pages/StoryPublicPage';
+import { TermsPage, PrivacyPage, HelpPage, ContactPage } from './pages/StaticPages';
 import './index.css';
 
 function App() {
@@ -35,38 +36,38 @@ function App() {
         httpBatchLink({
           url: import.meta.env.VITE_API_URL || 'http://localhost:4000/trpc',
           headers() {
-            if (session?.access_token) {
-              return { Authorization: `Bearer ${session.access_token}` };
-            }
-            return {};
+            return session ? { Authorization: `Bearer ${session.access_token}` } : {};
           },
         }),
       ],
     }),
   );
 
-  const [currentRoute, setCurrentRoute] = useState<'landing' | 'home' | 'dash' | 'chat' | 'admin' | 'journalist-signup' | 'story'>('landing');
-  const [publicStoryId, setPublicStoryId] = useState<string | null>(null);
+  const [currentRoute, setCurrentRoute] = useState(() => {
+    const params = new URLSearchParams(window.location.search);
+    return params.get('route') || 'landing';
+  });
 
-  // Check URL for public story route on load
+  const publicStoryId = new URLSearchParams(window.location.search).get('storyId');
+
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    const storyId = params.get('pauta');
-    if (storyId) {
-      setPublicStoryId(storyId);
-      setCurrentRoute('story');
+    if (params.get('route') !== currentRoute) {
+      params.set('route', currentRoute);
+      window.history.pushState(null, '', `?${params.toString()}`);
+      window.scrollTo(0, 0);
     }
-  }, []);
+  }, [currentRoute]);
 
   return (
     <trpc.Provider client={trpcClient} queryClient={queryClient}>
       <QueryClientProvider client={queryClient}>
-        <div className={`min-h-screen ${currentRoute === 'landing' ? '' : 'bg-slate-50 flex flex-col items-center'}`}>
+        <div className="min-h-screen bg-slate-50 flex flex-col font-sans">
           
-          {/* Navegação Rápida (Oculta na Landing Page) */}
-          {currentRoute !== 'landing' && currentRoute !== 'story' && currentRoute !== 'journalist-signup' && (
-            <nav id="nav" style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 1000, background: 'rgba(255,255,255,0.95)', backdropFilter: 'blur(16px)', borderBottom: '1px solid var(--border)', display: 'flex', alignItems: 'center', padding: '0 24px', height: '60px', gap: '8px' }}>
-              <div className="nav-logo" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          {/* Global Navbar (Hidden on Landing, Story, Journalist Signup and Static Pages) */}
+          {!['landing', 'story', 'journalist-signup', 'terms', 'privacy', 'help', 'contact'].includes(currentRoute) && (
+            <nav id="nav" style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 1000, background: 'white', borderBottom: '1px solid var(--border)', display: 'flex', alignItems: 'center', padding: '0 24px', height: '64px' }}>
+              <div className="nav-logo" onClick={() => setCurrentRoute('landing')} style={{ cursor: 'pointer' }}>
                 <div className="nav-icon" style={{ width: '32px', height: '32px', borderRadius: '9px', background: 'var(--grad)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontSize: '17px', fontWeight: 700 }}>&#8734;</div>
                 <div className="nav-brand" style={{ fontSize: '18px', fontWeight: 800, color: 'var(--dark)' }}>Mar<em style={{ fontStyle: 'normal', background: 'var(--grad)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>IA</em></div>
               </div>
@@ -87,8 +88,8 @@ function App() {
               </button>
               {session && (
                 <div id="nav-user" style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13px', color: 'var(--gray)', marginLeft: '8px' }}>
-                  <div className="nav-av">U</div>
-                  <div id="nav-cred">Conta</div>
+                  <div className="nav-av" style={{ width: '32px', height: '32px', borderRadius: '50%', background: '#eee', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{session.user.email?.[0].toUpperCase() || 'U'}</div>
+                  <div id="nav-cred" onClick={() => setCurrentRoute('dash')} style={{ cursor: 'pointer' }}>Conta</div>
                 </div>
               )}
             </nav>
@@ -120,6 +121,12 @@ function App() {
           {currentRoute === 'journalist-signup' && <JournalistSignupPage onBack={() => setCurrentRoute('landing')} />}
 
           {currentRoute === 'story' && publicStoryId && <StoryPublicPage storyId={publicStoryId} />}
+
+          {/* Static Pages */}
+          {currentRoute === 'terms' && <TermsPage onNavigate={(route) => setCurrentRoute(route as any)} />}
+          {currentRoute === 'privacy' && <PrivacyPage onNavigate={(route) => setCurrentRoute(route as any)} />}
+          {currentRoute === 'help' && <HelpPage onNavigate={(route) => setCurrentRoute(route as any)} />}
+          {currentRoute === 'contact' && <ContactPage onNavigate={(route) => setCurrentRoute(route as any)} />}
 
         </div>
       </QueryClientProvider>

@@ -328,10 +328,10 @@ export function LandingPage({ onJoinWaitlist, onNavigate }: LandingPageProps) {
           <span style={{ color: 'white', fontSize: '18px', fontWeight: '800', marginLeft: '8px',  }}>MarIA</span>
         </div>
         <div className="footer-links">
-          <a href="#">Termos de Uso</a>
-          <a href="#">Privacidade</a>
-          <a href="#">Ajuda</a>
-          <a href="#">Contato</a>
+          <a href="#" onClick={(e) => { e.preventDefault(); onNavigate('terms'); }}>Termos de Uso</a>
+          <a href="#" onClick={(e) => { e.preventDefault(); onNavigate('privacy'); }}>Privacidade</a>
+          <a href="#" onClick={(e) => { e.preventDefault(); onNavigate('help'); }}>Ajuda</a>
+          <a href="#" onClick={(e) => { e.preventDefault(); onNavigate('contact'); }}>Contato</a>
         </div>
       </div>
       <div className="footer-copy">© 2025 MarIA — A 1ª Assessora de Imprensa Virtual do Brasil · Feita com ❤️ em Goiás</div>
