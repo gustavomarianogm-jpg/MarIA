@@ -33,7 +33,7 @@ function App() {
   const [trpcClient] = useState(() => {
     let trpcUrl = import.meta.env.VITE_API_URL || 'http://localhost:4000/trpc';
     if (trpcUrl && !trpcUrl.endsWith('/trpc')) {
-      trpcUrl = `${trpcUrl}/trpc`;
+      trpcUrl = trpcUrl.replace(/\/+$/, '') + '/trpc';
     }
     
     return trpc.createClient({

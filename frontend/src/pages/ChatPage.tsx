@@ -142,10 +142,23 @@ export function ChatPage({ session, onNavigate }: { session: any, onNavigate: (r
         <div className="chat-wrap" style={{ height: isCongressMode ? 'calc(100vh - 60px)' : 'auto' }}>
           <div className="chat-hdr">
             <div className="av-m">M</div>
-            <div className="info">
+            <div className="info" style={{ flex: 1 }}>
               <div className="name">MarIA {isCongressMode && "(Apresentação)"}</div>
               <div className="status"><div className="dot-on"></div> Assessora Virtual • Online</div>
             </div>
+            
+            <button 
+              onClick={handleNewStory} 
+              style={{ 
+                background: 'rgba(255,255,255,0.2)', color: 'white', border: '1px solid rgba(255,255,255,0.3)', 
+                padding: '6px 12px', borderRadius: '12px', fontSize: '12px', fontWeight: 600, cursor: 'pointer',
+                marginRight: isCongressMode ? '0' : '12px'
+              }}
+              title="Reiniciar conversa do zero"
+            >
+              🔄 Reiniciar
+            </button>
+
             {!isCongressMode && (
               session ? (
                 <div className="chat-cred">
