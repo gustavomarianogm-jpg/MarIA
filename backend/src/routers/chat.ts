@@ -158,31 +158,21 @@ Release gerado pela MarIA — A 1ª Assessora de Imprensa Virtual do Brasil`;
           await supabase.from('messages').insert(msgsToInsert);
         }
 
-        // 3. OPERAÇÃO ATÔMICA: Cria Story -> Debita Crédito -> Notifica
+        // 3. OPERAÇÃO ATÔMICA (RPC): Cria Story -> Debita Crédito -> Loga
         let createdStoryId: string | null = null;
-        let creditDebited = false;
 
         try {
-          // A. Cria a Story (valida schemas e salva o conteúdo)
-          const { data: storyData, error: storyError } = await supabase.from('stories').insert({
-            userId: ctx.user.id,
-            conversationId: conv?.id || null,
-            title: releaseTitle,
-            content: releaseText,
-            status: 'review'
-          }).select('id').single();
+          const { data: storyId, error: rpcError } = await supabase.rpc('create_story_with_credit', {
+            p_user_id: ctx.user.id,
+            p_conversation_id: conv?.id || null,
+            p_title: releaseTitle,
+            p_content: releaseText
+          });
 
-          if (storyError || !storyData) throw new Error('Erro ao salvar pauta no banco de dados.');
-          createdStoryId = storyData.id;
-
-          // B. Debita o crédito
-          const { error: creditUpdateError } = await supabase.from('credits').update({ 
-            balance: creditData.balance - 1,
-            totalUsed: creditData.totalUsed + 1
-          }).eq('userId', ctx.user.id);
-
-          if (creditUpdateError) throw new Error('Erro ao debitar crédito.');
-          creditDebited = true;
+          if (rpcError || !storyId) {
+            throw new Error(`Erro na transação de crédito/pauta: ${rpcError?.message}`);
+          }
+          createdStoryId = storyId;
 
           // C. Notifica curadoria de forma SÍNCRONA
           const { data: userProfile } = await supabase
@@ -195,7 +185,7 @@ Release gerado pela MarIA — A 1ª Assessora de Imprensa Virtual do Brasil`;
             clientName: userProfile?.name || 'Cliente',
             title: releaseTitle,
             content: releaseText,
-            storyId: conv?.id || undefined
+            storyId: createdStoryId
           });
 
           if (!notifyResult.ok) {
@@ -203,17 +193,9 @@ Release gerado pela MarIA — A 1ª Assessora de Imprensa Virtual do Brasil`;
           }
 
         } catch (txnError: any) {
-          // Lógica de ROLLBACK
-          if (creditDebited) {
-            await supabase.from('credits').update({ 
-              balance: creditData.balance,
-              totalUsed: creditData.totalUsed
-            }).eq('userId', ctx.user.id);
-          }
-          if (createdStoryId) {
-            await supabase.from('stories').delete().eq('id', createdStoryId);
-          }
-          throw new Error('Falha na transação. Nenhum crédito foi cobrado. ' + txnError.message);
+          // Em caso de falha de notificação (a pauta e o crédito já foram salvos/debitados)
+          // Mas se falhar a transação do banco, cai aqui sem debitar nada.
+          throw new Error(txnError.message || 'Erro crítico durante a geração e processamento do release.');
         }
 
         // 4. Extrai tags da pauta via IA (fire-and-forget, sem impacto na transação)

@@ -38,6 +38,15 @@ CREATE TABLE IF NOT EXISTS public.credits (
   "createdAt" timestamptz DEFAULT now()
 );
 
+-- 2.1 Tabela Imutável de Histórico de Créditos (Credits Log - Rule 8.2)
+CREATE TABLE IF NOT EXISTS public.credits_log (
+  id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
+  "userId" uuid REFERENCES public.users(id) ON DELETE CASCADE,
+  amount integer NOT NULL,
+  action text NOT NULL,
+  "createdAt" timestamptz DEFAULT now()
+);
+
 -- 3. Tabela de Conversas (Conversations)
 CREATE TABLE IF NOT EXISTS public.conversations (
   id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
@@ -85,11 +94,62 @@ CREATE TABLE IF NOT EXISTS public.matches (
 );
 
 -- ========================================================
+-- Índices de Performance (Regra 8.2)
+-- ========================================================
+CREATE INDEX IF NOT EXISTS idx_stories_userid ON public.stories("userId");
+CREATE INDEX IF NOT EXISTS idx_stories_status ON public.stories(status);
+CREATE INDEX IF NOT EXISTS idx_stories_createdat ON public.stories("createdAt");
+CREATE INDEX IF NOT EXISTS idx_messages_convid ON public.messages("conversationId");
+CREATE INDEX IF NOT EXISTS idx_matches_storyid ON public.matches("storyId");
+CREATE INDEX IF NOT EXISTS idx_matches_journalistid ON public.matches("journalistId");
+CREATE INDEX IF NOT EXISTS idx_credits_log_userid ON public.credits_log("userId");
+
+-- ========================================================
+-- Funções (RPC) para Transações Atômicas (Regra 8.2)
+-- ========================================================
+CREATE OR REPLACE FUNCTION public.create_story_with_credit(
+  p_user_id uuid,
+  p_conversation_id uuid,
+  p_title text,
+  p_content text
+) RETURNS uuid AS $$
+DECLARE
+  v_story_id uuid;
+  v_balance integer;
+BEGIN
+  -- 1. Verifica saldo e bloqueia a linha (Evita Race Conditions)
+  SELECT balance INTO v_balance FROM public.credits WHERE "userId" = p_user_id FOR UPDATE;
+  
+  IF v_balance IS NULL OR v_balance <= 0 THEN
+    RAISE EXCEPTION 'Saldo insuficiente';
+  END IF;
+
+  -- 2. Debita na tabela snapshot de créditos
+  UPDATE public.credits
+  SET balance = balance - 1, "totalUsed" = "totalUsed" + 1
+  WHERE "userId" = p_user_id;
+
+  -- 3. Registra no ledger imutável de histórico
+  INSERT INTO public.credits_log ("userId", amount, action)
+  VALUES (p_user_id, -1, 'generate_release');
+
+  -- 4. Insere a pauta gerada
+  INSERT INTO public.stories ("userId", "conversationId", title, content, status)
+  VALUES (p_user_id, p_conversation_id, p_title, p_content, 'review')
+  RETURNING id INTO v_story_id;
+
+  RETURN v_story_id;
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
+
+
+-- ========================================================
 -- Políticas de Segurança Padrão (Row Level Security - RLS)
 -- ========================================================
 
 ALTER TABLE public.users ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.credits ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.credits_log ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.conversations ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.messages ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.stories ENABLE ROW LEVEL SECURITY;
@@ -97,6 +157,7 @@ ALTER TABLE public.matches ENABLE ROW LEVEL SECURITY;
 
 CREATE POLICY "Acesso público temporário (read/write)" ON public.users FOR ALL USING (true) WITH CHECK (true);
 CREATE POLICY "Acesso público temporário (read/write)" ON public.credits FOR ALL USING (true) WITH CHECK (true);
+CREATE POLICY "Acesso público temporário (read/write)" ON public.credits_log FOR ALL USING (true) WITH CHECK (true);
 CREATE POLICY "Acesso público temporário (read/write)" ON public.conversations FOR ALL USING (true) WITH CHECK (true);
 CREATE POLICY "Acesso público temporário (read/write)" ON public.messages FOR ALL USING (true) WITH CHECK (true);
 CREATE POLICY "Acesso público temporário (read/write)" ON public.stories FOR ALL USING (true) WITH CHECK (true);
