@@ -83,6 +83,34 @@ export const matchmakingRouter = router({
 
       if (insertError) throw new Error('Erro ao salvar matches: ' + insertError.message);
 
+      // Notifica o cliente com a lista de matches (Passo 8)
+      const { data: storyOwner } = await supabase
+        .from('stories')
+        .select('title, users!inner(name, email)')
+        .eq('id', input.storyId)
+        .single();
+
+      if (storyOwner) {
+        // @ts-ignore
+        const user = Array.isArray(storyOwner.users) ? storyOwner.users[0] : storyOwner.users;
+        if (user && user.email) {
+          const topMatchesForEmail = matchResults.slice(0, 5).map(m => {
+            const journalist = journalists.find(j => j.id === m.journalistId);
+            return {
+              name: m.name,
+              score: m.score,
+              outlet: journalist?.outlet
+            };
+          });
+          
+          import('../notify').then(({ notifyClientMatch }) => {
+            notifyClientMatch(user.email, user.name, storyOwner.title, topMatchesForEmail).catch(err => {
+              console.error('[MATCH] Erro ao notificar cliente sobre match:', err);
+            });
+          });
+        }
+      }
+
       return {
         ok: true,
         matches: matchResults.length,

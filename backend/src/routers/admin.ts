@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { router, adminProcedure } from '../trpc';
 import { supabase } from '../supabase';
-import { notifyCuradoria } from '../notify';
+import { notifyCuradoria, notifyClientApproval, notifyClientRejection } from '../notify';
 
 export const adminRouter = router({
   // ═══════════════════════════════════════════
@@ -50,6 +50,24 @@ export const adminRouter = router({
         .eq('id', input.storyId);
 
       if (error) throw new Error(error.message);
+
+      // Notifica o cliente sobre a aprovação
+      const { data: story } = await supabase
+        .from('stories')
+        .select('title, users!inner(name, email)')
+        .eq('id', input.storyId)
+        .single();
+
+      if (story) {
+        // @ts-ignore
+        const user = Array.isArray(story.users) ? story.users[0] : story.users;
+        if (user && user.email) {
+          notifyClientApproval(user.email, user.name, story.title).catch(err => 
+            console.error('[ADMIN] Erro ao notificar aprovação:', err)
+          );
+        }
+      }
+
       return { ok: true };
     }),
 
@@ -75,6 +93,13 @@ export const adminRouter = router({
         .single();
 
       if (story) {
+        // @ts-ignore
+        const user = Array.isArray(story.users) ? story.users[0] : story.users;
+        if (user && user.email) {
+          notifyClientRejection(user.email, user.name, story.title, input.feedback).catch(err => 
+            console.error('[ADMIN] Erro ao notificar rejeição:', err)
+          );
+        }
         console.log(`[ADMIN] Pauta "${story.title}" rejeitada. Feedback: ${input.feedback}`);
       }
 
