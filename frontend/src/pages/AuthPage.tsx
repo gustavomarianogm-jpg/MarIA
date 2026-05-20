@@ -1,9 +1,5 @@
 import React, { useState } from 'react';
 import { supabase } from '@/utils/supabase';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 
 export function AuthPage({ onLogin }: { onLogin: () => void }) {
   const [email, setEmail] = useState('');
@@ -29,34 +25,54 @@ export function AuthPage({ onLogin }: { onLogin: () => void }) {
   };
 
   return (
-    <div className="flex-1 w-full flex items-center justify-center p-4 bg-slate-50">
-      <Card className="w-full max-w-sm shadow-md">
-        <CardHeader className="text-center">
-          <CardTitle className="text-2xl font-bold">Acesso</CardTitle>
-          <CardDescription>Insira seu e-mail para receber um link mágico e entrar na plataforma.</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={handleLogin} className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="email">E-mail</Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="seu@email.com"
+    <div id="pg-auth" className="page on" style={{ display: 'flex' }}>
+      <div className="auth-wrap">
+        <div className="auth-logo">
+          <div className="nav-icon">&#8734;</div>
+          <div className="nav-brand" style={{ fontSize: '24px' }}>Mar<em>IA</em></div>
+        </div>
+        
+        <div className="auth-tabs">
+          <button className="auth-tab on">Acesso</button>
+          <button className="auth-tab" onClick={() => alert('Cadastro via Waitlist na Landing Page.')}>Cadastro PME</button>
+        </div>
+        
+        <div className="auth-card" id="card-login">
+          <h3>Bem-vindo(a) de volta</h3>
+          <div className="sub">Acesse sua conta para continuar</div>
+          
+          <button className="oauth-btn" onClick={() => alert('Em breve!')}>
+            <img src="https://www.svgrepo.com/show/475656/google-color.svg" width="18" alt="Google" /> Continuar com Google
+          </button>
+          
+          <div className="divider"><hr/><span>ou acesso por e-mail</span><hr/></div>
+          
+          <form onSubmit={handleLogin}>
+            <div className="field">
+              <label>E-mail corporativo</label>
+              <input 
+                type="email" 
+                placeholder="seu@email.com.br" 
                 value={email}
-                onChange={e => setEmail(e.target.value)}
+                onChange={(e) => setEmail(e.target.value)}
                 required
               />
             </div>
-            <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? 'Enviando...' : 'Receber Magic Link'}
-            </Button>
-            <div className="text-center text-xs text-muted-foreground mt-4">
-              <p>Ambiente de Desenvolvimento: Use qualquer e-mail para testar, e confira o console do Supabase (Inbucket) para pegar o link.</p>
-            </div>
+            <button type="submit" className="btn-primary" style={{ width: '100%', padding: '12px', fontSize: '14px' }} disabled={loading}>
+              {loading ? 'Enviando...' : 'Acessar conta ↗'}
+            </button>
           </form>
-        </CardContent>
-      </Card>
+
+          <div className="text-center text-xs mt-4" style={{ color: 'var(--muted)', marginTop: '16px', fontSize: '11px' }}>
+            <p>Ambiente de Dev: Use qualquer e-mail para testar, confira o Inbucket para pegar o link.</p>
+          </div>
+          
+          <div className="jrn-link">
+            Jornalista? <a href="#" onClick={(e) => { e.preventDefault(); window.location.href = '/?pauta='; }}>Acesse pautas aprovadas</a>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
+
