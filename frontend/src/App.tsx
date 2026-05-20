@@ -64,9 +64,9 @@ function App() {
         <div className={`min-h-screen ${currentRoute === 'landing' ? '' : 'bg-slate-50 flex flex-col items-center'}`}>
           
           {/* Navegação Rápida (Oculta na Landing Page) */}
-          {currentRoute !== 'landing' && (
+          {currentRoute !== 'landing' && currentRoute !== 'story' && currentRoute !== 'journalist-signup' && (
             <nav className="w-full bg-white border-b border-slate-200 p-4 flex gap-4 justify-center shadow-sm">
-              <button onClick={() => setCurrentRoute('home')} className={`font-semibold ${currentRoute === 'home' ? 'text-primary' : 'text-muted-foreground'}`}>Inicial / Waitlist</button>
+              <button onClick={() => setCurrentRoute('landing')} className={`font-semibold text-muted-foreground`}>← Início</button>
               <button onClick={() => setCurrentRoute('dash')} className={`font-semibold ${currentRoute === 'dash' ? 'text-primary' : 'text-muted-foreground'}`}>Dashboard</button>
               <button onClick={() => setCurrentRoute('chat')} className={`font-semibold ${currentRoute === 'chat' ? 'text-primary' : 'text-muted-foreground'}`}>Chat MarIA</button>
               {session && <button onClick={() => setCurrentRoute('admin')} className={`font-semibold ${currentRoute === 'admin' ? 'text-primary' : 'text-muted-foreground'}`}>⚙️ Admin</button>}
@@ -83,8 +83,6 @@ function App() {
             }}
             onNavigate={(route) => setCurrentRoute(route as any)}
           />}
-
-          {currentRoute === 'home' && <WaitlistPage />}
           
           {currentRoute === 'dash' && (
             session ? <DashboardPage /> : <AuthPage onLogin={() => {}} />
