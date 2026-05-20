@@ -1,12 +1,23 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import './LandingPage.css';
 
 interface LandingPageProps {
   onJoinWaitlist: () => void;
 }
 
+
+const FAQS = [
+  { q: 'A MarIA garante que minha pauta será publicada?', a: 'Não garantimos publicação — isso depende da decisão editorial de cada veículo. O que garantimos é que sua história chegará aos jornalistas certos, formatada profissionalmente, aumentando em até 80% suas chances de virar notícia.' },
+  { q: 'Como funcionam os créditos?', a: 'Cada crédito equivale a uma pauta completa (entrevista + release + curadoria + envio). Se a pauta for reprovada pela curadoria, o crédito é devolvido automaticamente.' },
+  { q: 'Quanto tempo leva para minha pauta chegar nos jornalistas?', a: 'A entrevista leva 10 a 20 minutos. O release é gerado instantaneamente. A curadoria humana é concluída em até 48 horas úteis.' },
+  { q: 'A MarIA funciona apenas para Goiás?', a: 'Nossa força atual é no Centro-Oeste, com conexões em Goiás. Mas nossa base cobre todo o Brasil. Histórias com relevância nacional chegam a veículos de todo o país.' },
+  { q: 'Meus dados ficam seguros?', a: 'Sim. Todos os dados são criptografados e seguimos a LGPD. Suas informações nunca são compartilhadas sem autorização explícita.' },
+];
+
 export function LandingPage({ onJoinWaitlist }: LandingPageProps) {
+  const [openFaq, setOpenFaq] = useState(-1);
+
   return (
     <div className="landing-page-wrapper">
         <nav id="nav">
@@ -61,7 +72,7 @@ export function LandingPage({ onJoinWaitlist }: LandingPageProps) {
           <div style={{ position: 'relative', display: 'inline-block',  }}>
             <div
               style={{ width: '200px', height: '200px', borderRadius: '50%', background: 'linear-gradient(135deg,#E91E8C,#9D4EDD)', padding: '4px', boxShadow: '0 8px 32px rgba(233,30,140,0.35)',  }}>
-              <img src="public/assets/maria-photo.jpg" alt="MarIA"
+              <img src="/assets/maria-photo.jpg" alt="MarIA"
                 
                 style={{ width: '192px', height: '192px', borderRadius: '50%', objectFit: 'cover', display: 'block',  }} />
             </div>
@@ -257,7 +268,25 @@ export function LandingPage({ onJoinWaitlist }: LandingPageProps) {
     <div className="section">
       <div className="section-badge">DÚVIDAS FREQUENTES</div>
       <h2>Perguntas Frequentes</h2>
-      <div className="faq-c" id="faq-c"></div>
+      
+      <div className="faq-c" id="faq-c">
+        {FAQS.map((f, i) => (
+          <div key={i} className="faq-item" onClick={() => setOpenFaq(openFaq === i ? -1 : i)}>
+            <div className="faq-q">
+              <span>{f.q}</span>
+              <div className={`faq-toggle ${openFaq === i ? 'open' : ''}`} id={`ft-${i}`}>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </div>
+            </div>
+            <div className={`faq-a ${openFaq === i ? 'on' : ''}`} id={`fa-${i}`}>
+              {f.a}
+            </div>
+          </div>
+        ))}
+      </div>
+
     </div>
 
     {/*  CTA FINAL  */}
