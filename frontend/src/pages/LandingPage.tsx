@@ -3,9 +3,17 @@ import React, { useState } from 'react';
 import './LandingPage.css';
 
 interface LandingPageProps {
-  onJoinWaitlist: () => void;
+  onJoinWaitlist: (segment?: string) => void;
 }
 
+const SEGMENTS = [
+  { label: 'PME / Empreendedor', value: 'PME / Empreendedor' },
+  { label: 'Startup', value: 'Startup' },
+  { label: 'Jornalista', value: 'Jornalista' },
+  { label: 'Investidor', value: 'Investidor' },
+  { label: 'Agência de PR', value: 'Agência de PR' },
+  { label: 'ONG / Social', value: 'ONG / Social' },
+];
 
 const FAQS = [
   { q: 'A MarIA garante que minha pauta será publicada?', a: 'Não garantimos publicação — isso depende da decisão editorial de cada veículo. O que garantimos é que sua história chegará aos jornalistas certos, formatada profissionalmente, aumentando em até 80% suas chances de virar notícia.' },
@@ -17,6 +25,7 @@ const FAQS = [
 
 export function LandingPage({ onJoinWaitlist }: LandingPageProps) {
   const [openFaq, setOpenFaq] = useState(-1);
+  const [selectedSegment, setSelectedSegment] = useState('PME / Empreendedor');
 
   return (
     <div className="landing-page-wrapper">
@@ -216,13 +225,17 @@ export function LandingPage({ onJoinWaitlist }: LandingPageProps) {
             id="wl-form-card">
             <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.55)', fontWeight: '600', marginBottom: '10px', textAlign: 'left',  }}>
               Quem é você?</div>
-            <div className="seg-row" id="seg-row" style={{ marginBottom: '18px',  }}>
-              <button className="seg-chip selected" >PME / Empreendedor</button>
-              <button className="seg-chip" >Startup</button>
-              <button className="seg-chip" >Jornalista</button>
-              <button className="seg-chip" >Investidor</button>
-              <button className="seg-chip" >Agência de PR</button>
-              <button className="seg-chip" >ONG / Social</button>
+            <div className="seg-row" id="seg-row" style={{ marginBottom: '18px' }}>
+              {SEGMENTS.map(s => (
+                <button
+                  key={s.value}
+                  type="button"
+                  className={`seg-chip${selectedSegment === s.value ? ' selected' : ''}`}
+                  onClick={() => setSelectedSegment(s.value)}
+                >
+                  {s.label}
+                </button>
+              ))}
             </div>
             <div className="wl-fields">
               <input className="wl-input" type="text" id="wl-name" placeholder="Seu nome completo" />
@@ -231,8 +244,17 @@ export function LandingPage({ onJoinWaitlist }: LandingPageProps) {
             <div className="err-msg" id="err-name">Por favor, informe seu nome.</div>
             <div className="err-msg" id="err-email">Informe um e-mail válido.</div>
             <div className="err-msg" id="err-dup">Este e-mail já está na lista.</div>
-            <button className="wl-btn" id="wl-btn" onClick={onJoinWaitlist} style={{ marginTop: '14px', fontSize: '15px', padding: '15px' }}>
-              ✓ Quero meu acesso antecipado
+            <button
+              className="wl-btn"
+              id="wl-btn"
+              onClick={() => onJoinWaitlist(selectedSegment)}
+              style={{ marginTop: '14px', fontSize: '15px', padding: '15px',
+                background: selectedSegment === 'Jornalista' ? 'linear-gradient(135deg,#9D4EDD,#7B2FBE)' : undefined
+              }}
+            >
+              {selectedSegment === 'Jornalista'
+                ? '📰 Cadastrar como Jornalista →'
+                : '✓ Quero meu acesso antecipado'}
             </button>
             <p className="wl-privacy">Seus dados ficam seguros. Sem spam. LGPD compliant.</p>
           </div>

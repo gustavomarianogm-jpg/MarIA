@@ -7,6 +7,7 @@ import { storiesRouter } from './routers/stories';
 import { chatRouter } from './routers/chat';
 import { adminRouter } from './routers/admin';
 import { matchmakingRouter } from './routers/matchmaking';
+import { journalistRouter } from './routers/journalist';
 
 export const createContext = async ({ req, res }: trpcExpress.CreateExpressContextOptions) => {
   const authHeader = req.headers.authorization;
@@ -64,6 +65,7 @@ export const appRouter = router({
   chat: chatRouter,
   admin: adminRouter,
   matchmaking: matchmakingRouter,
+  journalist: journalistRouter,
 });
 
 export type AppRouter = typeof appRouter;

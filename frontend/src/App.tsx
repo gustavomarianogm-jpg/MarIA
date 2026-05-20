@@ -9,6 +9,8 @@ import { DashboardPage } from './pages/DashboardPage';
 import { ChatPage } from './pages/ChatPage';
 import { AdminPage } from './pages/AdminPage';
 import { LandingPage } from './pages/LandingPage';
+import { JournalistSignupPage } from './pages/JournalistSignupPage';
+import { StoryPublicPage } from './pages/StoryPublicPage';
 import './index.css';
 
 function App() {
@@ -43,7 +45,18 @@ function App() {
     }),
   );
 
-  const [currentRoute, setCurrentRoute] = useState<'landing' | 'home' | 'dash' | 'chat' | 'admin'>('landing');
+  const [currentRoute, setCurrentRoute] = useState<'landing' | 'home' | 'dash' | 'chat' | 'admin' | 'journalist-signup' | 'story'>('landing');
+  const [publicStoryId, setPublicStoryId] = useState<string | null>(null);
+
+  // Check URL for public story route on load
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const storyId = params.get('pauta');
+    if (storyId) {
+      setPublicStoryId(storyId);
+      setCurrentRoute('story');
+    }
+  }, []);
 
   return (
     <trpc.Provider client={trpcClient} queryClient={queryClient}>
@@ -60,7 +73,13 @@ function App() {
             </nav>
           )}
 
-          {currentRoute === 'landing' && <LandingPage onJoinWaitlist={() => setCurrentRoute('home')} />}
+          {currentRoute === 'landing' && <LandingPage onJoinWaitlist={(segment) => {
+            if (segment === 'Jornalista') {
+              setCurrentRoute('journalist-signup');
+            } else {
+              setCurrentRoute('home');
+            }
+          }} />}
 
           {currentRoute === 'home' && <WaitlistPage />}
           
@@ -75,6 +94,10 @@ function App() {
           {currentRoute === 'admin' && (
             session ? <AdminPage /> : <AuthPage onLogin={() => {}} />
           )}
+
+          {currentRoute === 'journalist-signup' && <JournalistSignupPage onBack={() => setCurrentRoute('landing')} />}
+
+          {currentRoute === 'story' && publicStoryId && <StoryPublicPage storyId={publicStoryId} />}
 
         </div>
       </QueryClientProvider>

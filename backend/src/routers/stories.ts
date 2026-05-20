@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { router, protectedProcedure } from '../trpc';
+import { router, protectedProcedure, publicProcedure } from '../trpc';
 import { supabase } from '../supabase';
 
 export const storiesRouter = router({
@@ -20,4 +20,22 @@ export const storiesRouter = router({
       created_at: s.createdAt,
     }));
   }),
+
+  // Rota PÚBLICA para jornalistas verem pautas aprovadas (sem login)
+  getPublic: publicProcedure
+    .input(z.object({ storyId: z.string().uuid() }))
+    .query(async ({ input }) => {
+      const { data, error } = await supabase
+        .from('stories')
+        .select('id, title, content, category, targetCity, targetState, createdAt')
+        .eq('id', input.storyId)
+        .eq('status', 'approved')
+        .single();
+
+      if (error || !data) {
+        throw new Error('Pauta não encontrada ou ainda em curadoria.');
+      }
+
+      return data;
+    }),
 });
