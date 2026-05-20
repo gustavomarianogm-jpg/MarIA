@@ -147,8 +147,65 @@ Release gerado pela MarIA — A 1ª Assessora de Imprensa Virtual do Brasil`;
         const titleMatch = releaseText.match(/^#\s+(.+)$/m);
         const releaseTitle = titleMatch ? titleMatch[1] : 'Nova pauta';
 
-        // Guest logic ends here
+        // Guest logic
         if (!ctx.user) {
+          try {
+            const { data: conv } = await supabase.from('conversations').insert({
+              userId: null,
+              title: releaseTitle,
+              status: 'completed'
+            }).select('id').single();
+
+            if (conv) {
+              const msgsToInsert = input.messages.map(m => ({
+                conversationId: conv.id,
+                role: m.role,
+                content: m.content
+              }));
+              await supabase.from('messages').insert(msgsToInsert);
+              
+              const { data: story } = await supabase.from('stories').insert({
+                userId: null,
+                conversationId: conv.id,
+                title: releaseTitle,
+                content: releaseText,
+                status: 'review'
+              }).select('id').single();
+
+              if (story) {
+                await notifyCuradoria({
+                  clientName: 'Visitante (Demonstração)',
+                  title: releaseTitle,
+                  content: releaseText,
+                  storyId: story.id
+                });
+                
+                // Extrair tags também para visitantes
+                (async () => {
+                  try {
+                    const tagsResponse = await anthropic.messages.create({
+                      model: 'claude-3-5-sonnet-20240620',
+                      max_tokens: 150,
+                      messages: [
+                        { role: 'user', content: `Analise este release e extraia de 3 a 5 tags/categorias que representem os temas principais. Responda APENAS um JSON array de strings em minúsculas, sem explicação. Exemplo: ["tecnologia", "startup", "fintech"]\n\nRelease:\n${releaseText}` }
+                      ]
+                    });
+                    // @ts-ignore
+                    const tagsText = tagsResponse.content[0].text.trim();
+                    const tags = JSON.parse(tagsText);
+                    if (Array.isArray(tags)) {
+                      await supabase
+                        .from('stories')
+                        .update({ tags })
+                        .eq('conversationId', conv.id);
+                    }
+                  } catch (tagErr) {}
+                })();
+              }
+            }
+          } catch (e) {
+            console.error('Erro ao salvar pauta de visitante:', e);
+          }
           return { ok: true, text: releaseText, title: releaseTitle };
         }
 
