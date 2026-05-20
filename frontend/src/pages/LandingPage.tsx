@@ -4,6 +4,7 @@ import './LandingPage.css';
 
 interface LandingPageProps {
   onJoinWaitlist: (segment?: string) => void;
+  onNavigate?: (route: string) => void;
 }
 
 const SEGMENTS = [
@@ -23,9 +24,11 @@ const FAQS = [
   { q: 'Meus dados ficam seguros?', a: 'Sim. Todos os dados são criptografados e seguimos a LGPD. Suas informações nunca são compartilhadas sem autorização explícita.' },
 ];
 
-export function LandingPage({ onJoinWaitlist }: LandingPageProps) {
+export function LandingPage({ onJoinWaitlist, onNavigate }: LandingPageProps) {
   const [openFaq, setOpenFaq] = useState(-1);
   const [selectedSegment, setSelectedSegment] = useState('PME / Empreendedor');
+
+  const nav = (route: string) => onNavigate?.(route);
 
   return (
     <div className="landing-page-wrapper">
@@ -36,9 +39,9 @@ export function LandingPage({ onJoinWaitlist }: LandingPageProps) {
     </div>
     <div className="nav-links">
       <button className="nav-btn active" >Início</button>
-      <button className="nav-btn" id="nav-login-btn" onClick={onJoinWaitlist}>Entrar</button>
+      <button className="nav-btn" id="nav-login-btn" onClick={() => nav('dash')}>Entrar</button>
       <button className="nav-btn" id="nav-dash-btn"  style={{ display: 'none',  }}>Dashboard</button>
-      <button className="nav-btn" onClick={onJoinWaitlist}>Chat MarIA</button>
+      <button className="nav-btn" onClick={() => nav('chat')}>Chat MarIA</button>
       <button className="nav-btn" id="nav-admin-btn" 
         style={{ color: '#854F0B', background: 'rgba(239,159,39,0.08)', display: 'none',  }}>⚙ Admin</button>
     </div>
@@ -55,9 +58,9 @@ export function LandingPage({ onJoinWaitlist }: LandingPageProps) {
   {/*  MENU MOBILE  */}
   <div className="mobile-menu" id="mobile-menu">
     <button className="mobile-btn" >🏠 Início</button>
-    <button className="mobile-btn" id="mob-login-btn" onClick={onJoinWaitlist}>🚪 Entrar / Cadastrar</button>
+    <button className="mobile-btn" id="mob-login-btn" onClick={() => nav('dash')}>🚪 Entrar / Cadastrar</button>
     <button className="mobile-btn" id="mob-dash-btn" style={{ display: 'none',  }} >📊 Dashboard</button>
-    <button className="mobile-btn" onClick={onJoinWaitlist}>💬 Chat MarIA</button>
+    <button className="mobile-btn" onClick={() => nav('chat')}>💬 Chat MarIA</button>
     <button className="mobile-btn" id="mob-admin-btn" style={{ display: 'none', color: '#854F0B',  }} >⚙️
       Admin</button>
   </div>

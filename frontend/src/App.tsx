@@ -73,13 +73,16 @@ function App() {
             </nav>
           )}
 
-          {currentRoute === 'landing' && <LandingPage onJoinWaitlist={(segment) => {
-            if (segment === 'Jornalista') {
-              setCurrentRoute('journalist-signup');
-            } else {
-              setCurrentRoute('home');
-            }
-          }} />}
+          {currentRoute === 'landing' && <LandingPage 
+            onJoinWaitlist={(segment) => {
+              if (segment === 'Jornalista') {
+                setCurrentRoute('journalist-signup');
+              } else {
+                setCurrentRoute('dash');
+              }
+            }}
+            onNavigate={(route) => setCurrentRoute(route as any)}
+          />}
 
           {currentRoute === 'home' && <WaitlistPage />}
           
