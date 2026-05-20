@@ -128,6 +128,24 @@ export async function notifyClientMatch(clientEmail: string, clientName: string,
   return sendResendEmail(clientEmail, `Match encontrado para "${title}"!`, htmlEmail);
 }
 
+export async function notifyJournalistNewMatch(journalistEmail: string, journalistName: string, title: string, storyUrl: string) {
+  const htmlEmail = `
+    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; color: #333;">
+      <h2 style="color: #9D4EDD;">Nova Pauta Exclusiva! 📰</h2>
+      <p>Olá, <strong>${journalistName}</strong>,</p>
+      <p>Nossa IA analisou o seu perfil e encontrou uma pauta que tem tudo a ver com a sua editoria:</p>
+      <h3 style="color: #E91E8C;">"${title}"</h3>
+      <p>Clique no botão abaixo para ler o release na íntegra e, se tiver interesse, entrar em contato direto com a fonte.</p>
+      <br/>
+      <a href="${storyUrl}" style="display: inline-block; background: #9D4EDD; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px; font-weight: bold;">Ler Pauta e Dar Match</a>
+      <br/><br/>
+      <p>Abraços,<br/>Equipe MarIA</p>
+    </div>
+  `;
+
+  return sendResendEmail(journalistEmail, `Nova Pauta: ${title}`, htmlEmail);
+}
+
 async function sendResendEmail(to: string, subject: string, html: string) {
   if (!RESEND_API_KEY) {
     console.warn('[NOTIFY] RESEND_API_KEY não configurada. Simulando envio de e-mail:');

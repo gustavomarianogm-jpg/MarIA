@@ -103,9 +103,24 @@ export const matchmakingRouter = router({
             };
           });
           
-          import('../notify').then(({ notifyClientMatch }) => {
+          import('../notify').then(({ notifyClientMatch, notifyJournalistNewMatch }) => {
+            // Notifica o cliente
             notifyClientMatch(user.email, user.name, storyOwner.title, topMatchesForEmail).catch(err => {
               console.error('[MATCH] Erro ao notificar cliente sobre match:', err);
+            });
+
+            // Notifica cada jornalista do match (com o link da pauta)
+            const publicStoryUrl = process.env.FRONTEND_URL 
+              ? `${process.env.FRONTEND_URL}/pauta/${input.storyId}`
+              : `https://mariapress.com.br/pauta/${input.storyId}`;
+
+            matchResults.forEach(m => {
+              const journalist = journalists.find(j => j.id === m.journalistId);
+              if (journalist && journalist.email) {
+                notifyJournalistNewMatch(journalist.email, journalist.name, storyOwner.title, publicStoryUrl).catch(err => {
+                  console.error('[MATCH] Erro ao notificar jornalista:', err);
+                });
+              }
             });
           });
         }

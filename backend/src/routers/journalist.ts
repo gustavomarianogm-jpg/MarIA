@@ -67,6 +67,16 @@ export const journalistRouter = router({
               console.error('[JOURNALIST] Erro ao notificar empreendedor:', err);
             });
           });
+          
+          // Retorna os dados da fonte para o jornalista
+          return { 
+            ok: true, 
+            message: 'Interesse registrado com sucesso!',
+            sourceContact: {
+              name: owner.name,
+              email: owner.email
+            }
+          };
         }
       }
 

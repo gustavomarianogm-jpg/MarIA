@@ -14,13 +14,18 @@ export function StoryPublicPage({ storyId }: StoryPublicPageProps) {
 
   const acceptMutation = trpc.journalist.acceptMatch.useMutation();
 
+  const [sourceContact, setSourceContact] = useState<{name: string, email: string} | null>(null);
+
   const handleAccept = async () => {
     if (!journalistEmail.trim()) {
       alert('Informe seu e-mail profissional.');
       return;
     }
     try {
-      await acceptMutation.mutateAsync({ storyId, email: journalistEmail.trim().toLowerCase() });
+      const res = await acceptMutation.mutateAsync({ storyId, email: journalistEmail.trim().toLowerCase() });
+      if (res.sourceContact) {
+        setSourceContact(res.sourceContact);
+      }
       setSubmitted(true);
     } catch (err: any) {
       alert(`Erro: ${err.message}`);
@@ -93,15 +98,22 @@ export function StoryPublicPage({ storyId }: StoryPublicPageProps) {
           border: '1px solid #EEE', textAlign: 'center'
         }}>
           {submitted ? (
-            <>
-              <div style={{ fontSize: '48px', marginBottom: '12px' }}>✅</div>
-              <h3 style={{ fontSize: '20px', fontWeight: '700', color: '#1A0A2E', marginBottom: '8px' }}>
-                Interesse registrado com sucesso!
-              </h3>
-              <p style={{ color: '#666', fontSize: '14px' }}>
-                O empreendedor será notificado do seu interesse. Obrigado!
-              </p>
-            </>
+            <div className="bg-green-50 text-green-900 p-8 rounded-xl text-center border border-green-200">
+              <h3 className="text-2xl font-bold mb-4">✅ Match Confirmado!</h3>
+              <p className="mb-6">O empreendedor foi notificado do seu interesse.</p>
+              
+              {sourceContact ? (
+                <div className="bg-white p-6 rounded-lg border border-green-100 shadow-sm text-left inline-block w-full max-w-sm">
+                  <h4 className="font-semibold text-slate-800 mb-2">Dados da Fonte:</h4>
+                  <p className="text-slate-600 mb-1"><strong>Nome:</strong> {sourceContact.name}</p>
+                  <p className="text-slate-600">
+                    <strong>E-mail:</strong> <a href={`mailto:${sourceContact.email}`} className="text-primary hover:underline">{sourceContact.email}</a>
+                  </p>
+                </div>
+              ) : (
+                <p className="text-sm">A fonte entrará em contato em breve.</p>
+              )}
+            </div>
           ) : !showInterestForm ? (
             <>
               <h3 style={{ fontSize: '20px', fontWeight: '700', color: '#1A0A2E', marginBottom: '8px' }}>
