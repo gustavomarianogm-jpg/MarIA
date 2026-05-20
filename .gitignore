@@ -7,11 +7,23 @@
 MarIA-master/
 MarIA-vercel-*/
 maria-photo-backup/
-*.jpeg
 
-# Logs e dependências
+# Dependências
 node_modules/
+package-lock.json
+
+# Vercel
 .vercel/
+
+# Logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+
+
+.vercel
+.env*.local
