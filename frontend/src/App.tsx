@@ -49,23 +49,25 @@ function App() {
   });
 
   const publicStoryId = new URLSearchParams(window.location.search).get('storyId');
+  const isCongressMode = new URLSearchParams(window.location.search).get('congresso') === 'true';
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     if (params.get('route') !== currentRoute) {
       params.set('route', currentRoute);
+      if (isCongressMode) params.set('congresso', 'true');
       window.history.pushState(null, '', `?${params.toString()}`);
       window.scrollTo(0, 0);
     }
-  }, [currentRoute]);
+  }, [currentRoute, isCongressMode]);
 
   return (
     <trpc.Provider client={trpcClient} queryClient={queryClient}>
       <QueryClientProvider client={queryClient}>
         <div className="min-h-screen bg-slate-50 flex flex-col font-sans">
           
-          {/* Global Navbar (Hidden on Landing, Story, Journalist Signup and Static Pages) */}
-          {!['landing', 'story', 'journalist-signup', 'terms', 'privacy', 'help', 'contact'].includes(currentRoute) && (
+          {/* Global Navbar (Hidden on Landing, Story, Journalist Signup, Static Pages and Congress Mode) */}
+          {!['landing', 'story', 'journalist-signup', 'terms', 'privacy', 'help', 'contact'].includes(currentRoute) && !isCongressMode && (
             <nav id="nav" style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 1000, background: 'white', borderBottom: '1px solid var(--border)', display: 'flex', alignItems: 'center', padding: '0 24px', height: '64px' }}>
               <div className="nav-logo" onClick={() => setCurrentRoute('landing')} style={{ cursor: 'pointer' }}>
                 <div className="nav-icon" style={{ width: '32px', height: '32px', borderRadius: '9px', background: 'var(--grad)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontSize: '17px', fontWeight: 700 }}>&#8734;</div>
@@ -111,7 +113,7 @@ function App() {
           )}
 
           {currentRoute === 'chat' && (
-            session ? <ChatPage /> : <AuthPage onLogin={() => {}} message="Faça login para acessar o Chat MarIA" />
+            <ChatPage session={session} onNavigate={(route) => setCurrentRoute(route as any)} />
           )}
 
           {currentRoute === 'admin' && (

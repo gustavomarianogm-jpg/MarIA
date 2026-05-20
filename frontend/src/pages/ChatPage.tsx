@@ -10,6 +10,8 @@ export function ChatPage({ session, onNavigate }: { session: any, onNavigate: (r
   const userName = userQuery.data?.name?.split(' ')[0] || 'Visitante';
   const credits = userQuery.data?.credits || 0;
 
+  const isCongressMode = new URLSearchParams(window.location.search).get('congresso') === 'true';
+
   const [messages, setMessages] = useState<Message[]>(() => {
     const saved = localStorage.getItem('maria_chat_messages');
     if (saved) {
@@ -22,6 +24,7 @@ export function ChatPage({ session, onNavigate }: { session: any, onNavigate: (r
   
   const [input, setInput] = useState('');
   const [release, setRelease] = useState('');
+  const [generatedReleaseText, setGeneratedReleaseText] = useState('');
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const chatMutation = trpc.chat.sendMessage.useMutation();
@@ -48,6 +51,7 @@ export function ChatPage({ session, onNavigate }: { session: any, onNavigate: (r
   }, [messages]);
 
   const checkGuestLimit = () => {
+    if (isCongressMode) return false;
     if (!session && localStorage.getItem('maria_guest_release') === 'true') {
       alert("Você já gerou sua pauta gratuita! Cadastre-se na plataforma para criar novas pautas.");
       onNavigate('dash');
@@ -63,6 +67,7 @@ export function ChatPage({ session, onNavigate }: { session: any, onNavigate: (r
 
     const userMsg = input.trim();
     setInput('');
+    setGeneratedReleaseText(''); // clear popup if they type again
     
     const newMessages: Message[] = [...messages, { role: 'user', content: userMsg }];
     setMessages(newMessages);
@@ -83,11 +88,17 @@ export function ChatPage({ session, onNavigate }: { session: any, onNavigate: (r
     if (checkGuestLimit()) return;
     try {
       const res = await generateReleaseMutation.mutateAsync({ messages });
-      setRelease(res.text);
+      
       if (session) {
         userQuery.refetch(); // Refetch credits after generating release
-      } else {
+      } else if (!isCongressMode) {
         localStorage.setItem('maria_guest_release', 'true');
+      }
+
+      if (isCongressMode) {
+        setGeneratedReleaseText(res.text);
+      } else {
+        setRelease(res.text);
       }
     } catch (err: any) {
       alert(err.message);
@@ -97,6 +108,7 @@ export function ChatPage({ session, onNavigate }: { session: any, onNavigate: (r
   const handleNewStory = () => {
     if (checkGuestLimit()) return;
     setRelease('');
+    setGeneratedReleaseText('');
     setMessages([
       { role: 'assistant', content: `Olá! 👋 Sobre o que vamos falar hoje?` }
     ]);
@@ -104,7 +116,7 @@ export function ChatPage({ session, onNavigate }: { session: any, onNavigate: (r
 
   if (release) {
     return (
-      <div id="pg-chat" className="page on" style={{ display: 'block' }}>
+      <div id="pg-chat" className="page on" style={{ display: 'block', paddingTop: isCongressMode ? '20px' : '60px' }}>
         <div className="chat-outer" style={{ maxWidth: '800px' }}>
           <div className="rel-wrap vis">
             <div className="rel-hdr">
@@ -125,28 +137,30 @@ export function ChatPage({ session, onNavigate }: { session: any, onNavigate: (r
   }
 
   return (
-    <div id="pg-chat" className="page on" style={{ display: 'block' }}>
+    <div id="pg-chat" className="page on" style={{ display: 'block', paddingTop: isCongressMode ? '20px' : '60px' }}>
       <div className="chat-outer">
-        <div className="chat-wrap">
+        <div className="chat-wrap" style={{ height: isCongressMode ? 'calc(100vh - 60px)' : 'auto' }}>
           <div className="chat-hdr">
             <div className="av-m">M</div>
             <div className="info">
-              <div className="name">MarIA</div>
+              <div className="name">MarIA {isCongressMode && "(Apresentação)"}</div>
               <div className="status"><div className="dot-on"></div> Assessora Virtual • Online</div>
             </div>
-            {session ? (
-              <div className="chat-cred">
-                <div className="cl">Créditos</div>
-                <div className="cv">{credits}</div>
-              </div>
-            ) : (
-              <div className="chat-cred" style={{ cursor: 'pointer' }} onClick={() => onNavigate('dash')}>
-                <div className="cv" style={{ fontSize: '12px' }}>Entrar / Cadastrar</div>
-              </div>
+            {!isCongressMode && (
+              session ? (
+                <div className="chat-cred">
+                  <div className="cl">Créditos</div>
+                  <div className="cv">{credits}</div>
+                </div>
+              ) : (
+                <div className="chat-cred" style={{ cursor: 'pointer' }} onClick={() => onNavigate('dash')}>
+                  <div className="cv" style={{ fontSize: '12px' }}>Entrar / Cadastrar</div>
+                </div>
+              )
             )}
           </div>
 
-          <div id="msgs">
+          <div id="msgs" style={{ flex: isCongressMode ? '1' : 'none' }}>
             {messages.map((m, i) => (
               <div key={i} className={`msg ${m.role}`}>
                 {m.role === 'assistant' && <div className="msg-av">M</div>}
@@ -207,6 +221,31 @@ export function ChatPage({ session, onNavigate }: { session: any, onNavigate: (r
 
         </div>
       </div>
+
+      {generatedReleaseText && !release && (
+        <div style={{
+          position: 'fixed', bottom: '100px', left: '50%', transform: 'translateX(-50%)', zIndex: 9999,
+          background: 'rgba(255, 255, 255, 0.95)', padding: '20px', borderRadius: '16px',
+          boxShadow: '0 20px 40px rgba(0,0,0,0.2)', textAlign: 'center', backdropFilter: 'blur(10px)',
+          border: '1px solid var(--border)'
+        }}>
+          <h3 style={{ fontSize: '16px', fontWeight: 800, color: 'var(--dark)', marginBottom: '8px' }}>História Gerada com Sucesso! 🎉</h3>
+          <p style={{ fontSize: '13px', color: 'var(--gray)', marginBottom: '16px' }}>O release da sua pauta está pronto para visualização.</p>
+          <button 
+            onClick={() => {
+              setRelease(generatedReleaseText);
+            }}
+            style={{
+              background: 'var(--grad)', color: 'white', border: 'none', padding: '12px 24px',
+              borderRadius: '100px', fontSize: '14px', fontWeight: 700, cursor: 'pointer',
+              boxShadow: '0 8px 24px rgba(233,30,140,0.3)'
+            }}
+          >
+            Visualizar História Completa ✨
+          </button>
+        </div>
+      )}
+
     </div>
   );
 }
