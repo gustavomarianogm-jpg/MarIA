@@ -55,7 +55,7 @@ export function DashboardPage() {
         <div className="flex items-center gap-4">
           <div className="text-right">
             <p className="text-sm text-slate-500">Saldo atual</p>
-            <p className="text-2xl font-black text-violet-600">{userProfile?.credits ?? '-'} <span className="text-base font-medium">créditos</span></p>
+            <p className="text-2xl font-black text-primary">{userProfile?.credits ?? '-'} <span className="text-base font-medium">créditos</span></p>
           </div>
           <Separator orientation="vertical" className="h-10 mx-2" />
           <Button variant="outline" onClick={handleLogout}>Sair</Button>
@@ -73,7 +73,7 @@ export function DashboardPage() {
             </CardHeader>
             <CardContent>
               <p className="text-sm text-muted-foreground mb-4">Gere um release completo através de uma entrevista guiada por IA.</p>
-              <Button className="w-full bg-violet-600 hover:bg-violet-700">
+              <Button className="w-full bg-primary hover:bg-primary/90">
                 ✨ Abrir Chat com a MarIA
               </Button>
             </CardContent>
@@ -129,7 +129,7 @@ export function DashboardPage() {
               ) : (
                 <div className="py-12 text-center flex flex-col items-center justify-center border-2 border-dashed border-slate-200 rounded-lg">
                   <p className="text-slate-500 mb-2">Nenhuma pauta gerada ainda.</p>
-                  <Button variant="link" className="text-violet-600">Criar minha primeira pauta</Button>
+                  <Button variant="link" className="text-primary">Criar minha primeira pauta</Button>
                 </div>
               )}
             </CardContent>

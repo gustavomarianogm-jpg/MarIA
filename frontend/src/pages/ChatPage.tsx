@@ -77,7 +77,7 @@ export function ChatPage() {
         {/* Header */}
         <div className="p-4 border-b border-slate-100 flex justify-between items-center bg-white/50 backdrop-blur-md z-10">
           <div className="flex items-center gap-3">
-            <div className="h-10 w-10 rounded-full bg-violet-600 text-white flex items-center justify-center font-bold">
+            <div className="h-10 w-10 rounded-full bg-primary text-white flex items-center justify-center font-bold">
               M
             </div>
             <div>
@@ -118,7 +118,7 @@ export function ChatPage() {
             <div className="mb-4">
               <Button 
                 onClick={handleGenerateRelease} 
-                className="w-full bg-violet-600 hover:bg-violet-700 text-white py-6 text-lg rounded-xl shadow-lg shadow-violet-200"
+                className="w-full bg-primary hover:bg-primary/90 text-white py-6 text-lg rounded-xl shadow-lg shadow-primary/20"
                 disabled={generateReleaseMutation.isPending}
               >
                 {generateReleaseMutation.isPending ? '⏳ Escrevendo Release...' : '✨ Gerar release profissional (1 crédito)'}
