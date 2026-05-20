@@ -5,14 +5,21 @@ import { ReleaseMarkdown } from '@/components/ReleaseMarkdown';
 
 type Message = { role: 'user' | 'assistant'; content: string };
 
-export function ChatPage() {
-  const userQuery = trpc.user.me.useQuery();
-  const userName = userQuery.data?.name?.split(' ')[0] || '';
+export function ChatPage({ session, onNavigate }: { session: any, onNavigate: (r: string) => void }) {
+  const userQuery = trpc.user.me.useQuery(undefined, { enabled: !!session });
+  const userName = userQuery.data?.name?.split(' ')[0] || 'Visitante';
   const credits = userQuery.data?.credits || 0;
 
-  const [messages, setMessages] = useState<Message[]>([
-    { role: 'assistant', content: 'Olá! 👋 Sou a **MarIA**, sua assessora de imprensa virtual. Vou te ajudar a transformar sua história em uma pauta profissional que vai chegar nos jornalistas certos.\n\nSobre o que vamos falar hoje?' }
-  ]);
+  const [messages, setMessages] = useState<Message[]>(() => {
+    const saved = localStorage.getItem('maria_chat_messages');
+    if (saved) {
+      try { return JSON.parse(saved); } catch (e) {}
+    }
+    return [
+      { role: 'assistant', content: 'Olá! 👋 Sou a **MarIA**, sua assessora de imprensa virtual. Vou te ajudar a transformar sua história em uma pauta profissional que vai chegar nos jornalistas certos.\n\nSobre o que vamos falar hoje?' }
+    ];
+  });
+  
   const [input, setInput] = useState('');
   const [release, setRelease] = useState('');
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -23,23 +30,36 @@ export function ChatPage() {
   const userMessageCount = messages.filter(m => m.role === 'user').length;
   const canGenerateRelease = userMessageCount >= 7 || messages.some(m => m.content.includes('Gerar release'));
 
-  // Update greeting when user name loads
   useEffect(() => {
-    if (userName && messages.length === 1 && messages[0].role === 'assistant') {
+    localStorage.setItem('maria_chat_messages', JSON.stringify(messages));
+  }, [messages]);
+
+  useEffect(() => {
+    if (session && userQuery.data?.name && messages.length === 1 && messages[0].role === 'assistant' && !messages[0].content.includes(userName)) {
       setMessages([{
         role: 'assistant',
         content: `Olá, **${userName}**! 👋 Sou a **MarIA**, sua assessora de imprensa virtual. Que história incrível você quer contar hoje?`
       }]);
     }
-  }, [userName]);
+  }, [userName, session, messages]);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
+  const checkGuestLimit = () => {
+    if (!session && localStorage.getItem('maria_guest_release') === 'true') {
+      alert("Você já gerou sua pauta gratuita! Cadastre-se na plataforma para criar novas pautas.");
+      onNavigate('dash');
+      return true;
+    }
+    return false;
+  };
+
   const handleSend = async (e?: React.FormEvent) => {
     if (e) e.preventDefault();
     if (!input.trim()) return;
+    if (checkGuestLimit()) return;
 
     const userMsg = input.trim();
     setInput('');
@@ -60,13 +80,26 @@ export function ChatPage() {
   };
 
   const handleGenerateRelease = async () => {
+    if (checkGuestLimit()) return;
     try {
       const res = await generateReleaseMutation.mutateAsync({ messages });
       setRelease(res.text);
-      userQuery.refetch(); // Refetch credits after generating release
+      if (session) {
+        userQuery.refetch(); // Refetch credits after generating release
+      } else {
+        localStorage.setItem('maria_guest_release', 'true');
+      }
     } catch (err: any) {
       alert(err.message);
     }
+  };
+
+  const handleNewStory = () => {
+    if (checkGuestLimit()) return;
+    setRelease('');
+    setMessages([
+      { role: 'assistant', content: `Olá! 👋 Sobre o que vamos falar hoje?` }
+    ]);
   };
 
   if (release) {
@@ -76,11 +109,11 @@ export function ChatPage() {
           <div className="rel-wrap vis">
             <div className="rel-hdr">
               <button onClick={() => setRelease('')}>&larr;</button>
-              <span>Release Profissional</span>
+              <span>Release Profissional {(!session) && "(Grátis)"}</span>
             </div>
             <div className="rel-acts">
               <button className="act-btn" onClick={() => navigator.clipboard.writeText(release)}>📋 Copiar Texto</button>
-              <button className="act-btn p" onClick={() => alert('Feature em breve!')}>🚀 Enviar para Curadoria (Match)</button>
+              <button className="act-btn p" onClick={handleNewStory}>🚀 Nova Pauta</button>
             </div>
             <div id="rel-content">
               <ReleaseMarkdown content={release} variant="release" />
@@ -101,17 +134,23 @@ export function ChatPage() {
               <div className="name">MarIA</div>
               <div className="status"><div className="dot-on"></div> Assessora Virtual • Online</div>
             </div>
-            <div className="chat-cred">
-              <div className="cl">Créditos</div>
-              <div className="cv">{credits}</div>
-            </div>
+            {session ? (
+              <div className="chat-cred">
+                <div className="cl">Créditos</div>
+                <div className="cv">{credits}</div>
+              </div>
+            ) : (
+              <div className="chat-cred" style={{ cursor: 'pointer' }} onClick={() => onNavigate('dash')}>
+                <div className="cv" style={{ fontSize: '12px' }}>Entrar / Cadastrar</div>
+              </div>
+            )}
           </div>
 
           <div id="msgs">
             {messages.map((m, i) => (
               <div key={i} className={`msg ${m.role}`}>
                 {m.role === 'assistant' && <div className="msg-av">M</div>}
-                {m.role === 'user' && <div className="msg-av u">{userName?.[0] || 'U'}</div>}
+                {m.role === 'user' && <div className="msg-av u">{session ? (userName?.[0] || 'U') : 'V'}</div>}
                 <div className="msg-b">
                   <ReleaseMarkdown content={m.content} variant="chat" />
                 </div>
@@ -138,7 +177,7 @@ export function ChatPage() {
               disabled={generateReleaseMutation.isPending}
               style={{ opacity: generateReleaseMutation.isPending ? 0.5 : 1 }}
             >
-              {generateReleaseMutation.isPending ? '⏳ Escrevendo Release...' : '✨ Gerar release profissional (1 crédito)'}
+              {generateReleaseMutation.isPending ? '⏳ Escrevendo Release...' : `✨ Gerar release profissional ${session ? '(1 crédito)' : '(Grátis)'}`}
             </button>
           ) : (
             <div id="chips">

@@ -40,7 +40,7 @@ const anthropic = new Anthropic({
 });
 
 export const chatRouter = router({
-  sendMessage: protectedProcedure
+  sendMessage: publicProcedure
     .input(z.object({
       messages: z.array(z.object({
         role: z.enum(['user', 'assistant']),
@@ -49,14 +49,18 @@ export const chatRouter = router({
     }))
     .mutation(async ({ ctx, input }) => {
       try {
-        // Busca nome do usuário para personalizar a entrevista
-        const { data: userProfile } = await supabase
-          .from('users')
-          .select('name')
-          .eq('id', ctx.user.id)
-          .single();
+        let userName = 'empreendedor';
+        if (ctx.user) {
+          const { data: userProfile } = await supabase
+            .from('users')
+            .select('name')
+            .eq('id', ctx.user.id)
+            .single();
+          if (userProfile?.name) {
+            userName = userProfile.name.split(' ')[0];
+          }
+        }
 
-        const userName = userProfile?.name?.split(' ')[0] || 'empreendedor';
         const personalizedPrompt = SYSTEM_PROMPT + `\n\nO nome do entrevistado é: ${userName}.`;
 
         const response = await anthropic.messages.create({
@@ -73,7 +77,7 @@ export const chatRouter = router({
       }
     }),
 
-  generateRelease: protectedProcedure
+  generateRelease: publicProcedure
     .input(z.object({
       messages: z.array(z.object({
         role: z.enum(['user', 'assistant']),
@@ -81,15 +85,17 @@ export const chatRouter = router({
       }))
     }))
     .mutation(async ({ ctx, input }) => {
-      // 1. Verifica se tem créditos na tabela credits
-      const { data: creditData, error: creditError } = await supabase
-        .from('credits')
-        .select('balance, totalUsed')
-        .eq('userId', ctx.user.id)
-        .single();
-        
-      if (creditError || !creditData || creditData.balance <= 0) {
-        throw new Error('Você não tem créditos suficientes.');
+      if (ctx.user) {
+        // Verifica se tem créditos na tabela credits
+        const { data: creditData, error: creditError } = await supabase
+          .from('credits')
+          .select('balance, totalUsed')
+          .eq('userId', ctx.user.id)
+          .single();
+          
+        if (creditError || !creditData || creditData.balance <= 0) {
+          throw new Error('Você não tem créditos suficientes.');
+        }
       }
 
       const today = new Date().toLocaleDateString("pt-BR", { timeZone: "America/Sao_Paulo" });
@@ -141,7 +147,12 @@ Release gerado pela MarIA — A 1ª Assessora de Imprensa Virtual do Brasil`;
         const titleMatch = releaseText.match(/^#\s+(.+)$/m);
         const releaseTitle = titleMatch ? titleMatch[1] : 'Nova pauta';
 
-        // 2. Grava a conversa (conversation) no banco
+        // Guest logic ends here
+        if (!ctx.user) {
+          return { ok: true, text: releaseText, title: releaseTitle };
+        }
+
+        // DB logic for authenticated users
         const { data: conv } = await supabase.from('conversations').insert({
           userId: ctx.user.id,
           title: releaseTitle,
@@ -149,7 +160,6 @@ Release gerado pela MarIA — A 1ª Assessora de Imprensa Virtual do Brasil`;
         }).select('id').single();
 
         if (conv) {
-          // Grava as mensagens atreladas à conversa
           const msgsToInsert = input.messages.map(m => ({
             conversationId: conv.id,
             role: m.role,
@@ -158,9 +168,7 @@ Release gerado pela MarIA — A 1ª Assessora de Imprensa Virtual do Brasil`;
           await supabase.from('messages').insert(msgsToInsert);
         }
 
-        // 3. OPERAÇÃO ATÔMICA (RPC): Cria Story -> Debita Crédito -> Loga
         let createdStoryId: string | null = null;
-
         try {
           const { data: storyId, error: rpcError } = await supabase.rpc('create_story_with_credit', {
             p_user_id: ctx.user.id,
@@ -174,7 +182,6 @@ Release gerado pela MarIA — A 1ª Assessora de Imprensa Virtual do Brasil`;
           }
           createdStoryId = storyId;
 
-          // C. Notifica curadoria de forma SÍNCRONA
           const { data: userProfile } = await supabase
             .from('users')
             .select('name')
@@ -193,12 +200,9 @@ Release gerado pela MarIA — A 1ª Assessora de Imprensa Virtual do Brasil`;
           }
 
         } catch (txnError: any) {
-          // Em caso de falha de notificação (a pauta e o crédito já foram salvos/debitados)
-          // Mas se falhar a transação do banco, cai aqui sem debitar nada.
           throw new Error(txnError.message || 'Erro crítico durante a geração e processamento do release.');
         }
 
-        // 4. Extrai tags da pauta via IA (fire-and-forget, sem impacto na transação)
         (async () => {
           try {
             const tagsResponse = await anthropic.messages.create({
