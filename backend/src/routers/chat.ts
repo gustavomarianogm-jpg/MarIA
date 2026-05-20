@@ -11,6 +11,8 @@ REGRAS ABSOLUTAS:
 - Use português brasileiro natural. Emojis com moderação (máx. 1 por mensagem).
 - NUNCA invente informações. Use APENAS o que o entrevistado disser.
 - Siga RIGOROSAMENTE a sequência de 7 etapas abaixo. NÃO pule etapas.
+- Durante o chat: use negrito com PARCIMÔNIA — no máximo 1-2 palavras-chave por mensagem. NUNCA use títulos markdown (#, ##) no chat.
+- NUNCA use itálico (asterisco simples *texto*) nas suas mensagens.
 
 SEQUÊNCIA OBRIGATÓRIA DA ENTREVISTA:
 
@@ -91,7 +93,41 @@ export const chatRouter = router({
       }
 
       const today = new Date().toLocaleDateString("pt-BR", { timeZone: "America/Sao_Paulo" });
-      const pr = `Com base na conversa, escreva um release jornalístico profissional em português do Brasil.\n\nA DATA DE HOJE É ${today}. NUNCA invente ou chute datas. Para a demarcação [Data], use a data de hoje, a menos que o usuário tenha especificado uma data de embargo explícita na entrevista.\n\nREGRAS DE FORMATAÇÃO (MUITO IMPORTANTE):\n1. NÃO USE negrito no corpo do texto (como em nomes de pessoas, cargos ou palavras de ênfase).\n2. Limite o uso de negrito APENAS à demarcação de cidade/data no início e aos subtítulos.\n3. O título principal do release DEVE usar capitalização de frase comum (apenas a primeira letra da frase e nomes próprios/cidades/siglas em maiúsculo). NUNCA capitalize a primeira letra de todas as palavras.\n\nESTRUTURA:\n# [Título chamativo até 12 palavras]\n**[Cidade, Estado] — [Data]** — [Lead: 2-3 linhas respondendo Quem, O quê, Quando, Onde, Por quê]\n\n[Parágrafo 1 — fato principal]\n\n[Parágrafo 2 — gancho: por que importa agora?]\n\n"[Citação marcante do porta-voz]", afirma [Nome], [Cargo].\n\n[Parágrafo 3 — dados e impacto]\n\n[Parágrafo 4 — background]\n\n## Sobre [empresa]\n[Parágrafo institucional]\n\n## Contato para imprensa\nNome: | Tel: | E-mail:\n\n---\n*Release gerado pela MarIA — A 1ª Assessora de Imprensa Virtual do Brasil*\n\nUSE APENAS dados fornecidos. Se algo não foi informado, escreva [a informar].`;
+      const pr = `Com base na conversa, escreva um release jornalístico profissional em português do Brasil.
+
+A DATA DE HOJE É ${today}. NUNCA invente ou chute datas. Para a demarcação [Data], use a data de hoje, a menos que o usuário tenha especificado uma data de embargo explícita na entrevista.
+
+REGRAS DE QUALIDADE E FORMATAÇÃO (MUITO IMPORTANTE):
+1. NUNCA invente dados. Sempre use exatamente o que o usuário forneceu. Se faltar algo, escreva [a informar].
+2. NUNCA invente data. Utilize a data informada nesta instrução ou a fornecida pelo usuário.
+3. No release final, use negrito APENAS em: (a) título principal, (b) cabeçalho de cidade/data, (c) nome da pessoa citada, (d) seções "Sobre" e "Contato para Imprensa". NUNCA use negrito em parágrafos comuns.
+4. NUNCA use itálico (asterisco simples) no texto.
+5. O título principal do release DEVE ter no máximo 12 palavras, com gancho jornalístico claro. Deve usar capitalização de frase comum (apenas a primeira letra da frase e nomes próprios em maiúsculo). NUNCA capitalize a primeira letra de todas as palavras.
+
+ESTRUTURA OBRIGATÓRIA:
+# [Título chamativo até 12 palavras]
+**[Cidade, Estado]** — **[Data]** — [Lide: quem, o quê, quando, onde, por quê — em um único parágrafo]
+
+[Corpo - Parágrafo 1: Contexto e fato principal]
+
+[Corpo - Parágrafo 2: Gancho - por que importa agora e impacto]
+
+"[Citação marcante do porta-voz]", afirma **[Nome da pessoa citada]**, [Cargo].
+
+[Corpo - Parágrafo 3: Background e conclusão]
+
+### Box de Dados
+- [Dado ou número relevante 1]
+- [Dado ou número relevante 2]
+
+## Sobre [empresa]
+[Parágrafo institucional]
+
+## Contato para imprensa
+Nome: | Tel: | E-mail:
+
+---
+Release gerado pela MarIA — A 1ª Assessora de Imprensa Virtual do Brasil`;
 
       try {
         const response = await anthropic.messages.create({
