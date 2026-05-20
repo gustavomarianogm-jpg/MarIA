@@ -8,6 +8,9 @@ import { ReleaseMarkdown } from '@/components/ReleaseMarkdown';
 type Message = { role: 'user' | 'assistant'; content: string };
 
 export function ChatPage() {
+  const userQuery = trpc.user.me.useQuery();
+  const userName = userQuery.data?.name?.split(' ')[0] || '';
+
   const [messages, setMessages] = useState<Message[]>([
     { role: 'assistant', content: 'Olá! 👋 Sou a **MarIA**, sua assessora de imprensa virtual. Vou te ajudar a transformar sua história em uma pauta profissional que vai chegar nos jornalistas certos.\n\nSobre o que vamos falar hoje?' }
   ]);
@@ -19,7 +22,17 @@ export function ChatPage() {
   const generateReleaseMutation = trpc.chat.generateRelease.useMutation();
 
   const userMessageCount = messages.filter(m => m.role === 'user').length;
-  const canGenerateRelease = userMessageCount >= 4 || messages.some(m => m.content.includes('Gerar release'));
+  const canGenerateRelease = userMessageCount >= 7 || messages.some(m => m.content.includes('Gerar release'));
+
+  // Update greeting when user name loads
+  useEffect(() => {
+    if (userName && messages.length === 1 && messages[0].role === 'assistant') {
+      setMessages([{
+        role: 'assistant',
+        content: `Olá, **${userName}**! 👋 Sou a **MarIA**, sua assessora de imprensa virtual. Que história incrível você quer contar hoje?`
+      }]);
+    }
+  }, [userName]);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
