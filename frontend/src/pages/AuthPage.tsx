@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { supabase } from '@/utils/supabase';
 
-export function AuthPage({ onLogin }: { onLogin: () => void }) {
+export function AuthPage({ onLogin, message }: { onLogin: () => void, message?: string }) {
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -39,7 +39,7 @@ export function AuthPage({ onLogin }: { onLogin: () => void }) {
         
         <div className="auth-card" id="card-login">
           <h3>Bem-vindo(a) de volta</h3>
-          <div className="sub">Acesse sua conta para continuar</div>
+          <div className="sub">{message || 'Acesse sua conta para continuar'}</div>
           
           <button className="oauth-btn" onClick={() => alert('Em breve!')}>
             <img src="https://www.svgrepo.com/show/475656/google-color.svg" width="18" alt="Google" /> Continuar com Google

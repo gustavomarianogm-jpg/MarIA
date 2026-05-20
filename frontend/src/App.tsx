@@ -72,9 +72,15 @@ function App() {
               </div>
               <div className="nav-links" style={{ display: 'flex', gap: '4px', marginLeft: 'auto' }}>
                 <button className={`nav-btn ${currentRoute === 'landing' ? 'active' : ''}`} onClick={() => setCurrentRoute('landing')}>Início</button>
-                <button className={`nav-btn ${currentRoute === 'dash' ? 'active' : ''}`} onClick={() => setCurrentRoute('dash')}>Dashboard</button>
-                <button className={`nav-btn ${currentRoute === 'chat' ? 'active' : ''}`} onClick={() => setCurrentRoute('chat')}>Chat MarIA</button>
-                {session && <button className={`nav-btn ${currentRoute === 'admin' ? 'active' : ''}`} onClick={() => setCurrentRoute('admin')} style={{ color: '#854F0B', background: 'rgba(239,159,39,0.08)' }}>⚙ Admin</button>}
+                {session ? (
+                  <>
+                    <button className={`nav-btn ${currentRoute === 'dash' ? 'active' : ''}`} onClick={() => setCurrentRoute('dash')}>Dashboard</button>
+                    <button className={`nav-btn ${currentRoute === 'chat' ? 'active' : ''}`} onClick={() => setCurrentRoute('chat')}>Chat MarIA</button>
+                    <button className={`nav-btn ${currentRoute === 'admin' ? 'active' : ''}`} onClick={() => setCurrentRoute('admin')} style={{ color: '#854F0B', background: 'rgba(239,159,39,0.08)' }}>⚙ Admin</button>
+                  </>
+                ) : (
+                  <button className={`nav-btn ${['dash', 'chat'].includes(currentRoute) ? 'active' : ''}`} onClick={() => setCurrentRoute('dash')}>Entrar</button>
+                )}
               </div>
               <button className="ham" id="ham-btn" aria-label="Menu" style={{ display: 'none' }}>
                 <span></span><span></span><span></span>
@@ -104,7 +110,7 @@ function App() {
           )}
 
           {currentRoute === 'chat' && (
-            session ? <ChatPage /> : <AuthPage onLogin={() => {}} />
+            session ? <ChatPage /> : <AuthPage onLogin={() => {}} message="Faça login para acessar o Chat MarIA" />
           )}
 
           {currentRoute === 'admin' && (
