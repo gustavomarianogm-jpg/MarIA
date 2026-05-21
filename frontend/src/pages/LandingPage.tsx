@@ -606,15 +606,16 @@ export function LandingPage({ session, onNavigate }: { session: any, onNavigate:
     <span className="display text-8xl">âˆž</span>
   </div>
 
-  <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
-    <h2 className="masthead text-[clamp(2.5rem,7vw,5.5rem)] leading-[0.9]">
-      Sua histÃ³ria <span className="display-italic">nÃ£o merece</span> morrer numa caixa de e-mail.
-    </h2>
-    <p className="text-xl md:text-2xl mt-8 max-w-2xl mx-auto opacity-90">
-      Teste grÃ¡tis a MarIA. FaÃ§a sua primeira pauta. Se gostar, vira cliente. Se nÃ£o gostar, fica sem nada perdido.
-    </p>
+  <div className="w-full flex flex-col items-center justify-center px-6 relative z-10 text-center">
+    <div className="max-w-4xl w-full flex flex-col items-center justify-center">
+      <h2 className="masthead text-[clamp(2.5rem,7vw,5.5rem)] leading-[0.9] text-center w-full">
+        Sua histÃ³ria <span className="display-italic">nÃ£o merece</span> morrer numa caixa de e-mail.
+      </h2>
+      <p className="text-xl md:text-2xl mt-8 max-w-2xl mx-auto opacity-90 text-center w-full">
+        Teste grÃ¡tis a MarIA. FaÃ§a sua primeira pauta. Se gostar, vira cliente. Se nÃ£o gostar, fica sem nada perdido.
+      </p>
 
-    <div className="flex flex-col sm:flex-row gap-4 justify-center mt-12">
+      <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-12 w-full">
       <a href="#" className="btn-primary" style={{"background":"#FAF6F0","color":"#0F0A1A","boxShadow":"5px 5px 0 #0F0A1A"}} onClick={(e) => { e.preventDefault(); onNavigate('chat'); }}>Criar minha pauta grÃ¡tis
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
       </a>
@@ -623,9 +624,10 @@ export function LandingPage({ session, onNavigate }: { session: any, onNavigate:
       </a>
     </div>
 
-    <p className="font-mono text-xs opacity-70 mt-8 tracking-wider">
-      ðŸ‡§ðŸ‡· FEITO EM GOIÃ‚NIA Â· APOIADO PELO PROGRAMA CENTELHA-GO Â· LGPD-COMPLIANT
-    </p>
+      <p className="font-mono text-xs opacity-70 mt-8 tracking-wider text-center w-full">
+        ðŸ‡§ðŸ‡· FEITO EM GOIÃ‚NIA Â· APOIADO PELO PROGRAMA CENTELHA-GO Â· LGPD-COMPLIANT
+      </p>
+    </div>
   </div>
 </section>
 
