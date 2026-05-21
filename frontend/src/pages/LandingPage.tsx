@@ -60,12 +60,12 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
         A MarIA é a primeira assessora de imprensa que combina <strong>IA + curadoria de jornalistas reais</strong> — e cobra só quando sua matéria sai publicada de verdade. Sem mensalidade gorda. Sem release jogado fora.
       </p>
 
-      <div className="flex flex-col sm:flex-row gap-4 rise rise-4" id="cta-hero">
-        <a onClick={(e) => { e.preventDefault(); onNavigate('chat'); }} href="#" className="btn-primary">
+      <div className="flex flex-col sm:flex-row gap-6 rise rise-4 mt-10" id="cta-hero">
+        <a onClick={(e) => { e.preventDefault(); onNavigate('chat'); }} href="#" className="btn-primary" style={{ padding: '1rem 1.75rem', fontSize: '1.05rem', boxShadow: '6px 6px 0 #E91E8C' }}>
           Criar minha 1ª pauta grátis
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
         </a>
-        <a href="#como-funciona" className="btn-ghost">
+        <a href="#como-funciona" className="btn-ghost" style={{ padding: '1rem 1.75rem', fontSize: '1.05rem', backgroundColor: '#FAF6F0' }}>
           Como funciona
         </a>
       </div>
@@ -96,36 +96,37 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
 
       {/* Card editorial */}
       <div className="card-news rounded-3xl p-8 md:p-12 relative z-10 rise rise-3 min-h-[550px] flex flex-col justify-between" style={{ minHeight: '550px' }}>
-        <div>
+        <div className="px-2 pt-2">
           <div className="flex items-center justify-between mb-8">
             <div className="flex items-center gap-4">
-              <div className="w-14 h-14 rounded-full bg-ink text-paper flex items-center justify-center font-display font-bold text-xl">M</div>
+              <div className="w-12 h-12 rounded-full bg-ink text-paper flex items-center justify-center font-display font-bold text-lg">M</div>
               <div>
-                <div className="font-semibold text-base md:text-lg">MarIA · online agora</div>
-                <div className="text-xs md:text-sm text-ink/60 font-mono mt-1">Jornalista · 15+ anos de redação</div>
+                <div className="font-semibold text-sm md:text-base">MarIA · online agora</div>
+                <div className="text-[10px] md:text-xs text-ink/60 font-mono mt-1 uppercase">Jornalista · 15+ anos de redação</div>
               </div>
             </div>
-            <span className="pulse-dot"></span>
+            <span className="pulse-dot mr-2"></span>
           </div>
         </div>
 
-        <div className="space-y-6 flex-1 flex flex-col justify-center">
-          <div className="bubble-maria" style={{ fontSize: '1.05rem', padding: '1.25rem 1.5rem', maxWidth: '90%' }}>
+        <div className="space-y-4 flex-1 flex flex-col justify-center px-2">
+          <div className="bubble-maria" style={{ fontSize: '1rem', padding: '1.25rem 1.5rem', maxWidth: '85%' }}>
             Oi, Marcos! 👋 Vi que sua padaria completou 50 anos. Isso é OURO pra uma pauta. Vamos contar essa história?
           </div>
-          <div className="bubble-user" style={{ fontSize: '1.05rem', padding: '1.25rem 1.5rem', maxWidth: '85%' }}>
+          <div className="bubble-user" style={{ fontSize: '1rem', padding: '1.25rem 1.5rem', maxWidth: '85%' }}>
             Sério? Achei que ninguém ia se importar com isso.
           </div>
-          <div className="bubble-maria" style={{ fontSize: '1.05rem', padding: '1.25rem 1.5rem', maxWidth: '90%' }}>
+          <div className="bubble-maria" style={{ fontSize: '1rem', padding: '1.25rem 1.5rem', maxWidth: '85%', lineHeight: '1.5' }}>
             Marcos, jornalista de pequeno negócio acorda procurando história assim. Tradição que sobreviveu pandemia + fermentação natural = manchete. Me conta: qual foi o momento mais difícil que vocês passaram?
           </div>
         </div>
 
-        <div className="news-rule mt-8 mb-6"></div>
-
-        <div className="flex items-center justify-between text-sm">
-          <span className="font-mono text-ink/60">↓ release pronto em ~7 min</span>
-          <span className="tabloid text-sm py-2 px-3">3.281 já publicaram</span>
+        <div className="px-2 mt-8">
+          <div className="border-t-2 border-dashed border-ink mb-5"></div>
+          <div className="flex items-center justify-between text-sm">
+            <span className="font-mono text-ink/60 text-[11px] md:text-xs tracking-tight">↓ release pronto em ~7 min</span>
+            <span className="tabloid text-[10px] md:text-xs py-2 px-3 font-bold">3.281 JÁ PUBLICARAM</span>
+          </div>
         </div>
       </div>
 
