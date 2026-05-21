@@ -70,8 +70,8 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <div className="min-h-screen bg-slate-50 flex flex-col font-sans">
           
-          {/* Global Navbar (Hidden on Landing, Story, Journalist Signup, Static Pages and Congress Mode) */}
-          {!['landing', 'story', 'journalist-signup', 'terms', 'privacy', 'help', 'contact'].includes(currentRoute) && !isCongressMode && (
+          {/* Global Navbar (Hidden on Landing, Chat, Story, Journalist Signup, Static Pages and Congress Mode) */}
+          {!['landing', 'chat', 'story', 'journalist-signup', 'terms', 'privacy', 'help', 'contact'].includes(currentRoute) && !isCongressMode && (
             <nav id="nav" style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 1000, background: 'white', borderBottom: '1px solid var(--border)', display: 'flex', alignItems: 'center', padding: '0 24px', height: '64px' }}>
               <div className="nav-logo" onClick={() => setCurrentRoute('landing')} style={{ cursor: 'pointer' }}>
                 <div className="nav-icon" style={{ width: '32px', height: '32px', borderRadius: '9px', background: 'var(--grad)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontSize: '17px', fontWeight: 700 }}>&#8734;</div>
