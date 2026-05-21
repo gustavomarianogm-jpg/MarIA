@@ -6,7 +6,7 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
       
 
 {/* =================== TOP BAR (estilo cabeçalho de jornal) =================== */}
-<div className="bg-ink text-paper text-xs font-mono tracking-widest border-b border-paper/20" style={{ padding: '1.25rem 0' }}>
+<div className="bg-ink text-paper text-xs font-mono tracking-widest border-b border-paper/20" style={{ padding: '0.625rem 0' }}>
   <div className="container-seguro flex items-center justify-between">
     <div className="flex items-center gap-3">
       <span className="pulse-dot"></span>
@@ -33,7 +33,7 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
 
     <div className="flex items-center gap-3">
       <a href="#login" className="hidden md:inline-flex text-sm font-medium hover:text-rose">Entrar</a>
-      <a href="#cta-hero" className="btn-primary text-sm py-2.5 px-5" style={{ boxShadow: '3px 3px 0 #E91E8C' }}>
+      <a href="#cta-hero" className="btn-primary" style={{ padding: '0.6rem 1.25rem', fontSize: '0.85rem', boxShadow: '3px 3px 0 #E91E8C' }}>
         Testar Grátis →
       </a>
     </div>
@@ -95,46 +95,48 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
       </div>
 
       {/* Card editorial */}
-      <div className="card-news rounded-2xl p-7 relative z-10 rise rise-3">
-        <div className="flex items-center justify-between mb-5">
-          <div className="flex items-center gap-3">
-            <div className="w-11 h-11 rounded-full bg-ink text-paper flex items-center justify-center font-display font-bold">M</div>
-            <div>
-              <div className="font-semibold text-sm">MarIA · online agora</div>
-              <div className="text-xs text-ink/60 font-mono">Jornalista · 15+ anos de redação</div>
+      <div className="card-news rounded-3xl p-8 md:p-12 relative z-10 rise rise-3 min-h-[550px] flex flex-col justify-between" style={{ minHeight: '550px' }}>
+        <div>
+          <div className="flex items-center justify-between mb-8">
+            <div className="flex items-center gap-4">
+              <div className="w-14 h-14 rounded-full bg-ink text-paper flex items-center justify-center font-display font-bold text-xl">M</div>
+              <div>
+                <div className="font-semibold text-base md:text-lg">MarIA · online agora</div>
+                <div className="text-xs md:text-sm text-ink/60 font-mono mt-1">Jornalista · 15+ anos de redação</div>
+              </div>
             </div>
+            <span className="pulse-dot"></span>
           </div>
-          <span className="pulse-dot"></span>
         </div>
 
-        <div className="space-y-3">
-          <div className="bubble-maria">
+        <div className="space-y-6 flex-1 flex flex-col justify-center">
+          <div className="bubble-maria" style={{ fontSize: '1.05rem', padding: '1.25rem 1.5rem', maxWidth: '90%' }}>
             Oi, Marcos! 👋 Vi que sua padaria completou 50 anos. Isso é OURO pra uma pauta. Vamos contar essa história?
           </div>
-          <div className="bubble-user">
+          <div className="bubble-user" style={{ fontSize: '1.05rem', padding: '1.25rem 1.5rem', maxWidth: '85%' }}>
             Sério? Achei que ninguém ia se importar com isso.
           </div>
-          <div className="bubble-maria">
+          <div className="bubble-maria" style={{ fontSize: '1.05rem', padding: '1.25rem 1.5rem', maxWidth: '90%' }}>
             Marcos, jornalista de pequeno negócio acorda procurando história assim. Tradição que sobreviveu pandemia + fermentação natural = manchete. Me conta: qual foi o momento mais difícil que vocês passaram?
           </div>
         </div>
 
-        <div className="news-rule mt-6 mb-4"></div>
+        <div className="news-rule mt-8 mb-6"></div>
 
-        <div className="flex items-center justify-between text-xs">
+        <div className="flex items-center justify-between text-sm">
           <span className="font-mono text-ink/60">↓ release pronto em ~7 min</span>
-          <span className="tabloid">3.281 já publicaram</span>
+          <span className="tabloid text-sm py-2 px-3">3.281 já publicaram</span>
         </div>
       </div>
 
       {/* Card de matéria publicada (atrás) */}
-      <div className="card-news rounded-xl p-5 absolute -bottom-10 -left-2 xl:-left-10 w-64 z-0 rise rise-4" style={{ transform: 'rotate(-3deg)', background: '#F5B700' }}>
-        <div className="flex items-center gap-2 mb-2 text-xs font-mono">
-          <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path d="M2 5a2 2 0 012-2h12a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V5z"/></svg>
-          <span className="font-semibold">FOLHA · PEQUENOS NEGÓCIOS</span>
+      <div className="card-news rounded-xl p-6 absolute -bottom-14 -left-4 xl:-left-12 w-72 z-0 rise rise-4" style={{ transform: 'rotate(-4deg)', background: '#F5B700' }}>
+        <div className="flex items-center gap-2 mb-3 text-xs font-mono">
+          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M2 5a2 2 0 012-2h12a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V5z"/></svg>
+          <span className="font-semibold text-[11px]">FOLHA · PEQUENOS NEGÓCIOS</span>
         </div>
-        <p className="font-display text-sm font-semibold leading-tight">"Padaria de Goiânia preserva fermentação de 50 anos e dobra faturamento"</p>
-        <div className="mt-3 text-[10px] font-mono text-ink/60">PUBLICADO HÁ 2 DIAS</div>
+        <p className="font-display text-base font-semibold leading-tight">"Padaria de Goiânia preserva fermentação de 50 anos e dobra faturamento"</p>
+        <div className="mt-4 text-[11px] font-mono text-ink/60">PUBLICADO HÁ 2 DIAS</div>
       </div>
     </div>
   </div>
