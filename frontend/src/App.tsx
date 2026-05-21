@@ -74,9 +74,9 @@ function App() {
           {/* Global Navbar (Hidden on Landing, Story, Journalist Signup, Static Pages and Congress Mode) */}
           {!['landing', 'story', 'journalist-signup', 'terms', 'privacy', 'help', 'contact'].includes(currentRoute) && !isCongressMode && (
             <nav id="nav" style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 1000, background: 'white', borderBottom: '1px solid var(--border)', display: 'flex', alignItems: 'center', padding: '0 24px', height: '64px' }}>
-              <div className="nav-logo" onClick={() => setCurrentRoute('landing')} style={{ cursor: 'pointer' }}>
+              <div className="nav-logo" onClick={() => setCurrentRoute('landing')} style={{ cursor: 'pointer', flexShrink: 0 }}>
                 <div className="nav-icon" style={{ width: '32px', height: '32px', borderRadius: '9px', background: 'var(--grad)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontSize: '17px', fontWeight: 700 }}>&#8734;</div>
-                <div className="nav-brand" style={{ fontSize: '18px', fontWeight: 800, color: 'var(--dark)' }}>Mar<em style={{ fontStyle: 'normal', background: 'var(--grad)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>IA</em></div>
+                <div className="nav-brand" style={{ fontSize: '18px', fontWeight: 800, color: 'var(--dark)', whiteSpace: 'nowrap' }}>Mar<em style={{ fontStyle: 'normal', background: 'var(--grad)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>IA</em></div>
               </div>
               <div className="nav-links" style={{ display: 'flex', gap: '4px', marginLeft: 'auto' }}>
                 <button className={`nav-btn ${currentRoute === 'landing' ? 'active' : ''}`} onClick={() => setCurrentRoute('landing')}>Início</button>
@@ -96,7 +96,7 @@ function App() {
               {session && (
                 <div id="nav-user" style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13px', color: 'var(--gray)', marginLeft: '8px' }}>
                   <div className="nav-av" style={{ width: '32px', height: '32px', borderRadius: '50%', background: '#eee', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{session.user.email?.[0].toUpperCase() || 'U'}</div>
-                  <div id="nav-cred" onClick={() => setCurrentRoute('dash')} style={{ cursor: 'pointer' }}>Conta</div>
+                  <div id="nav-cred" onClick={() => setCurrentRoute('dash')} style={{ cursor: 'pointer', flexShrink: 0 }}>Conta</div>
                 </div>
               )}
             </nav>
