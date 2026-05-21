@@ -76,7 +76,9 @@ export function ChatPage({ session, onNavigate }: { session: any, onNavigate: (r
       const res = await chatMutation.mutateAsync({ messages: newMessages });
       setMessages([...newMessages, { role: 'assistant', content: res.text }]);
     } catch (err: any) {
-      setMessages([...newMessages, { role: 'assistant', content: 'Erro de conexão. Tente novamente.' }]);
+      const errorMsg = err?.message || err?.data?.message || 'Erro de conexão. Tente novamente.';
+      console.error('[ChatPage] Erro:', errorMsg, err);
+      setMessages([...newMessages, { role: 'assistant', content: `⚠️ ${errorMsg}` }]);
     }
   };
 
