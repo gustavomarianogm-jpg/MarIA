@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { trpc } from '@/utils/trpc';
 import { Button } from '@/components/ui/button';
 import { ReleaseMarkdown } from '@/components/ReleaseMarkdown';
+import './ChatPage.css';
 
 type Message = { role: 'user' | 'assistant'; content: string };
 
