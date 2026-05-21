@@ -56,11 +56,11 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
         <span className="marker">não mais um release esquecido</span> na caixa de e-mail.
       </h1>
 
-      <p className="text-lg md:text-xl text-ink/75 max-w-xl rise rise-3 leading-relaxed">
+      <p className="display text-xl md:text-2xl text-ink/80 leading-snug rise rise-2" style={{ marginTop: '3.5rem' }}>
         A MarIA é a primeira assessora de imprensa que combina <strong>IA + curadoria de jornalistas reais</strong> — e cobra só quando sua matéria sai publicada de verdade. Sem mensalidade gorda. Sem release jogado fora.
       </p>
 
-      <div className="flex flex-col sm:flex-row gap-6 rise rise-4 mt-10" id="cta-hero">
+      <div className="flex flex-col sm:flex-row gap-6 rise rise-4" id="cta-hero" style={{ marginTop: '3.5rem' }}>
         <a onClick={(e) => { e.preventDefault(); onNavigate('chat'); }} href="#" className="btn-primary" style={{ padding: '1rem 1.75rem', fontSize: '1.05rem', boxShadow: '6px 6px 0 #E91E8C' }}>
           Criar minha 1ª pauta grátis
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
@@ -70,7 +70,7 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
         </a>
       </div>
 
-      <div className="flex flex-wrap items-center gap-6 pt-4 rise rise-5">
+      <div className="flex flex-wrap items-center gap-4 md:gap-6 text-sm font-medium text-ink/70 rise rise-5" style={{ marginTop: '2.5rem' }}>
         <div className="flex items-center gap-2 text-sm">
           <svg className="w-5 h-5 text-rose" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/></svg>
           <span className="font-medium">Sem cartão de crédito</span>
@@ -131,21 +131,21 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
       </div>
 
       {/* Card de matéria publicada (atrás) */}
-      <div className="card-news rounded-xl p-6 absolute -bottom-14 -left-4 xl:-left-12 w-72 z-0 rise rise-4" style={{ transform: 'rotate(-4deg)', background: '#F5B700' }}>
+      <div className="card-news rounded-xl absolute -bottom-14 -left-4 xl:-left-12 rise rise-4" style={{ transform: 'rotate(-4deg)', background: '#F5B700', zIndex: 30, width: '360px', padding: '2rem' }}>
         <div className="flex items-center gap-2 mb-3 text-xs font-mono">
           <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M2 5a2 2 0 012-2h12a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V5z"/></svg>
-          <span className="font-semibold text-[11px]">FOLHA · PEQUENOS NEGÓCIOS</span>
+          <span className="font-semibold text-[12px]">FOLHA · PEQUENOS NEGÓCIOS</span>
         </div>
-        <p className="font-display text-base font-semibold leading-tight">"Padaria de Goiânia preserva fermentação de 50 anos e dobra faturamento"</p>
-        <div className="mt-4 text-[11px] font-mono text-ink/60">PUBLICADO HÁ 2 DIAS</div>
+        <p className="font-display text-lg font-semibold leading-tight">"Padaria de Goiânia preserva fermentação de 50 anos e dobra faturamento"</p>
+        <div className="mt-4 text-xs font-mono text-ink/60">PUBLICADO HÁ 2 DIAS</div>
       </div>
     </div>
   </div>
 </section>
 
 {/* =================== FAIXA DE LOGOS / "JÁ SAÍRAM EM" =================== */}
-<section className="bg-ink text-paper py-8 border-y-2 border-ink overflow-hidden">
-  <div className="container-seguro mb-5 flex items-center justify-between">
+<section className="bg-ink text-paper border-y-2 border-ink overflow-hidden" style={{ padding: '2.5rem 0' }}>
+  <div className="container-seguro mb-6 flex items-center justify-between">
     <span className="font-mono text-xs tracking-widest opacity-70">CLIENTES MARIA QUE JÁ SAÍRAM EM</span>
     <span className="font-mono text-xs tracking-widest opacity-70">3.281 MATÉRIAS · ATUALIZADO HOJE</span>
   </div>
@@ -170,7 +170,7 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
     <span className="display text-3xl opacity-80 whitespace-nowrap">G1</span>
     <span className="display text-3xl opacity-80 whitespace-nowrap">· Startupi ·</span>
   </div>
-</section>
+</div>
 
 {/* =================== A DOR (problema/agitação) =================== */}
 <section className="sec-dura grain relative">
