@@ -35,9 +35,11 @@ FINALIZAÇÃO: Somente APÓS coletar informações de TODAS as 7 etapas, diga:
 
 Se o entrevistado der respostas vagas ou incompletas em qualquer etapa, faça perguntas de acompanhamento para extrair mais detalhes ANTES de avançar para a próxima etapa.`;
 
-const anthropic = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY || '',
-});
+const getAnthropic = () => {
+  const key = process.env.ANTHROPIC_API_KEY;
+  if (!key) return null;
+  return new Anthropic({ apiKey: key });
+};
 
 export const chatRouter = router({
   sendMessage: publicProcedure
@@ -62,6 +64,11 @@ export const chatRouter = router({
         }
 
         const personalizedPrompt = SYSTEM_PROMPT + `\n\nO nome do entrevistado é: ${userName}.`;
+
+        const anthropic = getAnthropic();
+        if (!anthropic) {
+          throw new Error('A chave da API do Anthropic (Claude) não está configurada.');
+        }
 
         const response = await anthropic.messages.create({
           model: 'claude-3-5-sonnet-20240620',
@@ -136,7 +143,12 @@ Nome: | Tel: | E-mail:
 Release gerado pela MarIA — A 1ª Assessora de Imprensa Virtual do Brasil`;
 
       try {
-        const response = await anthropic.messages.create({
+        const anthropicClient = getAnthropic();
+        if (!anthropicClient) {
+          throw new Error('A chave da API do Anthropic (Claude) não está configurada no servidor.');
+        }
+
+        const response = await anthropicClient.messages.create({
           model: 'claude-3-5-sonnet-20240620',
           max_tokens: 2000,
           messages: [...input.messages, { role: 'user', content: pr }],
@@ -183,7 +195,10 @@ Release gerado pela MarIA — A 1ª Assessora de Imprensa Virtual do Brasil`;
                 // Extrair tags também para visitantes
                 (async () => {
                   try {
-                    const tagsResponse = await anthropic.messages.create({
+                    const anthropicClient = getAnthropic();
+                    if (!anthropicClient) return;
+                    
+                    const tagsResponse = await anthropicClient.messages.create({
                       model: 'claude-3-5-sonnet-20240620',
                       max_tokens: 150,
                       messages: [
@@ -262,7 +277,10 @@ Release gerado pela MarIA — A 1ª Assessora de Imprensa Virtual do Brasil`;
 
         (async () => {
           try {
-            const tagsResponse = await anthropic.messages.create({
+            const anthropicClient = getAnthropic();
+            if (!anthropicClient) return;
+
+            const tagsResponse = await anthropicClient.messages.create({
               model: 'claude-3-5-sonnet-20240620',
               max_tokens: 150,
               messages: [
