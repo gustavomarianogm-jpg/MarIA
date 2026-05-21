@@ -139,9 +139,9 @@ export function ChatPage({ session, onNavigate }: { session: any, onNavigate: (r
   }
 
   return (
-    <div id="pg-chat" className="page on" style={{ display: 'block', paddingTop: isCongressMode ? '20px' : '60px' }}>
-      <div className="chat-outer">
-        <div className="chat-wrap" style={{ height: isCongressMode ? 'calc(100vh - 60px)' : 'auto' }}>
+    <div id="pg-chat" className="page on" style={{ display: 'flex', flexDirection: 'column', height: '100vh', paddingTop: isCongressMode ? '0px' : '60px' }}>
+      <div className="chat-outer" style={{ flex: 1, maxWidth: '100%', margin: 0, padding: 0 }}>
+        <div className="chat-wrap" style={{ flex: 1, height: '100%', borderRadius: 0, border: 'none', boxShadow: 'none' }}>
           <div className="chat-hdr">
             <div className="av-m">M</div>
             <div className="info" style={{ flex: 1 }}>
@@ -175,7 +175,7 @@ export function ChatPage({ session, onNavigate }: { session: any, onNavigate: (r
             )}
           </div>
 
-          <div id="msgs" style={{ flex: isCongressMode ? '1' : 'none' }}>
+          <div id="msgs" style={{ flex: 1 }}>
             {messages.map((m, i) => (
               <div key={i} className={`msg ${m.role}`}>
                 {m.role === 'assistant' && <div className="msg-av">M</div>}
