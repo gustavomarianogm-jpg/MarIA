@@ -3,9 +3,11 @@ import React from 'react';
 export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r: string) => void }) {
   return (
     <div className="landing-body relative overflow-x-hidden">
-      {/* =================== TOP BAR (estilo cabeçalho de jornal) =================== */}
+      
+
+{/* =================== TOP BAR (estilo cabeçalho de jornal) =================== */}
 <div className="bg-ink text-paper py-2 text-xs font-mono tracking-widest border-b border-paper/20">
-  <div style={{ maxWidth: '80rem', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }} className="w-full px-6">
+  <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
     <div className="flex items-center gap-3">
       <span className="pulse-dot"></span>
       <span className="opacity-80">EDIÇÃO Nº 001 · GOIÂNIA-GO · A 1ª ASSESSORIA QUE COBRA POR RESULTADO</span>
@@ -16,8 +18,8 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
 
 {/* =================== NAV =================== */}
 <nav className="sticky top-0 z-50 bg-paper/90 backdrop-blur-md border-b border-ink/15">
-  <div style={{ maxWidth: '80rem', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: '5rem' }} className="w-full px-6">
-    <a onClick={(e) => e.preventDefault()} href="#" className="flex items-center gap-2 group">
+  <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+    <a onClick={(e) => { e.preventDefault(); onNavigate('landing'); }} href="#" className="flex items-center gap-2 group">
       <div className="w-10 h-10 bg-ink text-paper flex items-center justify-center font-display font-bold text-xl rounded-full group-hover:bg-rose transition-colors">M</div>
       <span className="display text-2xl">MarIA<span className="text-rose">.</span></span>
     </a>
@@ -40,21 +42,21 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
 
 {/* =================== HERO =================== */}
 <section className="relative pt-16 pb-24 md:pt-24 md:pb-32 grain">
-  <div style={{ maxWidth: '80rem', margin: '0 auto', display: 'grid', gridTemplateColumns: '1.15fr 1fr', gap: '4rem', alignItems: 'center' }} className="w-full px-6 relative">
+  <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-[1.15fr_1fr] gap-16 items-center relative">
 
     {/* Coluna esquerda: manchete */}
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+    <div className="space-y-8">
       <div className="flex items-center gap-3 rise rise-1">
         <span className="tabloid">Exclusiva</span>
         <span className="font-mono text-xs text-ink/60">Caderno · NEGÓCIOS</span>
       </div>
 
-      <h1 style={{ fontSize: 'clamp(2.8rem, 7vw, 5.5rem)', lineHeight: '1' }} className="display rise rise-2">
+      <h1 className="display text-[clamp(2.8rem,7vw,5.5rem)] rise rise-2">
         Sua história merece <span className="display-italic text-rose">virar notícia</span> —
         <span className="marker">não mais um release esquecido</span> na caixa de e-mail.
       </h1>
 
-      <p style={{ maxWidth: '36rem', lineHeight: '1.625' }} className="text-lg md:text-xl text-ink/75 w-full rise rise-3">
+      <p className="text-lg md:text-xl text-ink/75 max-w-xl rise rise-3 leading-relaxed">
         A MarIA é a primeira assessora de imprensa que combina <strong>IA + curadoria de jornalistas reais</strong> — e cobra só quando sua matéria sai publicada de verdade. Sem mensalidade gorda. Sem release jogado fora.
       </p>
 
@@ -85,7 +87,7 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
     </div>
 
     {/* Coluna direita: chat MarIA + selo recorte */}
-    <div style={{ width: '100%', maxWidth: '32rem', margin: '0 auto' }} className="relative">
+    <div className="relative">
 
       {/* Selo retrô */}
       <div className="absolute -top-6 -right-2 z-20 stamp">
@@ -105,7 +107,7 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
           <span className="pulse-dot"></span>
         </div>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }} className="flex flex-col">
+        <div className="space-y-3">
           <div className="bubble-maria">
             Oi, Marcos! 👋 Vi que sua padaria completou 50 anos. Isso é OURO pra uma pauta. Vamos contar essa história?
           </div>
@@ -140,7 +142,7 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
 
 {/* =================== FAIXA DE LOGOS / "JÁ SAÍRAM EM" =================== */}
 <section className="bg-ink text-paper py-8 border-y-2 border-ink overflow-hidden">
-  <div style={{ maxWidth: '80rem', margin: '0 auto' }} className="w-full px-6 mb-5 flex items-center justify-between">
+  <div className="max-w-7xl mx-auto px-6 mb-5 flex items-center justify-between">
     <span className="font-mono text-xs tracking-widest opacity-70">CLIENTES MARIA QUE JÁ SAÍRAM EM</span>
     <span className="font-mono text-xs tracking-widest opacity-70">3.281 MATÉRIAS · ATUALIZADO HOJE</span>
   </div>
@@ -169,10 +171,10 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
 
 {/* =================== A DOR (problema/agitação) =================== */}
 <section className="py-24 md:py-32 grain relative">
-  <div style={{ maxWidth: '64rem', margin: '0 auto' }} className="w-full px-6">
+  <div className="max-w-5xl mx-auto px-6">
     <div className="text-center mb-16">
       <span className="tabloid mb-5 inline-block">A real dura</span>
-      <h2 className="masthead  mt-4">
+      <h2 className="masthead text-[clamp(2.2rem,5vw,4rem)] mt-4">
         Você gasta R$ 3.000/mês com assessoria e <span className="display-italic text-coral">nunca aparece</span>.
       </h2>
     </div>
@@ -196,7 +198,7 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
     </div>
 
     <div className="mt-16 text-center">
-      <p style={{ maxWidth: '48rem', margin: '0 auto' }} className="display text-2xl md:text-3xl w-full leading-snug">
+      <p className="display text-2xl md:text-3xl max-w-3xl mx-auto leading-snug">
         A MarIA não vende release. Vende <span className="marker">a chance real da sua história sair</span> num veículo de credibilidade.
       </p>
     </div>
@@ -212,15 +214,15 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
       <circle cx="50" cy="50" r="45"/>
       <circle cx="50" cy="50" r="35"/>
       <circle cx="50" cy="50" r="25"/>
-      <text x="50" y="52" text-anchor="middle" fill="#FAF6F0" font-family="JetBrains Mono" font-size="3">SUA HISTÓRIA · MERECE SER OUVIDA · </text>
+      <text x="50" y="52" textAnchor="middle" fill="#FAF6F0" fontFamily="JetBrains Mono" fontSize="3">SUA HISTÓRIA · MERECE SER OUVIDA · </text>
     </svg>
   </div>
 
-  <div style={{ maxWidth: '80rem', margin: '0 auto' }} className="w-full px-6">
+  <div className="max-w-7xl mx-auto px-6">
 
-    <div style={{ maxWidth: '48rem' }} className="mb-20 w-full">
+    <div className="mb-20 max-w-3xl">
       <span className="tabloid mb-5 inline-block">O método</span>
-      <h2 className="masthead  mt-4">
+      <h2 className="masthead text-[clamp(2.4rem,5.5vw,4.5rem)] mt-4">
         3 passos. <span className="display-italic text-mustard">7 minutos.</span> Uma chance real de sair na imprensa.
       </h2>
     </div>
@@ -230,7 +232,7 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
       {/* Passo 1 */}
       <div className="relative">
         <div className="masthead text-9xl text-rose/40 leading-none">01</div>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }} className="-mt-12 md:-mt-16 relative z-10 flex flex-col pl-2">
+        <div className="-mt-12 md:-mt-16 relative z-10 space-y-4 pl-2">
           <h3 className="display text-3xl">Conversa com a MarIA</h3>
           <p className="text-paper/75 leading-relaxed">
             Sem formulário chato. A MarIA te entrevista por chat, igual uma jornalista de verdade: <em>"por que agora?", "quem fala?", "tem número?"</em>. Em 7 minutos, ela monta um release que pauteiro lê até o fim.
@@ -243,7 +245,7 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
       {/* Passo 2 */}
       <div className="relative">
         <div className="masthead text-9xl text-mustard/50 leading-none">02</div>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }} className="-mt-12 md:-mt-16 relative z-10 flex flex-col pl-2">
+        <div className="-mt-12 md:-mt-16 relative z-10 space-y-4 pl-2">
           <h3 className="display text-3xl">Curadoria de jornalista real</h3>
           <p className="text-paper/75 leading-relaxed">
             Nenhuma pauta sai sem passar por um jornalista de redação humano. Ele afia o gancho, valida o que faz sentido, corta o que não. É o <strong>firewall de qualidade</strong> que IA pura nunca tem.
@@ -256,7 +258,7 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
       {/* Passo 3 */}
       <div className="relative">
         <div className="masthead text-9xl text-coral/60 leading-none">03</div>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }} className="-mt-12 md:-mt-16 relative z-10 flex flex-col pl-2">
+        <div className="-mt-12 md:-mt-16 relative z-10 space-y-4 pl-2">
           <h3 className="display text-3xl">Conexão com quem cobre o tema</h3>
           <p className="text-paper/75 leading-relaxed">
             Sua pauta vai pra <strong>20 jornalistas brasileiros</strong> que cobrem exatamente o seu setor. Não é spam pra 5.000 e-mails — é o jornalista certo, no momento certo, com o gancho certo.
@@ -272,12 +274,12 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
 
 {/* =================== PROVA / CASES =================== */}
 <section id="prova" className="py-24 md:py-32 relative grain">
-  <div style={{ maxWidth: '80rem', margin: '0 auto' }} className="w-full px-6">
+  <div className="max-w-7xl mx-auto px-6">
 
     <div className="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6">
-      <div style={{ maxWidth: '42rem' }} className="w-full">
+      <div className="max-w-2xl">
         <span className="tabloid mb-5 inline-block">Saiu na imprensa</span>
-        <h2 className="masthead  mt-4">
+        <h2 className="masthead text-[clamp(2.2rem,5vw,4rem)] mt-4">
           Histórias <span className="display-italic text-rose">de verdade</span> que viraram manchete.
         </h2>
       </div>
@@ -352,10 +354,10 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
 
 {/* =================== COMPARATIVO =================== */}
 <section className="py-24 md:py-32 bg-paper relative">
-  <div style={{ maxWidth: '72rem', margin: '0 auto' }} className="w-full px-6">
+  <div className="max-w-6xl mx-auto px-6">
     <div className="text-center mb-16">
       <span className="tabloid mb-5 inline-block">Comparativo honesto</span>
-      <h2 className="masthead  mt-4">
+      <h2 className="masthead text-[clamp(2.2rem,5vw,4rem)] mt-4">
         MarIA <span className="display-italic">vs.</span> o resto do mercado.
       </h2>
     </div>
@@ -417,14 +419,14 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
 
 {/* =================== PREÇO =================== */}
 <section id="preco" className="py-24 md:py-32 bg-ink text-paper relative grain">
-  <div style={{ maxWidth: '64rem', margin: '0 auto' }} className="w-full px-6">
+  <div className="max-w-5xl mx-auto px-6">
 
     <div className="text-center mb-16">
       <span className="tabloid mb-5 inline-block" style={{ background: '#F5B700' }}>Preço justo</span>
-      <h2 className="masthead  mt-4">
+      <h2 className="masthead text-[clamp(2.2rem,5.5vw,4.5rem)] mt-4">
         Um plano. <span className="display-italic text-mustard">Zero confusão.</span>
       </h2>
-      <p style={{ maxWidth: '42rem', margin: '0 auto' }} className="text-paper/75 w-full mt-6 text-lg">
+      <p className="text-paper/75 max-w-2xl mx-auto mt-6 text-lg">
         Esqueça pacotes Pro/Plus/Ultra. Você paga uma mensalidade pequena pra ter acesso à MarIA — e um bônus se sua matéria sair publicada em veículo de credibilidade.
       </p>
     </div>
@@ -444,7 +446,7 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
           <p className="text-xs font-mono text-ink/60 mt-2">CANCELA QUANDO QUISER · SEM FIDELIDADE</p>
         </div>
 
-        <ul style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }} className="flex flex-col mb-8">
+        <ul className="space-y-3 mb-8">
           <li className="flex items-start gap-3 text-sm">
             <svg className="w-5 h-5 text-rose flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/></svg>
             <span><strong>1 pauta/mês</strong> com MarIA + curadoria humana</span>
@@ -485,7 +487,7 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
           </div>
         </div>
 
-        <ul style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }} className="flex flex-col mb-8">
+        <ul className="space-y-3 mb-8">
           <li className="flex items-start gap-3 text-sm">
             <svg className="w-5 h-5 text-ink flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/></svg>
             <span><strong>Tudo do Acesso</strong> +</span>
@@ -504,7 +506,7 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
           </li>
         </ul>
 
-        <a href="#" className="btn-primary w-full justify-center">Quero o Resultado →</a>
+        <a onClick={(e) => { e.preventDefault(); onNavigate('chat'); }} href="#" className="btn-primary w-full justify-center">Quero o Resultado →</a>
       </div>
     </div>
 
@@ -516,16 +518,16 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
 
 {/* =================== OBJEÇÕES (FAQ) =================== */}
 <section className="py-24 md:py-32 bg-paper">
-  <div style={{ maxWidth: '56rem', margin: '0 auto' }} className="w-full px-6">
+  <div className="max-w-4xl mx-auto px-6">
 
     <div className="mb-16">
       <span className="tabloid mb-5 inline-block">Perguntas honestas</span>
-      <h2 className="masthead  mt-4">
+      <h2 className="masthead text-[clamp(2.2rem,5vw,4rem)] mt-4">
         Tudo que você quer perguntar <span className="display-italic text-rose">antes de testar</span>.
       </h2>
     </div>
 
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }} className="flex flex-col">
+    <div className="space-y-4">
 
       <details className="card-news rounded-xl p-6 group" open>
         <summary className="font-display text-xl font-semibold cursor-pointer flex items-center justify-between">
@@ -605,11 +607,11 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
     <span className="display text-8xl">∞</span>
   </div>
 
-  <div style={{ maxWidth: '56rem', margin: '0 auto' }} className="w-full px-6 text-center relative z-10">
-    <h2 className="masthead  leading-[0.9]">
+  <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
+    <h2 className="masthead text-[clamp(2.5rem,7vw,5.5rem)] leading-[0.9]">
       Sua história <span className="display-italic">não merece</span> morrer numa caixa de e-mail.
     </h2>
-    <p style={{ maxWidth: '42rem', margin: '0 auto' }} className="text-xl md:text-2xl mt-8 w-full opacity-90">
+    <p className="text-xl md:text-2xl mt-8 max-w-2xl mx-auto opacity-90">
       Teste grátis a MarIA. Faça sua primeira pauta. Se gostar, vira cliente. Se não gostar, fica sem nada perdido.
     </p>
 
@@ -631,7 +633,7 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
 
 {/* =================== FOOTER =================== */}
 <footer className="bg-ink text-paper py-16 border-t-2 border-paper/20">
-  <div style={{ maxWidth: '80rem', margin: '0 auto' }} className="w-full px-6">
+  <div className="max-w-7xl mx-auto px-6">
 
     <div className="grid md:grid-cols-4 gap-12 mb-12">
       <div>
@@ -644,7 +646,7 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
 
       <div>
         <h4 className="font-mono text-xs tracking-widest mb-4 opacity-60">PRODUTO</h4>
-        <ul style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }} className="flex flex-col text-sm">
+        <ul className="space-y-2 text-sm">
           <li><a href="#" className="hover:text-rose">Como funciona</a></li>
           <li><a href="#preco" className="hover:text-rose">Preço</a></li>
           <li><a href="#" className="hover:text-rose">Cases</a></li>
@@ -654,7 +656,7 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
 
       <div>
         <h4 className="font-mono text-xs tracking-widest mb-4 opacity-60">JORNALISTAS</h4>
-        <ul style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }} className="flex flex-col text-sm">
+        <ul className="space-y-2 text-sm">
           <li><a href="#" className="hover:text-rose">Cadastrar-se grátis</a></li>
           <li><a href="#" className="hover:text-rose">Banco de fontes</a></li>
           <li><a href="#" className="hover:text-rose">Selo MarIA Verified</a></li>
@@ -663,7 +665,7 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
 
       <div>
         <h4 className="font-mono text-xs tracking-widest mb-4 opacity-60">EMPRESA</h4>
-        <ul style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }} className="flex flex-col text-sm">
+        <ul className="space-y-2 text-sm">
           <li><a href="#" className="hover:text-rose">Sobre nós</a></li>
           <li><a href="#" className="hover:text-rose">Blog (A Boa Notícia)</a></li>
           <li><a href="#" className="hover:text-rose">Contato</a></li>
@@ -684,6 +686,8 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
     </div>
   </div>
 </footer>
+
+
     </div>
   );
 }
