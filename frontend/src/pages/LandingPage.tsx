@@ -6,7 +6,7 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
       
 
 {/* =================== TOP BAR (estilo cabeçalho de jornal) =================== */}
-<div className="bg-ink text-paper py-3 text-xs font-mono tracking-widest border-b border-paper/20">
+<div className="bg-ink text-paper py-5 text-xs font-mono tracking-widest border-b border-paper/20">
   <div className="container-seguro flex items-center justify-between">
     <div className="flex items-center gap-3">
       <span className="pulse-dot"></span>
