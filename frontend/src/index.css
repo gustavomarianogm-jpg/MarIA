@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,800;1,9..144,400&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 @import "tw-animate-css";
@@ -9,14 +10,13 @@
 @import "@fontsource/poppins/800.css";
 @import "@fontsource/poppins/900.css";
 @import "@fontsource/roboto-mono/400.css";
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,800;1,9..144,400&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 @import "./Global.css";
 
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
     --font-heading: 'Poppins', sans-serif;
-    --font-sans: 'Poppins', sans-serif;
+    --font-sans: var(--font-inter);
     --font-inter: 'Inter Tight', system-ui, sans-serif;
     --font-display: 'Fraunces', serif;
     --font-mono: 'JetBrains Mono', 'Roboto Mono', monospace;
@@ -338,3 +338,34 @@
   letter-spacing: 0.12em;
   font-weight: 600;
 }
+
+
+/* Manual Tailwind fallbacks for arbitrary classes */
+@media (min-width: 1024px) {
+  .lg\:grid-cols-\[1\.15fr_1fr\] { grid-template-columns: 1.15fr 1fr; }
+  .lg\:grid-cols-\[1fr_1\.15fr\] { grid-template-columns: 1fr 1.15fr; }
+}
+
+.text-\[clamp\(2\.8rem\,7vw\,5\.5rem\)\] { font-size: clamp(2.8rem, 7vw, 5.5rem); }
+.text-\[10px\] { font-size: 10px; }
+.text-\[clamp\(2\.2rem\,5vw\,4rem\)\] { font-size: clamp(2.2rem, 5vw, 4rem); }
+.text-\[clamp\(2\.4rem\,5\.5vw\,4\.5rem\)\] { font-size: clamp(2.4rem, 5.5vw, 4.5rem); }
+.text-\[clamp\(2\.2rem\,5\.5vw\,4\.5rem\)\] { font-size: clamp(2.2rem, 5.5vw, 4.5rem); }
+.text-\[clamp\(2\.5rem\,7vw\,5\.5rem\)\] { font-size: clamp(2.5rem, 7vw, 5.5rem); }
+.leading-\[0\.9\] { line-height: 0.9; }
+
+
+/* Manual max-w fallbacks missing from Tailwind v4 */
+.max-w-xl { max-width: 36rem; }
+.max-w-2xl { max-width: 42rem; }
+.max-w-3xl { max-width: 48rem; }
+.max-w-4xl { max-width: 56rem; }
+.max-w-5xl { max-width: 64rem; }
+.max-w-6xl { max-width: 72rem; }
+.max-w-7xl { max-width: 80rem; }
+
+
+.max-w-xs { max-width: 20rem; }
+.max-w-sm { max-width: 24rem; }
+.max-w-md { max-width: 28rem; }
+.max-w-lg { max-width: 32rem; }
