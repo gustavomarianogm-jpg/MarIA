@@ -6,8 +6,8 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
       
 
 {/* =================== TOP BAR (estilo cabeçalho de jornal) =================== */}
-<div className="bg-ink text-paper py-2 text-xs font-mono tracking-widest border-b border-paper/20">
-  <div className="w-full max-w-7xl mx-auto px-8 md:px-12 lg:px-16 xl:px-20 flex items-center justify-between">
+<div className="bg-ink text-paper py-3 text-xs font-mono tracking-widest border-b border-paper/20">
+  <div className="container-seguro flex items-center justify-between">
     <div className="flex items-center gap-3">
       <span className="pulse-dot"></span>
       <span className="opacity-80">EDIÇÃO Nº 001 · GOIÂNIA-GO · A 1ª ASSESSORIA QUE COBRA POR RESULTADO</span>
@@ -18,7 +18,7 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
 
 {/* =================== NAV =================== */}
 <nav className="sticky top-0 z-50 bg-paper/90 backdrop-blur-md border-b border-ink/15">
-  <div className="w-full max-w-7xl mx-auto px-8 md:px-12 lg:px-16 xl:px-20 h-20 flex items-center justify-between">
+  <div className="container-seguro h-20 flex items-center justify-between">
     <a onClick={(e) => { e.preventDefault(); onNavigate('landing'); }} href="#" className="flex items-center gap-2 group">
       <div className="w-10 h-10 bg-ink text-paper flex items-center justify-center font-display font-bold text-xl rounded-full group-hover:bg-rose transition-colors">M</div>
       <span className="display text-2xl">MarIA<span className="text-rose">.</span></span>
@@ -41,8 +41,8 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
 </nav>
 
 {/* =================== HERO =================== */}
-<section className="relative pt-16 pb-32 md:pt-24 md:pb-48 grain">
-  <div className="w-full max-w-7xl mx-auto px-8 md:px-12 lg:px-16 xl:px-20 grid xl:grid-cols-[1.15fr_1fr] gap-16 items-center relative">
+<section className="relative sec-hero grain">
+  <div className="container-seguro grid xl:grid-cols-[1.15fr_1fr] gap-16 items-center relative">
 
     {/* Coluna esquerda: manchete */}
     <div className="space-y-8">
@@ -87,7 +87,7 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
     </div>
 
     {/* Coluna direita: chat MarIA + selo recorte */}
-    <div className="relative">
+    <div className="relative chat-overflow-fix">
 
       {/* Selo retrô */}
       <div className="absolute -top-6 -right-2 z-20 stamp">
@@ -142,7 +142,7 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
 
 {/* =================== FAIXA DE LOGOS / "JÁ SAÍRAM EM" =================== */}
 <section className="bg-ink text-paper py-8 border-y-2 border-ink overflow-hidden">
-  <div className="w-full max-w-7xl mx-auto px-8 md:px-12 lg:px-16 xl:px-20 mb-5 flex items-center justify-between">
+  <div className="container-seguro mb-5 flex items-center justify-between">
     <span className="font-mono text-xs tracking-widest opacity-70">CLIENTES MARIA QUE JÁ SAÍRAM EM</span>
     <span className="font-mono text-xs tracking-widest opacity-70">3.281 MATÉRIAS · ATUALIZADO HOJE</span>
   </div>
@@ -170,8 +170,8 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
 </section>
 
 {/* =================== A DOR (problema/agitação) =================== */}
-<section className="py-40 md:py-56 grain relative">
-  <div className="w-full max-w-5xl mx-auto px-8 md:px-12 lg:px-16 xl:px-20">
+<section className="sec-dura grain relative">
+  <div className="container-seguro-estreito">
     <div className="text-center mb-16">
       <span className="tabloid mb-5 inline-block">A real dura</span>
       <h2 className="masthead text-[clamp(2.2rem,5vw,4rem)] mt-4">
@@ -206,7 +206,7 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
 </section>
 
 {/* =================== COMO FUNCIONA =================== */}
-<section id="como-funciona" className="py-32 md:py-40 bg-ink text-paper relative overflow-hidden">
+<section id="como-funciona" className="sec-passos bg-ink text-paper relative overflow-hidden">
 
   {/* Decoração */}
   <div className="absolute top-10 right-10 opacity-20 hidden lg:block">
@@ -218,7 +218,7 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
     </svg>
   </div>
 
-  <div className="w-full max-w-7xl mx-auto px-8 md:px-12 lg:px-16 xl:px-20">
+  <div className="container-seguro">
 
     <div className="mb-20 max-w-3xl">
       <span className="tabloid mb-5 inline-block">O método</span>
@@ -273,8 +273,8 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
 </section>
 
 {/* =================== PROVA / CASES =================== */}
-<section id="prova" className="py-48 md:py-64 relative grain">
-  <div className="w-full max-w-7xl mx-auto px-8 md:px-12 lg:px-16 xl:px-20">
+<section id="prova" className="sec-prova relative grain">
+  <div className="container-seguro">
 
     <div className="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6">
       <div className="max-w-2xl">
@@ -353,8 +353,8 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
 </section>
 
 {/* =================== COMPARATIVO =================== */}
-<section className="mt-16 py-40 md:py-56 bg-paper relative">
-  <div className="w-full max-w-6xl mx-auto px-8 md:px-12 lg:px-16 xl:px-20">
+<section className="sec-comparativo bg-paper relative">
+  <div className="container-seguro">
     <div className="text-center mb-16">
       <span className="tabloid mb-5 inline-block">Comparativo honesto</span>
       <h2 className="masthead text-[clamp(2.2rem,5vw,4rem)] mt-4">
@@ -418,8 +418,8 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
 </section>
 
 {/* =================== PREÇO =================== */}
-<section id="preco" className="py-40 md:py-56 bg-ink text-paper relative grain">
-  <div className="w-full max-w-5xl mx-auto px-8 md:px-12 lg:px-16 xl:px-20">
+<section id="preco" className="sec-preco bg-ink text-paper relative grain">
+  <div className="container-seguro-estreito">
 
     <div className="text-center mb-16">
       <span className="tabloid mb-5 inline-block" style={{ background: '#F5B700' }}>Preço justo</span>
@@ -517,8 +517,8 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
 </section>
 
 {/* =================== OBJEÇÕES (FAQ) =================== */}
-<section className="py-40 md:py-56 bg-paper">
-  <div className="w-full max-w-4xl mx-auto px-8 md:px-12 lg:px-16 xl:px-20">
+<section className="sec-faq bg-paper">
+  <div className="container-seguro-estreito">
 
     <div className="mb-16">
       <span className="tabloid mb-5 inline-block">Perguntas honestas</span>
@@ -594,7 +594,7 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
 </section>
 
 {/* =================== CTA FINAL =================== */}
-<section className="py-40 md:py-56 bg-rose text-paper relative overflow-hidden grain">
+<section className="sec-cta bg-rose text-paper relative overflow-hidden grain">
 
   {/* Estrelas decorativas */}
   <div className="absolute top-10 left-10 opacity-30">
@@ -607,7 +607,7 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
     <span className="display text-8xl">∞</span>
   </div>
 
-  <div className="w-full max-w-4xl mx-auto px-8 md:px-12 lg:px-16 xl:px-20 text-center relative z-10">
+  <div className="container-seguro-estreito text-center relative z-10">
     <h2 className="masthead text-[clamp(2.5rem,7vw,5.5rem)] leading-[0.9]">
       Sua história <span className="display-italic">não merece</span> morrer numa caixa de e-mail.
     </h2>
@@ -633,7 +633,7 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
 
 {/* =================== FOOTER =================== */}
 <footer className="bg-ink text-paper py-16 border-t-2 border-paper/20">
-  <div className="w-full max-w-7xl mx-auto px-8 md:px-12 lg:px-16 xl:px-20">
+  <div className="container-seguro">
 
     <div className="grid md:grid-cols-4 gap-12 mb-12">
       <div>
