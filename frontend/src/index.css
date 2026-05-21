@@ -1,4 +1,4 @@
-﻿@import "tailwindcss";
+@import "tailwindcss";
 @plugin "@tailwindcss/typography";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
@@ -297,7 +297,7 @@
   font-weight: 800;
   font-variation-settings: "opsz" 144;
   letter-spacing: -0.04em;
-  line-height: 0.9;
+  line-height: 1.1;
 }
 
 .bubble-maria {

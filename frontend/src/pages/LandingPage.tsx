@@ -1,4 +1,4 @@
-﻿
+
 import React from 'react';
 
 export function LandingPage({ session, onNavigate }: { session: any, onNavigate: (r: string) => void }) {
@@ -178,25 +178,25 @@ export function LandingPage({ session, onNavigate }: { session: any, onNavigate:
       </h2>
     </div>
 
-    <div className="grid md:grid-cols-3 gap-6">
-      <div className="card-news rounded-xl p-6">
-        <div className="masthead text-5xl text-rose mb-3">300</div>
+    <div className="grid md:grid-cols-3 gap-6 mb-8">
+      <div className="card-news rounded-xl p-6 flex flex-col justify-center">
+        <div className="masthead text-7xl text-rose mb-4">300</div>
         <p className="font-semibold mb-2">e-mails por dia</p>
         <p className="text-sm text-ink/70">recebe um jornalista. 95% vÃ£o direto pra lixeira sem nem ser abertos.</p>
       </div>
-      <div className="card-news rounded-xl p-6">
-        <div className="masthead text-5xl text-rose mb-3">R$ 3k</div>
+      <div className="card-news rounded-xl p-6 flex flex-col justify-center">
+        <div className="masthead text-7xl text-rose mb-4">R$ 3k</div>
         <p className="font-semibold mb-2">Ã© o piso mensal</p>
         <p className="text-sm text-ink/70">de uma assessoria tradicional. InacessÃ­vel pra PME, MEI ou ONG.</p>
       </div>
-      <div className="card-news rounded-xl p-6">
-        <div className="masthead text-5xl text-rose mb-3">0</div>
+      <div className="card-news rounded-xl p-6 flex flex-col justify-center">
+        <div className="masthead text-7xl text-rose mb-4">0</div>
         <p className="font-semibold mb-2">Ã© o que o ChatGPT</p>
         <p className="text-sm text-ink/70">entrega de publicaÃ§Ã£o. Ele te dÃ¡ o texto. NinguÃ©m pra mandar pra ninguÃ©m.</p>
       </div>
     </div>
 
-    <div className="mt-16 text-center">
+    <div className="mt-20 text-center relative z-10">
       <p className="display text-2xl md:text-3xl max-w-3xl mx-auto leading-snug">
         A MarIA nÃ£o vende release. Vende <span className="marker">a chance real da sua histÃ³ria sair</span> num veÃ­culo de credibilidade.
       </p>
