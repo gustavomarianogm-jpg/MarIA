@@ -122,7 +122,7 @@ export function ChatPage({ session, onNavigate }: { session: any, onNavigate: (r
         <div className="chat-outer" style={{ maxWidth: '800px' }}>
           <div className="rel-wrap vis">
             <div className="rel-hdr">
-              <button onClick={() => setRelease('')}>&larr;</button>
+              <button aria-label="Voltar" onClick={() => setRelease('')}>&larr;</button>
               <span>Release Profissional {(!session) && "(Grátis)"}</span>
             </div>
             <div className="rel-acts">
@@ -225,13 +225,14 @@ export function ChatPage({ session, onNavigate }: { session: any, onNavigate: (r
             <input 
               type="text" 
               placeholder="Responda à MarIA..." 
+              aria-label="Mensagem para a MarIA"
               value={input}
               onChange={e => setInput(e.target.value)}
               disabled={chatMutation.isPending || generateReleaseMutation.isPending}
               style={{ flex: 1, border: '1px solid #EEE', borderRadius: '24px', padding: '14px 20px', fontSize: '14px', fontFamily: "'Poppins', 'Segoe UI', sans-serif", background: '#FAFAFA', color: '#1A1028', outline: 'none', boxShadow: '0 4px 12px rgba(0,0,0,0.03)' }}
             />
-            <button type="submit" disabled={!input.trim() || chatMutation.isPending || generateReleaseMutation.isPending} style={{ width: '42px', height: '42px', borderRadius: '50%', background: 'linear-gradient(135deg, #E91E8C, #9D4EDD)', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, opacity: (!input.trim() || chatMutation.isPending) ? 0.35 : 1 }}>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <button type="submit" aria-label="Enviar mensagem" disabled={!input.trim() || chatMutation.isPending || generateReleaseMutation.isPending} style={{ width: '42px', height: '42px', borderRadius: '50%', background: 'linear-gradient(135deg, #E91E8C, #9D4EDD)', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, opacity: (!input.trim() || chatMutation.isPending) ? 0.35 : 1 }}>
+              <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <line x1="22" y1="2" x2="11" y2="13"></line>
                 <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
               </svg>
