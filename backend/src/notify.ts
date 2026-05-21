@@ -1,4 +1,4 @@
-import { supabase } from '../supabase';
+import { supabase } from './supabase';
 
 const MARIA_PRESS_EMAIL = process.env.MARIA_PRESS_EMAIL || 'mariapress.comunica@gmail.com';
 const RESEND_API_KEY = process.env.RESEND_API_KEY || '';

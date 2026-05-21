@@ -24,7 +24,7 @@ export const matchmakingRouter = router({
       // 2. Busca todos os jornalistas com tags
       const { data: journalists, error: journalistError } = await supabase
         .from('users')
-        .select('id, name, tags, city, state')
+        .select('id, name, tags, city, state, email, outlet')
         .eq('role', 'journalist');
 
       if (journalistError || !journalists) throw new Error('Erro ao buscar jornalistas.');

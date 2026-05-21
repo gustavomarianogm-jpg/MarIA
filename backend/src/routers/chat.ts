@@ -264,7 +264,7 @@ Release gerado pela MarIA — A 1ª Assessora de Imprensa Virtual do Brasil`;
             clientName: userProfile?.name || 'Cliente',
             title: releaseTitle,
             content: releaseText,
-            storyId: createdStoryId
+            storyId: createdStoryId || undefined
           });
 
           if (!notifyResult.ok) {
@@ -294,7 +294,7 @@ Release gerado pela MarIA — A 1ª Assessora de Imprensa Virtual do Brasil`;
               await supabase
                 .from('stories')
                 .update({ tags })
-                .eq('conversationId', conv?.id);
+                .eq('conversationId', conv?.id || '');
             }
           } catch (tagErr) {
             console.error('[CHAT] Falha ao extrair tags:', tagErr);
