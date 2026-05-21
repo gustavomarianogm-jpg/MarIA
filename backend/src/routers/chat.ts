@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { router, protectedProcedure } from '../trpc';
+import { router, protectedProcedure, publicProcedure } from '../trpc';
 import { supabase } from '../supabase';
 import Anthropic from '@anthropic-ai/sdk';
 import { notifyCuradoria } from '../notify';
