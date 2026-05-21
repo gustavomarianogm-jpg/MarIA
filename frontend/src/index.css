@@ -415,3 +415,43 @@
 .chat-overflow-fix * {
   white-space: normal !important;
 }
+
+/* RAW CSS CLASSES PARA BURLAR O TAILWIND */
+.raw-chat-icon {
+  width: 2.5rem !important;
+  height: 2.5rem !important;
+  font-size: 1.125rem !important;
+}
+.raw-chat-name {
+  font-size: 0.875rem !important;
+}
+.raw-chat-role {
+  font-size: 0.65rem !important;
+}
+.raw-chat-header-pad {
+  padding-left: 0.5rem !important;
+  padding-right: 0.5rem !important;
+}
+.raw-dashed-line {
+  border-top: 2px dashed var(--color-ink) !important;
+  margin-bottom: 1rem !important;
+}
+.raw-pulse-fix {
+  margin-right: 0.5rem !important;
+}
+.raw-chat-footer-text {
+  font-size: 0.68rem !important;
+  letter-spacing: -0.02em !important;
+}
+.raw-chat-footer-btn {
+  font-size: 0.65rem !important;
+  padding: 0.4rem 0.6rem !important;
+  font-weight: 800 !important;
+}
+.raw-chat-box {
+  min-height: 550px !important;
+  padding: 2.5rem !important;
+}
+.raw-space-y > * + * {
+  margin-top: 1rem !important;
+}

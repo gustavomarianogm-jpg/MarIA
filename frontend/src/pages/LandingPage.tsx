@@ -95,37 +95,37 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
       </div>
 
       {/* Card editorial */}
-      <div className="card-news rounded-3xl p-8 md:p-12 relative z-10 rise rise-3 min-h-[550px] flex flex-col justify-between" style={{ minHeight: '550px' }}>
-        <div className="px-2 pt-2">
+      <div className="card-news rounded-3xl raw-chat-box relative z-10 rise rise-3 flex flex-col justify-between">
+        <div className="raw-chat-header-pad pt-2">
           <div className="flex items-center justify-between mb-8">
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-full bg-ink text-paper flex items-center justify-center font-display font-bold text-lg">M</div>
+              <div className="rounded-full bg-ink text-paper flex items-center justify-center font-display font-bold raw-chat-icon">M</div>
               <div>
-                <div className="font-semibold text-sm md:text-base">MarIA · online agora</div>
-                <div className="text-[10px] md:text-xs text-ink/60 font-mono mt-1 uppercase">Jornalista · 15+ anos de redação</div>
+                <div className="font-semibold raw-chat-name">MarIA · online agora</div>
+                <div className="text-ink/60 font-mono mt-1 uppercase raw-chat-role">Jornalista · 15+ anos de redação</div>
               </div>
             </div>
-            <span className="pulse-dot mr-2"></span>
+            <span className="pulse-dot raw-pulse-fix"></span>
           </div>
         </div>
 
-        <div className="space-y-4 flex-1 flex flex-col justify-center px-2">
-          <div className="bubble-maria" style={{ fontSize: '1rem', padding: '1.25rem 1.5rem', maxWidth: '85%' }}>
+        <div className="raw-space-y flex-1 flex flex-col justify-center px-2">
+          <div className="bubble-maria" style={{ fontSize: '1rem', padding: '1rem 1.25rem', maxWidth: '85%' }}>
             Oi, Marcos! 👋 Vi que sua padaria completou 50 anos. Isso é OURO pra uma pauta. Vamos contar essa história?
           </div>
-          <div className="bubble-user" style={{ fontSize: '1rem', padding: '1.25rem 1.5rem', maxWidth: '85%' }}>
+          <div className="bubble-user" style={{ fontSize: '1rem', padding: '1rem 1.25rem', maxWidth: '85%' }}>
             Sério? Achei que ninguém ia se importar com isso.
           </div>
-          <div className="bubble-maria" style={{ fontSize: '1rem', padding: '1.25rem 1.5rem', maxWidth: '85%', lineHeight: '1.5' }}>
+          <div className="bubble-maria" style={{ fontSize: '1rem', padding: '1rem 1.25rem', maxWidth: '85%', lineHeight: '1.45' }}>
             Marcos, jornalista de pequeno negócio acorda procurando história assim. Tradição que sobreviveu pandemia + fermentação natural = manchete. Me conta: qual foi o momento mais difícil que vocês passaram?
           </div>
         </div>
 
         <div className="px-2 mt-8">
-          <div className="border-t-2 border-dashed border-ink mb-5"></div>
-          <div className="flex items-center justify-between text-sm">
-            <span className="font-mono text-ink/60 text-[11px] md:text-xs tracking-tight">↓ release pronto em ~7 min</span>
-            <span className="tabloid text-[10px] md:text-xs py-2 px-3 font-bold">3.281 JÁ PUBLICARAM</span>
+          <div className="raw-dashed-line"></div>
+          <div className="flex items-center justify-between">
+            <span className="font-mono text-ink/60 raw-chat-footer-text">↓ release pronto em ~7 min</span>
+            <span className="tabloid raw-chat-footer-btn">3.281 JÁ PUBLICARAM</span>
           </div>
         </div>
       </div>
