@@ -15,10 +15,10 @@ button{font-family:'Poppins','Segoe UI',sans-serif}
 #nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(255,255,255,0.95);
   backdrop-filter:blur(16px);border-bottom:1px solid var(--border);
   display:flex;align-items:center;padding:0 24px;height:60px;gap:8px}
-.nav-logo{display:flex;align-items:center;gap:8px}
+.nav-logo{display:flex;align-items:center;gap:8px;flex-shrink:0;width:auto}
 .nav-icon{width:32px;height:32px;border-radius:9px;background:var(--grad);
   display:flex;align-items:center;justify-content:center;color:white;font-size:17px;font-weight:700}
-.nav-brand{font-size:18px;font-weight:800;color:var(--dark)}
+.nav-brand{font-size:18px;font-weight:800;color:var(--dark);white-space:nowrap}
 .nav-brand em{font-style:normal;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .nav-links{display:flex;gap:4px;margin-left:auto}
 .nav-btn{padding:6px 14px;border-radius:20px;font-size:13px;border:none;background:transparent;
