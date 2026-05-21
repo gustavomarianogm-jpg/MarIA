@@ -12,7 +12,7 @@ import { LandingPage } from './pages/LandingPage';
 import { JournalistSignupPage } from './pages/JournalistSignupPage';
 import { StoryPublicPage } from './pages/StoryPublicPage';
 import { TermsPage, PrivacyPage, HelpPage, ContactPage } from './pages/StaticPages';
-import './Global.css'; import './index.css';
+import './Global.css'; import './index.css'; import './styles/layout-fixes.css';
 
 function App() {
   const [session, setSession] = useState<any>(null);
