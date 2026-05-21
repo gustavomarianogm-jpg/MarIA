@@ -1,13 +1,6 @@
 import { initTRPC, TRPCError } from '@trpc/server';
 import * as trpcExpress from '@trpc/server/adapters/express';
 import { supabase } from './supabase';
-import { waitlistRouter } from './routers/waitlist';
-import { userRouter } from './routers/user';
-import { storiesRouter } from './routers/stories';
-import { chatRouter } from './routers/chat';
-import { adminRouter } from './routers/admin';
-import { matchmakingRouter } from './routers/matchmaking';
-import { journalistRouter } from './routers/journalist';
 
 export const createContext = async ({ req, res }: trpcExpress.CreateExpressContextOptions) => {
   const authHeader = req.headers.authorization;
@@ -54,18 +47,3 @@ export const adminProcedure = protectedProcedure.use(async ({ ctx, next }) => {
 
   return next({ ctx });
 });
-
-export const appRouter = router({
-  healthcheck: publicProcedure.query(() => {
-    return { status: 'ok', timestamp: new Date() };
-  }),
-  waitlist: waitlistRouter,
-  user: userRouter,
-  stories: storiesRouter,
-  chat: chatRouter,
-  admin: adminRouter,
-  matchmaking: matchmakingRouter,
-  journalist: journalistRouter,
-});
-
-export type AppRouter = typeof appRouter;
