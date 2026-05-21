@@ -2,7 +2,7 @@ import React from 'react';
 
 export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r: string) => void }) {
   return (
-    <div className="landing-body relative overflow-x-hidden">
+    <div className="landing-body relative overflow-clip">
       
 
 {/* =================== TOP BAR (estilo cabeçalho de jornal) =================== */}
@@ -17,8 +17,8 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
 </div>
 
 {/* =================== HEADER (MENU) =================== */}
-<nav className="bg-paper border-b border-ink/10 py-5 sticky top-0 z-50">
-  <div className="container-seguro flex items-center justify-between">
+<nav className="bg-paper/95 backdrop-blur-md border-b border-ink/10 sticky top-0 z-50 transition-all">
+  <div className="container-seguro h-20 flex items-center justify-between">
     <a onClick={(e) => { e.preventDefault(); onNavigate('landing'); }} href="#" className="flex items-center gap-2 group">
       <div className="w-10 h-10 bg-ink text-paper flex items-center justify-center font-display font-bold text-xl rounded-full group-hover:bg-rose transition-colors">M</div>
       <span className="display text-2xl">MarIA<span className="text-rose">.</span></span>
@@ -41,7 +41,7 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
 </nav>
 
 {/* =================== HERO =================== */}
-<section className="relative sec-hero grain">
+<section className="relative sec-hero grain pt-8 pb-12 lg:pt-12 lg:pb-20">
   <div className="container-seguro grid xl:grid-cols-[1.15fr_1fr] gap-16 items-center relative">
 
     {/* Coluna esquerda: manchete */}
@@ -52,12 +52,18 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
       </div>
 
       <h1 className="display text-[clamp(2.8rem,7vw,5.5rem)] rise rise-2">
-        Sua história merece <span className="display-italic text-rose">virar notícia</span> —
-        <span className="marker">não mais um release esquecido</span> na caixa de e-mail.
+        Sua história <br />
+        <span className="display-italic text-rose">merece virar notícia</span> <br />
+        — não mais um <br />
+        <span className="marker">release esquecido</span> <br />
+        na caixa de e-mail.
       </h1>
 
-      <p className="display text-xl md:text-2xl text-ink/80 leading-snug rise rise-2" style={{ marginTop: '3.5rem' }}>
-        A MarIA é a primeira assessora de imprensa que combina <strong>IA + curadoria de jornalistas reais</strong> — e cobra só quando sua matéria sai publicada de verdade. Sem mensalidade gorda. Sem release jogado fora.
+      <p className="text-xl md:text-2xl text-ink/80 leading-relaxed rise rise-2" style={{ marginTop: '3.5rem' }}>
+        A MarIA é a primeira assessora de imprensa que combina IA +<br className="hidden md:block" />
+        curadoria de jornalistas reais — e cobra só quando sua matéria<br className="hidden md:block" />
+        sai publicada de verdade. Sem mensalidade gorda. Sem release<br className="hidden md:block" />
+        jogado fora.
       </p>
 
       <div className="flex flex-col sm:flex-row gap-6 rise rise-4" id="cta-hero" style={{ marginTop: '3.5rem' }}>
@@ -110,14 +116,23 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
         </div>
 
         <div className="raw-space-y flex-1 flex flex-col justify-center px-2">
-          <div className="bubble-maria" style={{ fontSize: '1rem', padding: '1rem 1.25rem', maxWidth: '85%' }}>
-            Oi, Marcos! 👋 Vi que sua padaria completou 50 anos. Isso é OURO pra uma pauta. Vamos contar essa história?
+          <div className="bubble-maria" style={{ fontSize: '1rem', padding: '1rem 1.25rem', maxWidth: '100%' }}>
+            Oi, Marcos! 👋 Vi que sua padaria<br/>
+            completou 50 anos. Isso é OURO pra<br/>
+            uma pauta. Vamos contar essa<br/>
+            história?
           </div>
-          <div className="bubble-user" style={{ fontSize: '1rem', padding: '1rem 1.25rem', maxWidth: '85%' }}>
-            Sério? Achei que ninguém ia se importar com isso.
+          <div className="bubble-user" style={{ fontSize: '1rem', padding: '1rem 1.25rem', maxWidth: '100%' }}>
+            Sério? Achei que ninguém ia se<br/>
+            importar com isso.
           </div>
-          <div className="bubble-maria" style={{ fontSize: '1rem', padding: '1rem 1.25rem', maxWidth: '85%', lineHeight: '1.45' }}>
-            Marcos, jornalista de pequeno negócio acorda procurando história assim. Tradição que sobreviveu pandemia + fermentação natural = manchete. Me conta: qual foi o momento mais difícil que vocês passaram?
+          <div className="bubble-maria" style={{ fontSize: '1rem', padding: '1rem 1.25rem', maxWidth: '100%', lineHeight: '1.45' }}>
+            Marcos, jornalista de pequeno negócio<br/>
+            acorda procurando história assim.<br/>
+            Tradição que sobreviveu pandemia +<br/>
+            fermentação natural = manchete. Me<br/>
+            conta: qual foi o momento mais difícil<br/>
+            que vocês passaram?
           </div>
         </div>
 
@@ -145,7 +160,7 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
 
 {/* =================== FAIXA DE LOGOS / "JÁ SAÍRAM EM" =================== */}
 <section className="bg-ink text-paper border-y-2 border-ink overflow-hidden" style={{ padding: '2.5rem 0' }}>
-  <div className="container-seguro mb-6 flex items-center justify-between" style={{ marginTop: '-1rem' }}>
+  <div className="container-seguro flex items-center justify-between" style={{ marginTop: '-1rem', marginBottom: '2.5rem' }}>
     <span className="font-mono text-xs tracking-widest opacity-70">CLIENTES MARIA QUE JÁ SAÍRAM EM</span>
     <span className="font-mono text-xs tracking-widest opacity-70">3.281 MATÉRIAS · ATUALIZADO HOJE</span>
   </div>
