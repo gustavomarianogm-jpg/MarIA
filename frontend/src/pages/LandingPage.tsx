@@ -42,10 +42,10 @@ export function LandingPage({ session, onNavigate }: { session: any, onNavigate:
 
 {/*  =================== HERO ===================  */}
 <section className="relative pt-16 pb-24 md:pt-24 md:pb-32 grain">
-  <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-[1.15fr_1fr] gap-16 items-center relative">
+  <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-12 gap-12 lg:gap-16 items-center relative">
 
     {/*  Coluna esquerda: manchete  */}
-    <div className="space-y-8">
+    <div className="lg:col-span-7 space-y-8">
       <div className="flex items-center gap-3 rise rise-1">
         <span className="tabloid">Exclusiva</span>
         <span className="font-mono text-xs text-ink/60">Caderno Â· NEGÃ“CIOS</span>
@@ -86,7 +86,7 @@ export function LandingPage({ session, onNavigate }: { session: any, onNavigate:
     </div>
 
     {/*  Coluna direita: chat MarIA + selo recorte  */}
-    <div className="relative">
+    <div className="lg:col-span-5 relative w-full max-w-[420px] mx-auto lg:mx-0 lg:ml-auto">
 
       {/*  Selo retrÃ´  */}
       <div className="absolute -top-6 -right-2 z-20 stamp">
@@ -106,7 +106,7 @@ export function LandingPage({ session, onNavigate }: { session: any, onNavigate:
           <span className="pulse-dot"></span>
         </div>
 
-        <div className="space-y-3">
+        <div className="flex flex-col gap-4">
           <div className="bubble-maria">
             Oi, Marcos! ðŸ‘‹ Vi que sua padaria completou 50 anos. Isso Ã© OURO pra uma pauta. Vamos contar essa histÃ³ria?
           </div>
@@ -127,7 +127,7 @@ export function LandingPage({ session, onNavigate }: { session: any, onNavigate:
       </div>
 
       {/*  Card de matÃ©ria publicada (atrÃ¡s)  */}
-      <div className="card-news rounded-xl p-5 absolute -bottom-10 -left-4 md:-left-10 w-64 z-0 rise rise-4" style={{"transform":"rotate(-3deg)","background":"#F5B700"}}>
+      <div className="card-news rounded-xl p-5 absolute -bottom-12 -left-2 md:-left-8 w-[85%] max-w-[280px] z-0 rise rise-4" style={{"transform":"rotate(-3deg)","background":"#F5B700"}}>
         <div className="flex items-center gap-2 mb-2 text-xs font-mono">
           <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path d="M2 5a2 2 0 012-2h12a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V5z"/></svg>
           <span className="font-semibold">FOLHA Â· PEQUENOS NEGÃ“CIOS</span>
