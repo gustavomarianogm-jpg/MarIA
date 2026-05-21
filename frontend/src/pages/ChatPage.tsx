@@ -14,7 +14,7 @@ export function ChatPage({ session, onNavigate }: { session: any, onNavigate: (r
   const isCongressMode = new URLSearchParams(window.location.search).get('congresso') === 'true';
 
   const [messages, setMessages] = useState<Message[]>(() => {
-    const saved = localStorage.getItem('maria_chat_messages');
+    const saved = session ? localStorage.getItem('maria_chat_messages') : null;
     if (saved) {
       try { return JSON.parse(saved); } catch (e) {}
     }
@@ -35,7 +35,7 @@ export function ChatPage({ session, onNavigate }: { session: any, onNavigate: (r
   const canGenerateRelease = userMessageCount >= 7 || messages.some(m => m.content.includes('Gerar release'));
 
   useEffect(() => {
-    localStorage.setItem('maria_chat_messages', JSON.stringify(messages));
+    if (session) localStorage.setItem('maria_chat_messages', JSON.stringify(messages));
   }, [messages]);
 
   useEffect(() => {
@@ -146,7 +146,7 @@ export function ChatPage({ session, onNavigate }: { session: any, onNavigate: (r
           <div className="chat-hdr">
             <div className="av-m">M</div>
             <div className="info" style={{ flex: 1 }}>
-              <div className="name">MarIA {isCongressMode && "(Apresentação)"}</div>
+              <div className="name">MarIA{isCongressMode ? " (Apresentação)" : ""}</div>
               <div className="status"><div className="dot-on"></div> Assessora Virtual • Online</div>
             </div>
             
