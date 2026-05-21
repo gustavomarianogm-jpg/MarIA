@@ -7,7 +7,7 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
 
 {/* =================== TOP BAR (estilo cabeçalho de jornal) =================== */}
 <div className="bg-ink text-paper py-2 text-xs font-mono tracking-widest border-b border-paper/20">
-  <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
+  <div className="w-[92%] max-w-7xl mx-auto px-6 flex items-center justify-between">
     <div className="flex items-center gap-3">
       <span className="pulse-dot"></span>
       <span className="opacity-80">EDIÇÃO Nº 001 · GOIÂNIA-GO · A 1ª ASSESSORIA QUE COBRA POR RESULTADO</span>
@@ -18,7 +18,7 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
 
 {/* =================== NAV =================== */}
 <nav className="sticky top-0 z-50 bg-paper/90 backdrop-blur-md border-b border-ink/15">
-  <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+  <div className="w-[92%] max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
     <a onClick={(e) => { e.preventDefault(); onNavigate('landing'); }} href="#" className="flex items-center gap-2 group">
       <div className="w-10 h-10 bg-ink text-paper flex items-center justify-center font-display font-bold text-xl rounded-full group-hover:bg-rose transition-colors">M</div>
       <span className="display text-2xl">MarIA<span className="text-rose">.</span></span>
@@ -42,7 +42,7 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
 
 {/* =================== HERO =================== */}
 <section className="relative pt-16 pb-24 md:pt-24 md:pb-32 grain">
-  <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-[1.15fr_1fr] gap-16 items-center relative">
+  <div className="w-[92%] max-w-7xl mx-auto px-6 grid xl:grid-cols-[1.15fr_1fr] gap-16 items-center relative">
 
     {/* Coluna esquerda: manchete */}
     <div className="space-y-8">
@@ -128,7 +128,7 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
       </div>
 
       {/* Card de matéria publicada (atrás) */}
-      <div className="card-news rounded-xl p-5 absolute -bottom-10 -left-4 md:-left-10 w-64 z-0 rise rise-4" style={{ transform: 'rotate(-3deg)', background: '#F5B700' }}>
+      <div className="card-news rounded-xl p-5 absolute -bottom-10 -left-2 xl:-left-10 w-64 z-0 rise rise-4" style={{ transform: 'rotate(-3deg)', background: '#F5B700' }}>
         <div className="flex items-center gap-2 mb-2 text-xs font-mono">
           <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path d="M2 5a2 2 0 012-2h12a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V5z"/></svg>
           <span className="font-semibold">FOLHA · PEQUENOS NEGÓCIOS</span>
@@ -142,7 +142,7 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
 
 {/* =================== FAIXA DE LOGOS / "JÁ SAÍRAM EM" =================== */}
 <section className="bg-ink text-paper py-8 border-y-2 border-ink overflow-hidden">
-  <div className="max-w-7xl mx-auto px-6 mb-5 flex items-center justify-between">
+  <div className="w-[92%] max-w-7xl mx-auto px-6 mb-5 flex items-center justify-between">
     <span className="font-mono text-xs tracking-widest opacity-70">CLIENTES MARIA QUE JÁ SAÍRAM EM</span>
     <span className="font-mono text-xs tracking-widest opacity-70">3.281 MATÉRIAS · ATUALIZADO HOJE</span>
   </div>
@@ -171,7 +171,7 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
 
 {/* =================== A DOR (problema/agitação) =================== */}
 <section className="py-24 md:py-32 grain relative">
-  <div className="max-w-5xl mx-auto px-6">
+  <div className="w-[92%] max-w-5xl mx-auto px-6">
     <div className="text-center mb-16">
       <span className="tabloid mb-5 inline-block">A real dura</span>
       <h2 className="masthead text-[clamp(2.2rem,5vw,4rem)] mt-4">
@@ -218,7 +218,7 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
     </svg>
   </div>
 
-  <div className="max-w-7xl mx-auto px-6">
+  <div className="w-[92%] max-w-7xl mx-auto px-6">
 
     <div className="mb-20 max-w-3xl">
       <span className="tabloid mb-5 inline-block">O método</span>
@@ -274,7 +274,7 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
 
 {/* =================== PROVA / CASES =================== */}
 <section id="prova" className="py-24 md:py-32 relative grain">
-  <div className="max-w-7xl mx-auto px-6">
+  <div className="w-[92%] max-w-7xl mx-auto px-6">
 
     <div className="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6">
       <div className="max-w-2xl">
@@ -354,7 +354,7 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
 
 {/* =================== COMPARATIVO =================== */}
 <section className="py-24 md:py-32 bg-paper relative">
-  <div className="max-w-6xl mx-auto px-6">
+  <div className="w-[92%] max-w-6xl mx-auto px-6">
     <div className="text-center mb-16">
       <span className="tabloid mb-5 inline-block">Comparativo honesto</span>
       <h2 className="masthead text-[clamp(2.2rem,5vw,4rem)] mt-4">
@@ -419,7 +419,7 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
 
 {/* =================== PREÇO =================== */}
 <section id="preco" className="py-24 md:py-32 bg-ink text-paper relative grain">
-  <div className="max-w-5xl mx-auto px-6">
+  <div className="w-[92%] max-w-5xl mx-auto px-6">
 
     <div className="text-center mb-16">
       <span className="tabloid mb-5 inline-block" style={{ background: '#F5B700' }}>Preço justo</span>
@@ -518,7 +518,7 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
 
 {/* =================== OBJEÇÕES (FAQ) =================== */}
 <section className="py-24 md:py-32 bg-paper">
-  <div className="max-w-4xl mx-auto px-6">
+  <div className="w-[92%] max-w-4xl mx-auto px-6">
 
     <div className="mb-16">
       <span className="tabloid mb-5 inline-block">Perguntas honestas</span>
@@ -607,7 +607,7 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
     <span className="display text-8xl">∞</span>
   </div>
 
-  <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
+  <div className="w-[92%] max-w-4xl mx-auto px-6 text-center relative z-10">
     <h2 className="masthead text-[clamp(2.5rem,7vw,5.5rem)] leading-[0.9]">
       Sua história <span className="display-italic">não merece</span> morrer numa caixa de e-mail.
     </h2>
@@ -633,7 +633,7 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
 
 {/* =================== FOOTER =================== */}
 <footer className="bg-ink text-paper py-16 border-t-2 border-paper/20">
-  <div className="max-w-7xl mx-auto px-6">
+  <div className="w-[92%] max-w-7xl mx-auto px-6">
 
     <div className="grid md:grid-cols-4 gap-12 mb-12">
       <div>
