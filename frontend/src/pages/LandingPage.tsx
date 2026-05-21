@@ -170,7 +170,7 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
     <span className="display text-3xl opacity-80 whitespace-nowrap">G1</span>
     <span className="display text-3xl opacity-80 whitespace-nowrap">· Startupi ·</span>
   </div>
-</div>
+</section>
 
 {/* =================== A DOR (problema/agitação) =================== */}
 <section className="sec-dura grain relative">
