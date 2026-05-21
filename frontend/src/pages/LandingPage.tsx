@@ -16,9 +16,9 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
   </div>
 </div>
 
-{/* =================== NAV =================== */}
-<nav className="sticky top-0 z-50 bg-paper/90 backdrop-blur-md border-b border-ink/15">
-  <div className="container-seguro h-20 flex items-center justify-between">
+{/* =================== HEADER (MENU) =================== */}
+<nav className="bg-paper border-b border-ink/10 py-5 sticky top-0 z-50">
+  <div className="container-seguro flex items-center justify-between">
     <a onClick={(e) => { e.preventDefault(); onNavigate('landing'); }} href="#" className="flex items-center gap-2 group">
       <div className="w-10 h-10 bg-ink text-paper flex items-center justify-center font-display font-bold text-xl rounded-full group-hover:bg-rose transition-colors">M</div>
       <span className="display text-2xl">MarIA<span className="text-rose">.</span></span>
@@ -131,7 +131,7 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
       </div>
 
       {/* Card de matéria publicada (atrás) */}
-      <div className="card-news rounded-xl absolute -bottom-14 -left-4 xl:-left-12 rise rise-4" style={{ transform: 'rotate(-4deg)', background: '#F5B700', zIndex: 30, width: '360px', padding: '2rem' }}>
+      <div className="card-news rounded-xl absolute -left-4 xl:-left-12 rise rise-4" style={{ transform: 'rotate(-4deg)', background: '#F5B700', zIndex: 30, width: '320px', padding: '1.75rem', bottom: '-5.5rem' }}>
         <div className="flex items-center gap-2 mb-3 text-xs font-mono">
           <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M2 5a2 2 0 012-2h12a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V5z"/></svg>
           <span className="font-semibold text-[12px]">FOLHA · PEQUENOS NEGÓCIOS</span>
@@ -145,7 +145,7 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
 
 {/* =================== FAIXA DE LOGOS / "JÁ SAÍRAM EM" =================== */}
 <section className="bg-ink text-paper border-y-2 border-ink overflow-hidden" style={{ padding: '2.5rem 0' }}>
-  <div className="container-seguro mb-6 flex items-center justify-between">
+  <div className="container-seguro mb-6 flex items-center justify-between" style={{ marginTop: '-1rem' }}>
     <span className="font-mono text-xs tracking-widest opacity-70">CLIENTES MARIA QUE JÁ SAÍRAM EM</span>
     <span className="font-mono text-xs tracking-widest opacity-70">3.281 MATÉRIAS · ATUALIZADO HOJE</span>
   </div>
