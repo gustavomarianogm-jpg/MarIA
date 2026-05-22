@@ -310,56 +310,56 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
       </div>
     </div>
 
-    <div className="grid lg:grid-cols-3 gap-6">
+    <div className="grid lg:grid-cols-3 gap-8">
 
-      <article className="card-news rounded-xl p-6 flex flex-col">
-        <div className="flex items-center gap-2 mb-4">
-          <span className="tabloid">Pequenos Negócios</span>
+      <article className="card-news rounded-2xl p-8 lg:p-10 flex flex-col min-h-[420px]">
+        <div className="flex items-center gap-2 mb-6">
+          <span className="tabloid text-sm px-3 py-1.5">Pequenos Negócios</span>
         </div>
-        <h3 className="display text-2xl mb-3 leading-tight">Sua história local nos veículos certos.</h3>
-        <p className="text-sm text-ink/75 flex-1 mb-5">
+        <h3 className="display text-3xl lg:text-4xl mb-4 leading-tight">Sua história local nos veículos certos.</h3>
+        <p className="text-base lg:text-lg text-ink/75 flex-1 mb-8 leading-relaxed">
           Uma padaria tradicional completa 50 anos. A MarIA organiza a pauta e conecta com jornais do bairro e cadernos de gastronomia local.
         </p>
-        <div className="news-rule mb-4"></div>
+        <div className="news-rule mb-6"></div>
         <div className="flex items-center justify-between">
           <div>
-            <div className="font-semibold text-sm">Exemplo Prático</div>
+            <div className="font-semibold text-base">Exemplo Prático</div>
           </div>
-          <div className="text-2xl">🥖</div>
+          <div className="text-4xl">🥖</div>
         </div>
       </article>
 
-      <article className="card-news rounded-xl p-6 flex flex-col bg-mustard">
-        <div className="flex items-center gap-2 mb-4">
-          <span className="tabloid" style={{ background: '#0F0A1A', color: '#F5B700' }}>ONGs e Causas</span>
+      <article className="card-news rounded-2xl p-8 lg:p-10 flex flex-col min-h-[420px]" style={{ background: '#F5B700' }}>
+        <div className="flex items-center gap-2 mb-6">
+          <span className="tabloid text-sm px-3 py-1.5" style={{ background: '#0F0A1A', color: '#F5B700' }}>ONGs e Causas</span>
         </div>
-        <h3 className="display text-2xl mb-3 leading-tight">Mais visibilidade para o seu projeto social.</h3>
-        <p className="text-sm text-ink/85 flex-1 mb-5">
+        <h3 className="display text-3xl lg:text-4xl mb-4 leading-tight">Mais visibilidade para o seu projeto social.</h3>
+        <p className="text-base lg:text-lg text-ink/85 flex-1 mb-8 leading-relaxed">
           Um projeto precisa de visibilidade. A MarIA encontra o gancho certo e direciona a pauta para repórteres que cobrem impacto social e cidadania.
         </p>
-        <div className="news-rule mb-4"></div>
+        <div className="news-rule mb-6"></div>
         <div className="flex items-center justify-between">
           <div>
-            <div className="font-semibold text-sm">Exemplo Prático</div>
+            <div className="font-semibold text-base">Exemplo Prático</div>
           </div>
-          <div className="text-2xl">🧵</div>
+          <div className="text-4xl">🧵</div>
         </div>
       </article>
 
-      <article className="card-news rounded-xl p-6 flex flex-col">
-        <div className="flex items-center gap-2 mb-4">
-          <span className="tabloid">Startups e Tecnologia</span>
+      <article className="card-news rounded-2xl p-8 lg:p-10 flex flex-col min-h-[420px]">
+        <div className="flex items-center gap-2 mb-6">
+          <span className="tabloid text-sm px-3 py-1.5">Startups e Tecnologia</span>
         </div>
-        <h3 className="display text-2xl mb-3 leading-tight">Do disparo genérico para o nicho correto.</h3>
-        <p className="text-sm text-ink/75 flex-1 mb-5">
+        <h3 className="display text-3xl lg:text-4xl mb-4 leading-tight">Do disparo genérico para o nicho correto.</h3>
+        <p className="text-base lg:text-lg text-ink/75 flex-1 mb-8 leading-relaxed">
           Uma agtech quer lançar seu produto. Em vez de spam, a MarIA faz o matchmaking com jornalistas focados em agronegócio e inovação.
         </p>
-        <div className="news-rule mb-4"></div>
+        <div className="news-rule mb-6"></div>
         <div className="flex items-center justify-between">
           <div>
-            <div className="font-semibold text-sm">Exemplo Prático</div>
+            <div className="font-semibold text-base">Exemplo Prático</div>
           </div>
-          <div className="text-2xl">🚀</div>
+          <div className="text-4xl">🚀</div>
         </div>
       </article>
 
