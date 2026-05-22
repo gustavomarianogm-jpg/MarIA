@@ -9,6 +9,7 @@ import { DashboardPage } from './pages/DashboardPage';
 import { ChatPage } from './pages/ChatPage';
 import { AdminPage } from './pages/AdminPage';
 import { LandingPage } from './pages/LandingPage';
+import { LandingPageRaw } from './pages/LandingPageRaw';
 import { JournalistSignupPage } from './pages/JournalistSignupPage';
 import { StoryPublicPage } from './pages/StoryPublicPage';
 import { TermsPage, PrivacyPage, HelpPage, ContactPage } from './pages/StaticPages';
@@ -101,16 +102,25 @@ function App() {
             </nav>
           )}
 
-          {currentRoute === 'landing' && <LandingPage 
-            onJoinWaitlist={(segment) => {
-              if (segment === 'Jornalista') {
-                setCurrentRoute('journalist-signup');
-              } else {
-                setCurrentRoute('dash');
-              }
-            }}
-            onNavigate={(route) => setCurrentRoute(route as any)}
-          />}
+          {currentRoute === 'landing' && (
+            import.meta.env.PROD ? (
+              <LandingPageRaw 
+                session={session}
+                onNavigate={(route) => setCurrentRoute(route as any)} 
+              />
+            ) : (
+              <LandingPage 
+                onJoinWaitlist={(segment) => {
+                  if (segment === 'Jornalista') {
+                    setCurrentRoute('journalist-signup');
+                  } else {
+                    setCurrentRoute('dash');
+                  }
+                }}
+                onNavigate={(route) => setCurrentRoute(route as any)}
+              />
+            )
+          )}
           
           {currentRoute === 'dash' && (
             session ? <DashboardPage /> : <AuthPage onLogin={() => {}} />
