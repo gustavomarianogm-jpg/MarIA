@@ -29,7 +29,7 @@ MarIA/
 **Stack:**
 - **Frontend:** React, Vite, Tailwind CSS, TypeScript
 - **Backend:** Node.js, Express, tRPC, TypeScript
-- **IA:** Anthropic Claude (claude-sonnet-4-6)
+- **IA:** Anthropic Claude (claude-sonnet-4-5)
 - **Banco de Dados:** Supabase (PostgreSQL)
 - **Deploy:** Vercel
 
