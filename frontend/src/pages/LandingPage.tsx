@@ -377,53 +377,53 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
       </h2>
     </div>
 
-    <div className="card-news rounded-2xl overflow-hidden">
+    <div className="card-news rounded-3xl overflow-hidden shadow-xl mt-4">
       <div className="overflow-x-auto">
-        <table className="w-full text-left text-sm md:text-base">
+        <table className="w-full text-left text-base md:text-lg">
           <thead className="bg-ink text-paper">
             <tr>
-              <th className="p-5 font-mono text-xs tracking-widest font-medium">CRITÉRIO</th>
-              <th className="p-5 font-display text-lg bg-rose text-paper">MarIA</th>
-              <th className="p-5 font-display text-lg">Assessoria tradicional</th>
-              <th className="p-5 font-display text-lg">Chat genérico</th>
-              <th className="p-5 font-display text-lg">DINO / Newswire</th>
+              <th className="p-6 md:p-8 font-mono text-sm tracking-widest font-medium border-b-2 border-rose">CRITÉRIO</th>
+              <th className="p-6 md:p-8 font-display text-2xl md:text-3xl bg-rose text-paper border-b-2 border-rose">MarIA</th>
+              <th className="p-6 md:p-8 font-display text-xl md:text-2xl border-b-2 border-ink/20">Assessoria tradicional</th>
+              <th className="p-6 md:p-8 font-display text-xl md:text-2xl border-b-2 border-ink/20">Chat genérico</th>
+              <th className="p-6 md:p-8 font-display text-xl md:text-2xl border-b-2 border-ink/20">DINO / Newswire</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-ink/15">
             <tr>
-              <td className="p-5 font-semibold">Custo mensal</td>
-              <td className="p-5 bg-rose/5 font-semibold text-rose">R$ 297 + sucesso</td>
-              <td className="p-5 text-ink/70">R$ 3.000 a R$ 15.000</td>
-              <td className="p-5 text-ink/70">R$ 100 (sem entrega)</td>
-              <td className="p-5 text-ink/70">R$ 700 por release</td>
+              <td className="p-6 md:p-8 font-semibold text-ink">Custo mensal</td>
+              <td className="p-6 md:p-8 bg-rose/5 font-bold text-rose text-xl">R$ 297 + sucesso</td>
+              <td className="p-6 md:p-8 text-ink/70">R$ 3.000 a R$ 15.000</td>
+              <td className="p-6 md:p-8 text-ink/70">R$ 100 (sem entrega)</td>
+              <td className="p-6 md:p-8 text-ink/70">R$ 700 por release</td>
             </tr>
             <tr>
-              <td className="p-5 font-semibold">Foco em conexões reais?</td>
-              <td className="p-5 bg-rose/5 font-bold text-rose">✓ SIM</td>
-              <td className="p-5 text-ink/70">✗ Não</td>
-              <td className="p-5 text-ink/70">N/A</td>
-              <td className="p-5 text-ink/70">✗ Não</td>
+              <td className="p-6 md:p-8 font-semibold text-ink">Foco em conexões reais?</td>
+              <td className="p-6 md:p-8 bg-rose/5 font-bold text-rose text-xl">✓ SIM</td>
+              <td className="p-6 md:p-8 text-ink/70">✗ Não</td>
+              <td className="p-6 md:p-8 text-ink/70">N/A</td>
+              <td className="p-6 md:p-8 text-ink/70">✗ Não</td>
             </tr>
             <tr>
-              <td className="p-5 font-semibold">Curadoria humana</td>
-              <td className="p-5 bg-rose/5 font-bold text-rose">✓ Jornalista real</td>
-              <td className="p-5 text-ink/70">✓ Sim</td>
-              <td className="p-5 text-ink/70">✗ Zero</td>
-              <td className="p-5 text-ink/70">✗ Distribuição automática</td>
+              <td className="p-6 md:p-8 font-semibold text-ink">Curadoria humana</td>
+              <td className="p-6 md:p-8 bg-rose/5 font-bold text-rose text-xl">✓ Jornalista real</td>
+              <td className="p-6 md:p-8 text-ink/70">✓ Sim</td>
+              <td className="p-6 md:p-8 text-ink/70">✗ Zero</td>
+              <td className="p-6 md:p-8 text-ink/70">✗ Distribuição automática</td>
             </tr>
             <tr>
-              <td className="p-5 font-semibold">Matchmaking com jornalista certo</td>
-              <td className="p-5 bg-rose/5 font-bold text-rose">✓ IA + rede própria</td>
-              <td className="p-5 text-ink/70">~ Depende do contato</td>
-              <td className="p-5 text-ink/70">✗ Você se vira</td>
-              <td className="p-5 text-ink/70">✗ Manda pra todo mundo</td>
+              <td className="p-6 md:p-8 font-semibold text-ink">Matchmaking com jornalista certo</td>
+              <td className="p-6 md:p-8 bg-rose/5 font-bold text-rose text-xl">✓ IA + rede própria</td>
+              <td className="p-6 md:p-8 text-ink/70">~ Depende do contato</td>
+              <td className="p-6 md:p-8 text-ink/70">✗ Você se vira</td>
+              <td className="p-6 md:p-8 text-ink/70">✗ Manda pra todo mundo</td>
             </tr>
             <tr>
-              <td className="p-5 font-semibold">Pensado pra PME / MEI / ONG</td>
-              <td className="p-5 bg-rose/5 font-bold text-rose">✓ Foco total</td>
-              <td className="p-5 text-ink/70">✗ Foco em grande empresa</td>
-              <td className="p-5 text-ink/70">~ Genérico</td>
-              <td className="p-5 text-ink/70">✗ Foco corporativo</td>
+              <td className="p-6 md:p-8 font-semibold text-ink">Pensado pra PME / MEI / ONG</td>
+              <td className="p-6 md:p-8 bg-rose/5 font-bold text-rose text-xl">✓ Foco total</td>
+              <td className="p-6 md:p-8 text-ink/70">✗ Foco em grande empresa</td>
+              <td className="p-6 md:p-8 text-ink/70">~ Genérico</td>
+              <td className="p-6 md:p-8 text-ink/70">✗ Foco corporativo</td>
             </tr>
           </tbody>
         </table>
