@@ -191,9 +191,9 @@ export function LandingPageRaw({ onNavigate }: { session?: unknown, onNavigate: 
         <p className="text-sm text-ink/70">de uma assessoria tradicional. Inacessível pra PME, MEI ou ONG.</p>
       </div>
       <div className="card-news rounded-xl p-6">
-        <div className="masthead text-5xl text-rose mb-3">0</div>
-        <p className="font-semibold mb-2">é o que o ChatGPT</p>
-        <p className="text-sm text-ink/70">entrega de publicação. Ele te dá o texto. Ninguém pra mandar pra ninguém.</p>
+        <div className="masthead text-5xl text-rose mb-3">IA</div>
+        <p className="font-semibold mb-2">sozinha gera texto.</p>
+        <p className="text-sm text-ink/70">A MarIA cria contexto, estratégia e conexão. A diferença está na curadoria jornalística e no direcionamento da pauta para quem realmente pode se interessar por ela.</p>
       </div>
     </div>
 
@@ -370,7 +370,7 @@ export function LandingPageRaw({ onNavigate }: { session?: unknown, onNavigate: 
               <th className="p-5 font-mono text-xs tracking-widest font-medium">CRITÉRIO</th>
               <th className="p-5 font-display text-lg bg-rose text-paper">MarIA</th>
               <th className="p-5 font-display text-lg">Assessoria tradicional</th>
-              <th className="p-5 font-display text-lg">ChatGPT</th>
+              <th className="p-5 font-display text-lg">Chat genérico</th>
               <th className="p-5 font-display text-lg">DINO / Newswire</th>
             </tr>
           </thead>
@@ -531,11 +531,11 @@ export function LandingPageRaw({ onNavigate }: { session?: unknown, onNavigate: 
 
       <details className="card-news rounded-xl p-6 group" open>
         <summary className="font-display text-xl font-semibold cursor-pointer flex items-center justify-between">
-          <span>Por que não usar só o ChatGPT pra escrever meu release?</span>
+          <span>Por que não usar só o Chat genérico pra escrever meu release?</span>
           <span className="text-rose text-3xl group-open:rotate-45 transition-transform">+</span>
         </summary>
         <p className="text-ink/75 mt-4 leading-relaxed">
-          Porque o ChatGPT te entrega o texto. E aí? Você fica com um release na mão sem saber pra quem mandar. A MarIA não é só a IA — é a <strong>rede curada de jornalistas brasileiros</strong> que recebem sua pauta de verdade. Texto sem distribuição é monólogo.
+          Porque o Chat genérico te entrega o texto. E aí? Você fica com um release na mão sem saber pra quem mandar. A MarIA não é só a IA — é a <strong>rede curada de jornalistas brasileiros</strong> que recebem sua pauta de verdade. Texto sem distribuição é monólogo.
         </p>
       </details>
 
