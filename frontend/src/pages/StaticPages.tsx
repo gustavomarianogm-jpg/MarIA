@@ -2,7 +2,7 @@ import React from 'react';
 
 export function StaticLayout({ title, children, onNavigate }: { title: string, children: React.ReactNode, onNavigate: (r: string) => void }) {
   return (
-    <div id="pg-home" className="page on" style={{ display: 'block', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+    <div id="pg-home" className="page on" style={{ display: 'flex', minHeight: '100vh', flexDirection: 'column' }}>
       <div className="section" style={{ flex: 1, padding: '120px 24px 56px', maxWidth: '800px', margin: '0 auto', width: '100%', textAlign: 'left' }}>
         <h1 style={{ fontSize: '32px', marginBottom: '32px', color: 'var(--dark)' }}>{title}</h1>
         <div style={{ lineHeight: '1.8', color: 'var(--gray)', fontSize: '16px' }}>

@@ -33,7 +33,7 @@ export function LandingPageRaw({ onNavigate }: { session?: unknown, onNavigate: 
 
     <div className="flex items-center gap-3">
       <a href="#login" className="hidden md:inline-flex text-sm font-medium hover:text-rose">Entrar</a>
-      <a onClick={(e) => { e.preventDefault(); onNavigate('chat'); }} href="#"  href="#cta-hero" className="btn-primary text-sm py-2.5 px-5" style={{"boxShadow":"3px 3px 0 #E91E8C"}}>
+      <a onClick={(e) => { e.preventDefault(); onNavigate('chat'); }} href="#cta-hero" className="btn-primary text-sm py-2.5 px-5" style={{"boxShadow":"3px 3px 0 #E91E8C"}}>
         Testar Grátis →
       </a>
     </div>
@@ -61,7 +61,7 @@ export function LandingPageRaw({ onNavigate }: { session?: unknown, onNavigate: 
       </p>
 
       <div className="flex flex-col sm:flex-row gap-4 rise rise-4" id="cta-hero">
-        <a onClick={(e) => { e.preventDefault(); onNavigate('chat'); }} href="#"  href="#" className="btn-primary">
+        <a onClick={(e) => { e.preventDefault(); onNavigate('chat'); }} href="#" className="btn-primary">
           Criar minha 1ª pauta grátis
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
         </a>
@@ -175,8 +175,9 @@ export function LandingPageRaw({ onNavigate }: { session?: unknown, onNavigate: 
     <div className="text-center mb-16">
       <span className="tabloid mb-5 inline-block">A real dura</span>
       <h2 className="masthead text-[clamp(2.2rem,5vw,4rem)] mt-4">
-        Nem toda boa história chega até os <span className="display-italic text-coral">jornalistas certos</span>. </h2> <p className="text-lg text-ink/80 mt-4 max-w-2xl mx-auto"> A MarIA nasceu para reduzir essa distância: organiza a informação, fortalece o gancho jornalístico e conecta histórias relevantes com profissionais que cobrem o tema. </p>
+        Nem toda boa história chega até os <span className="display-italic text-coral">jornalistas certos</span>.
       </h2>
+      <p className="text-lg text-ink/80 mt-4 max-w-2xl mx-auto"> A MarIA nasceu para reduzir essa distância: organiza a informação, fortalece o gancho jornalístico e conecta histórias relevantes com profissionais que cobrem o tema. </p>
     </div>
 
     <div className="grid md:grid-cols-3 gap-6">
@@ -446,7 +447,7 @@ export function LandingPageRaw({ onNavigate }: { session?: unknown, onNavigate: 
     </p>
 
     <div className="flex flex-col sm:flex-row gap-4 justify-center mt-12">
-      <a onClick={(e) => { e.preventDefault(); onNavigate('chat'); }} href="#"  href="#" className="btn-primary" style={{"background":"#FAF6F0","color":"#0F0A1A","boxShadow":"5px 5px 0 #0F0A1A"}}>
+      <a onClick={(e) => { e.preventDefault(); onNavigate('chat'); }} href="#" className="btn-primary" style={{"background":"#FAF6F0","color":"#0F0A1A","boxShadow":"5px 5px 0 #0F0A1A"}}>
         Criar minha pauta grátis
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
       </a>
@@ -487,7 +488,7 @@ export function LandingPageRaw({ onNavigate }: { session?: unknown, onNavigate: 
       <div>
         <h4 className="font-mono text-xs tracking-widest mb-4 opacity-60">JORNALISTAS</h4>
         <ul className="space-y-2 text-sm">
-          <li><a onClick={(e) => { e.preventDefault(); onNavigate('chat'); }} href="#"  href="#" className="hover:text-rose">Cadastrar-se grátis</a></li>
+          <li><a onClick={(e) => { e.preventDefault(); onNavigate('chat'); }} href="#" className="hover:text-rose">Cadastrar-se grátis</a></li>
           <li><a href="#" className="hover:text-rose">Banco de fontes</a></li>
           <li><a href="#" className="hover:text-rose">Selo MarIA Verified</a></li>
         </ul>
