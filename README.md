@@ -17,23 +17,18 @@ A MarIA usa inteligência artificial para ajudar PMEs, startups e empreendedores
 
 ```
 MarIA/
-├── index.html              # Frontend SPA (HTML + CSS + JS)
-├── public/
-│   └── assets/             # Imagens e assets estáticos
-│       └── maria-photo.jpg
-├── api/                    # Vercel Serverless Functions
-│   ├── auth.js             # Autenticação server-side (cria sessão)
-│   ├── chat.js             # Proxy para Anthropic Claude API
-│   ├── state.js            # Persistência de estado em nuvem
-│   └── waitlist.js         # CRUD da waitlist via Supabase
-├── supabase/
-│   └── schema.sql          # Schema do banco de dados (3 tabelas)
+├── frontend/               # Aplicação Frontend em React + Vite + TypeScript
+├── backend/                # API Backend em Node.js (Express + tRPC + TypeScript)
+├── database/               # Scripts e configurações do Banco de Dados
+├── supabase/               # Configuração e Schema do Supabase
+├── legacy/                 # Arquivos de versões antigas/legadas
+├── maria-landing-perfeita.html # Landing page pura (HTML/CSS)
 └── vercel.json             # Configuração de deploy
 ```
 
 **Stack:**
-- **Frontend:** HTML, CSS e JavaScript vanilla (sem framework)
-- **Backend:** Vercel Serverless Functions (Node.js)
+- **Frontend:** React, Vite, Tailwind CSS, TypeScript
+- **Backend:** Node.js, Express, tRPC, TypeScript
 - **IA:** Anthropic Claude (claude-sonnet-4-6)
 - **Banco de Dados:** Supabase (PostgreSQL)
 - **Deploy:** Vercel
