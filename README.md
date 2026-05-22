@@ -15,20 +15,21 @@ A MarIA usa inteligência artificial para ajudar PMEs, startups e empreendedores
 
 ## 🏗️ Arquitetura
 
-```
+O projeto adota uma arquitetura de monorepo estruturada para rodar localmente com servidores Node dedicados e em produção via Vercel Serverless.
+
+```text
 MarIA/
+├── api/                    # Ponto de entrada Serverless da Vercel (exporta o Express)
 ├── frontend/               # Aplicação Frontend em React + Vite + TypeScript
 ├── backend/                # API Backend em Node.js (Express + tRPC + TypeScript)
 ├── database/               # Scripts e configurações do Banco de Dados
 ├── supabase/               # Configuração e Schema do Supabase
-├── legacy/                 # Arquivos de versões antigas/legadas
-├── maria-landing-perfeita.html # Landing page pura (HTML/CSS)
-└── vercel.json             # Configuração de deploy
+└── vercel.json             # Regras de rewrites e functions para o deploy
 ```
 
 **Stack:**
-- **Frontend:** React, Vite, Tailwind CSS, TypeScript
-- **Backend:** Node.js, Express, tRPC, TypeScript
+- **Frontend:** React 19, Vite, Tailwind CSS 4, TypeScript
+- **Backend:** Node.js 20.x, Express, tRPC, TypeScript
 - **IA:** Anthropic Claude (claude-sonnet-4-5)
 - **Banco de Dados:** Supabase (PostgreSQL)
 - **Deploy:** Vercel
@@ -37,8 +38,7 @@ MarIA/
 
 ### Pré-requisitos
 
-- [Node.js](https://nodejs.org/) 18+
-- [Vercel CLI](https://vercel.com/cli)
+- [Node.js](https://nodejs.org/) 20 LTS
 - Conta no [Supabase](https://supabase.com/)
 - API Key da [Anthropic](https://console.anthropic.com/)
 
@@ -46,11 +46,11 @@ MarIA/
 
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/seu-usuario/MarIA.git
+   git clone https://github.com/gustavomarianogm-jpg/MarIA.git
    cd MarIA
    ```
 
-2. Crie o arquivo `.env` com as variáveis necessárias:
+2. Crie o arquivo `.env` na raiz (ou nas subpastas, conforme configurado) com as variáveis necessárias:
    ```env
    SUPABASE_URL=https://seu-projeto.supabase.co
    SUPABASE_SERVICE_KEY=sua-service-role-key
@@ -60,16 +60,21 @@ MarIA/
    ALLOWED_ORIGIN=http://localhost:3000
    ```
 
-3. Execute o schema no Supabase:
+3. Instale todas as dependências do monorepo de uma só vez:
+   ```bash
+   npm run install:all
+   ```
+
+4. Execute o schema no Supabase:
    - Acesse o [SQL Editor](https://supabase.com/dashboard/project/_/sql) do seu projeto
    - Cole e execute o conteúdo de `supabase/schema.sql`
 
-4. Inicie o servidor de desenvolvimento:
+5. Inicie os servidores de desenvolvimento (Frontend + Backend simultaneamente):
    ```bash
-   vercel dev
+   npm run dev
    ```
 
-5. Acesse [http://localhost:3000](http://localhost:3000)
+6. Acesse [http://localhost:5173](http://localhost:5173) (ou a porta padrão que o Vite subir). O backend estará escutando em [http://localhost:4000/trpc](http://localhost:4000/trpc).
 
 ## 📦 Deploy
 
@@ -85,7 +90,9 @@ Certifique-se de configurar as variáveis de ambiente no painel da Vercel:
 - `ANTHROPIC_API_KEY`
 - `ADMIN_EMAIL` (ex: `admin@maria.com.br`)
 - `ADMIN_PASSWORD` (senha segura para o admin)
-- `ALLOWED_ORIGIN` (ex: `https://mariapress.com.br`)
+- `ALLOWED_ORIGIN` (ex: `https://mar-ia-mhjz.vercel.app`)
+
+A Vercel construirá o `frontend` estático através do Vite e converterá automaticamente a API Express em Serverless Functions mapeadas pelo `/api/index.ts`.
 
 ## 🔐 Variáveis de Ambiente
 
@@ -96,13 +103,13 @@ Certifique-se de configurar as variáveis de ambiente no painel da Vercel:
 | `ANTHROPIC_API_KEY` | API key da Anthropic para o Claude | ✅ |
 | `ADMIN_EMAIL` | E-mail do administrador (default: `admin@maria.com.br`) | ✅ |
 | `ADMIN_PASSWORD` | Senha do administrador (autenticação server-side) | ✅ |
-| `ALLOWED_ORIGIN` | Domínio permitido para CORS (default: `https://mariapress.com.br`) | ❌ |
+| `ALLOWED_ORIGIN` | Domínio permitido para CORS (default: Vercel Preview URL) | ❌ |
 
-> ⚠️ **Nunca commite o arquivo `.env`** — ele contém chaves secretas.
+> ⚠️ **Nunca faça commit do arquivo `.env`** — ele contém chaves secretas. O repositório já está configurado com `.gitignore` para protegê-lo.
 
 ## 🗃️ Banco de Dados
 
-O schema está em `supabase/schema.sql` e contém 3 tabelas:
+O schema está em `supabase/schema.sql` e contém 3 tabelas principais:
 
 ### `waitlist`
 - Campos: id (UUID), name, email (unique), segment, status, created_at
@@ -117,7 +124,7 @@ O schema está em `supabase/schema.sql` e contém 3 tabelas:
 ### `app_state`
 - Campos: user_email (PK), state (JSONB), updated_at
 - Persiste créditos, pautas, histórico de chat e curadoria em nuvem
-- Sincronização automática via `/api/state`
+- Sincronização automática via API tRPC
 
 ## 📄 Licença
 
