@@ -3,17 +3,20 @@
   "version": "1.0.0",
   "description": "> A 1ª Assessora de Imprensa Virtual do Brasil 🇧🇷",
   "main": "index.js",
-  "dependencies": {},
   "devDependencies": {
     "concurrently": "^9.2.1",
-    "jest": "^29.7.0"
+    "husky": "^9.1.7",
+    "jest": "^29.7.0",
+    "lint-staged": "^17.0.5",
+    "prettier": "^3.8.3"
   },
   "scripts": {
     "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\"",
     "dev:frontend": "cd frontend && npm run dev",
     "dev:backend": "cd backend && npm run dev",
     "install:all": "npm install && cd frontend && npm install && cd ../backend && npm install",
-    "vercel-build": "pwd && ls -la && cd frontend && npm install && npm run build"
+    "vercel-build": "pwd && ls -la && cd frontend && npm install && npm run build",
+    "prepare": "husky"
   },
   "repository": {
     "type": "git",
@@ -29,5 +32,14 @@
   "homepage": "https://github.com/gustavomarianogm-jpg/MarIA#readme",
   "engines": {
     "node": "20.x"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "prettier --write",
+      "eslint --fix"
+    ],
+    "*.{js,jsx,json,md}": [
+      "prettier --write"
+    ]
   }
 }
