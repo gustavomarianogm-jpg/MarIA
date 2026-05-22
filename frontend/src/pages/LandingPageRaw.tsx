@@ -57,7 +57,7 @@ export function LandingPageRaw({ onNavigate }: { session?: unknown, onNavigate: 
       </h1>
 
       <p className="text-lg md:text-xl text-ink/75 max-w-xl rise rise-3 leading-relaxed">
-        A MarIA não vende release. Ela amplia a chance real da sua história estar visível para jornalistas, com curadoria, estratégia e conexões qualificadas.
+        A MarIA é a primeira assessora de imprensa virtual do Brasil criada para transformar boas histórias em pautas jornalísticas, combinando inteligência artificial, curadoria humana e conexão com jornalistas reais.
       </p>
 
       <div className="flex flex-col sm:flex-row gap-4 rise rise-4" id="cta-hero">
