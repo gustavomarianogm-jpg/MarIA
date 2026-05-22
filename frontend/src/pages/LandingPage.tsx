@@ -193,8 +193,11 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
     <div className="text-center mb-16">
       <span className="tabloid mb-5 inline-block">A real dura</span>
       <h2 className="masthead text-[clamp(2.2rem,5vw,4rem)] mt-4">
-        Você gasta R$ 3.000/mês com assessoria e <span className="display-italic text-coral">nunca aparece</span>.
+        Nem toda boa história chega até os <span className="display-italic text-coral">jornalistas certos</span>.
       </h2>
+      <p className="text-lg text-ink/80 mt-4 max-w-2xl mx-auto">
+        A MarIA nasceu para reduzir essa distância: organiza a informação, fortalece o gancho jornalístico e conecta histórias relevantes com profissionais que cobrem o tema.
+      </p>
     </div>
 
     <div className="flex flex-col md:flex-row gap-8 justify-center">
