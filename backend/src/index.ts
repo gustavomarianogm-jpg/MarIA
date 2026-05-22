@@ -30,7 +30,28 @@ export type AppRouter = typeof appRouter;
 const app = express();
 
 // Permite chamadas do frontend no Vercel e do localhost
-app.use(cors({ origin: '*' }));
+const allowedOrigins = [
+  'http://localhost:3000',
+  'http://localhost:5173',
+  'https://mar-ia-mhjz.vercel.app',
+  process.env.ALLOWED_ORIGIN
+].filter(Boolean);
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin) return callback(null, true);
+    
+    if (
+      allowedOrigins.includes(origin) ||
+      origin.endsWith('.vercel.app')
+    ) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
+}));
 app.use(express.json());
 
 // tRPC endpoint
