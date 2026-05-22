@@ -426,91 +426,48 @@ export function LandingPageRaw({ onNavigate }: { session?: unknown, onNavigate: 
       <h2 className="masthead text-[clamp(2.2rem,5.5vw,4.5rem)] mt-4">
         Um plano. <span className="display-italic text-mustard">Zero confusão.</span>
       </h2>
-      <p className="text-paper/75 max-w-2xl mx-auto mt-6 text-lg">
-        Esqueça pacotes Pro/Plus/Ultra. Você paga uma mensalidade pequena pra ter acesso à MarIA — e um bônus se sua matéria sair publicada em veículo de credibilidade.
-      </p>
+      
     </div>
 
-    <div className="grid md:grid-cols-[1fr_1.15fr] gap-6">
-
-      
-      <div className="card-news rounded-2xl p-8 text-ink">
-        <div className="flex items-center justify-between mb-2">
-          <h3 className="display text-3xl">Acesso</h3>
-          <span className="font-mono text-xs bg-ink text-paper px-2 py-1">START</span>
-        </div>
-        <p className="text-ink/70 text-sm mb-6">Pra quem quer experimentar antes de pagar mais.</p>
-
-        <div className="mb-6">
-          <div className="display text-6xl font-bold">R$ 297<span className="text-2xl text-ink/60">/mês</span></div>
-          <p className="text-xs font-mono text-ink/60 mt-2">CANCELA QUANDO QUISER · SEM FIDELIDADE</p>
-        </div>
-
-        <ul className="space-y-3 mb-8">
-          <li className="flex items-start gap-3 text-sm">
-            <svg className="w-5 h-5 text-rose flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/></svg>
-            <span><strong>1 pauta/mês</strong> com MarIA + curadoria humana</span>
-          </li>
-          <li className="flex items-start gap-3 text-sm">
-            <svg className="w-5 h-5 text-rose flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/></svg>
-            <span>Envio pra <strong>20 jornalistas</strong> selecionados pra seu setor</span>
-          </li>
-          <li className="flex items-start gap-3 text-sm">
-            <svg className="w-5 h-5 text-rose flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/></svg>
-            <span>Dashboard com aberturas, respostas e interesses</span>
-          </li>
-          <li className="flex items-start gap-3 text-sm">
-            <svg className="w-5 h-5 text-rose flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/></svg>
-            <span><strong>Mais chance de chegar à imprensa certa</strong> com curadoria inteligente</span>
-          </li>
-        </ul>
-
-        <a href="#" className="btn-ghost w-full justify-center">Começar com Acesso</a>
-      </div>
-
-      
-      <div className="card-news rounded-2xl p-8 text-ink relative" style={{"background":"#F5B700","boxShadow":"8px 8px 0 #E91E8C"}}>
-        <div className="absolute -top-4 left-8 stamp" style={{"background":"#E91E8C","color":"#FAF6F0","borderColor":"#FAF6F0"}}>
-          MAIS ESCOLHIDO
+    <div className="max-w-lg mx-auto">
+      <div className="card-news rounded-2xl p-8 text-ink relative" style={{ background: '#F5B700', boxShadow: '8px 8px 0 #E91E8C' }}>
+        <div className="absolute -top-4 left-8 stamp" style={{ background: '#E91E8C', color: '#FAF6F0', borderColor: '#FAF6F0' }}>
+          VERSÃO BETA
         </div>
 
         <div className="flex items-center justify-between mb-2 mt-2">
-          <h3 className="display text-3xl">Resultado</h3>
-          <span className="font-mono text-xs bg-ink text-paper px-2 py-1">PRO</span>
+          <h3 className="display text-3xl">Plano Beta MarIA</h3>
         </div>
-        <p className="text-ink/80 text-sm mb-6">Pra quem quer transformar release em matéria publicada.</p>
-
-        <div className="mb-6">
-          <div className="display text-6xl font-bold">R$ 297<span className="text-2xl text-ink/70">/mês</span></div>
-          <div className="mt-3 px-3 py-2 bg-ink text-paper inline-block font-mono text-xs">
-            + Foco total em conexões qualificadas
-          </div>
-        </div>
+        <p className="text-ink/80 text-sm mb-6">Acesso inicial à plataforma para criação de pauta, curadoria e conexão jornalística.</p>
 
         <ul className="space-y-3 mb-8">
           <li className="flex items-start gap-3 text-sm">
             <svg className="w-5 h-5 text-ink flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/></svg>
-            <span><strong>Tudo do Acesso</strong> +</span>
+            <span><strong>1 pauta</strong> com apoio da MarIA</span>
           </li>
           <li className="flex items-start gap-3 text-sm">
             <svg className="w-5 h-5 text-ink flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/></svg>
-            <span><strong>Acompanhamento ativo</strong> até a publicação</span>
+            <span><strong>Curadoria humana</strong></span>
           </li>
           <li className="flex items-start gap-3 text-sm">
             <svg className="w-5 h-5 text-ink flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/></svg>
-            <span>Acesso à <strong>Comunidade MarIA</strong> (workshops, jornalistas convidados)</span>
+            <span><strong>Sugestão</strong> de gancho jornalístico</span>
           </li>
           <li className="flex items-start gap-3 text-sm">
             <svg className="w-5 h-5 text-ink flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/></svg>
-            <span><strong>Bônus de R$ 300</strong> só sai se sua matéria sair</span>
+            <span><strong>Direcionamento</strong> estratégico</span>
+          </li>
+          <li className="flex items-start gap-3 text-sm">
+            <svg className="w-5 h-5 text-ink flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/></svg>
+            <span>Possibilidade de <strong>conexão com jornalistas</strong> por tema</span>
           </li>
         </ul>
 
-        <a href="#" className="btn-primary w-full justify-center">Quero o Resultado →</a>
+        <a onClick={(e) => { e.preventDefault(); onNavigate('chat'); }} href="#" className="btn-primary w-full justify-center">Testar a MarIA →</a>
       </div>
     </div>
 
-    <p className="text-center text-xs font-mono opacity-60 mt-10">
+        <p className="text-center text-xs font-mono opacity-60 mt-10">
       ONG VERIFICADA · 50% DE DESCONTO · FALE COM A GENTE
     </p>
   </div>
