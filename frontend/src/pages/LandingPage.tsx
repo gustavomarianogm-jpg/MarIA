@@ -197,18 +197,18 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
       </h2>
     </div>
 
-    <div className="grid md:grid-cols-3 gap-6">
-      <div className="card-news rounded-xl p-6">
+    <div className="flex flex-col md:flex-row gap-8 justify-center">
+      <div className="card-news rounded-xl p-6 flex-1 min-w-0">
         <div className="masthead text-5xl text-rose mb-3">300</div>
         <p className="font-semibold mb-2">e-mails por dia</p>
         <p className="text-sm text-ink/70">recebe um jornalista. 95% vão direto pra lixeira sem nem ser abertos.</p>
       </div>
-      <div className="card-news rounded-xl p-6">
+      <div className="card-news rounded-xl p-6 flex-1 min-w-0">
         <div className="masthead text-5xl text-rose mb-3">R$ 3k</div>
         <p className="font-semibold mb-2">é o piso mensal</p>
         <p className="text-sm text-ink/70">de uma assessoria tradicional. Inacessível pra PME, MEI ou ONG.</p>
       </div>
-      <div className="card-news rounded-xl p-6">
+      <div className="card-news rounded-xl p-6 flex-1 min-w-0">
         <div className="masthead text-5xl text-rose mb-3">0</div>
         <p className="font-semibold mb-2">é o que o ChatGPT</p>
         <p className="text-sm text-ink/70">entrega de publicação. Ele te dá o texto. Ninguém pra mandar pra ninguém.</p>
