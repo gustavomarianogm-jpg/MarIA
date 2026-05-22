@@ -60,10 +60,9 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
       </h1>
 
       <p className="text-xl md:text-2xl text-ink/80 leading-relaxed rise rise-2" style={{ marginTop: '3.5rem' }}>
-        A MarIA é a primeira assessora de imprensa que combina IA +<br className="hidden md:block" />
-        curadoria de jornalistas reais — e cobra só quando sua matéria<br className="hidden md:block" />
-        sai publicada de verdade. Sem mensalidade gorda. Sem release<br className="hidden md:block" />
-        jogado fora.
+        A MarIA não vende release. Ela amplia a chance real da sua história<br className="hidden md:block" />
+        estar visível para jornalistas, com curadoria, estratégia e<br className="hidden md:block" />
+        conexões qualificadas.
       </p>
 
       <div className="flex flex-col sm:flex-row gap-6 rise rise-4" id="cta-hero" style={{ marginTop: '3.5rem' }}>
@@ -83,7 +82,7 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
         </div>
         <div className="flex items-center gap-2 text-sm">
           <svg className="w-5 h-5 text-rose" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/></svg>
-          <span className="font-medium">Garantia: só paga se publicar</span>
+          <span className="font-medium">Conexões qualificadas</span>
         </div>
         <div className="flex items-center gap-2 text-sm">
           <svg className="w-5 h-5 text-rose" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/></svg>
@@ -401,7 +400,7 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
               <td className="p-5 text-ink/70">R$ 700 por release</td>
             </tr>
             <tr>
-              <td className="p-5 font-semibold">Você só paga se publicar?</td>
+              <td className="p-5 font-semibold">Foco em conexões reais?</td>
               <td className="p-5 bg-rose/5 font-bold text-rose">✓ SIM</td>
               <td className="p-5 text-ink/70">✗ Não</td>
               <td className="p-5 text-ink/70">N/A</td>
@@ -501,7 +500,7 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
         <div className="mb-6">
           <div className="display text-6xl font-bold">R$ 297<span className="text-2xl text-ink/70">/mês</span></div>
           <div className="mt-3 px-3 py-2 bg-ink text-paper inline-block font-mono text-xs">
-            + R$ 300 só quando a matéria publicar
+            + Foco total em conexões qualificadas
           </div>
         </div>
 
@@ -520,7 +519,7 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
           </li>
           <li className="flex items-start gap-3 text-sm">
             <svg className="w-5 h-5 text-ink flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/></svg>
-            <span><strong>Bônus de R$ 300</strong> só sai se sua matéria sair</span>
+            <span><strong>Estratégia ativa</strong> para sua história ganhar visibilidade</span>
           </li>
         </ul>
 
