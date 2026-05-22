@@ -62,7 +62,8 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
       <p className="text-xl md:text-2xl text-ink/80 leading-relaxed rise rise-2" style={{ marginTop: '3.5rem' }}>
         A MarIA é a primeira assessora de imprensa virtual do Brasil criada para transformar<br className="hidden md:block" />
         boas histórias em pautas jornalísticas, combinando inteligência artificial,<br className="hidden md:block" />
-        curadoria humana e conexão com jornalistas reais.
+        curadoria humana e conexão com jornalistas reais. Sem burocracia.<br className="hidden md:block" />
+        Sem disparo genérico. Com estratégia, curadoria e conexão real.
       </p>
 
       <div className="flex flex-col sm:flex-row gap-6 rise rise-4" id="cta-hero" style={{ marginTop: '3.5rem' }}>
