@@ -26,5 +26,8 @@
   "bugs": {
     "url": "https://github.com/gustavomarianogm-jpg/MarIA/issues"
   },
-  "homepage": "https://github.com/gustavomarianogm-jpg/MarIA#readme"
+  "homepage": "https://github.com/gustavomarianogm-jpg/MarIA#readme",
+  "engines": {
+    "node": "20.x"
+  }
 }
