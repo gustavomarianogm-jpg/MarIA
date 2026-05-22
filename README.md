@@ -55,8 +55,6 @@ MarIA/
    SUPABASE_URL=https://seu-projeto.supabase.co
    SUPABASE_SERVICE_KEY=sua-service-role-key
    ANTHROPIC_API_KEY=sua-api-key
-   ADMIN_EMAIL=admin@maria.com.br
-   ADMIN_PASSWORD=uma-senha-segura
    ALLOWED_ORIGIN=http://localhost:3000
    ```
 
@@ -88,8 +86,6 @@ Certifique-se de configurar as variáveis de ambiente no painel da Vercel:
 - `SUPABASE_URL`
 - `SUPABASE_SERVICE_KEY`
 - `ANTHROPIC_API_KEY`
-- `ADMIN_EMAIL` (ex: `admin@maria.com.br`)
-- `ADMIN_PASSWORD` (senha segura para o admin)
 - `ALLOWED_ORIGIN` (ex: `https://mar-ia-mhjz.vercel.app`)
 
 A Vercel construirá o `frontend` estático através do Vite e converterá automaticamente a API Express em Serverless Functions mapeadas pelo `/api/index.ts`.
