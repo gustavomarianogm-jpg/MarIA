@@ -461,7 +461,7 @@ export function LandingPageRaw({ onNavigate }: { session?: unknown, onNavigate: 
           </li>
           <li className="flex items-start gap-3 text-sm">
             <svg className="w-5 h-5 text-rose flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/></svg>
-            <span>Garantia de 30 dias: <strong>não gostou, devolvemos</strong></span>
+            <span><strong>Mais chance de chegar à imprensa certa</strong> com curadoria inteligente</span>
           </li>
         </ul>
 
@@ -545,7 +545,7 @@ export function LandingPageRaw({ onNavigate }: { session?: unknown, onNavigate: 
           <span className="text-rose text-3xl group-open:rotate-45 transition-transform">+</span>
         </summary>
         <p className="text-ink/75 mt-4 leading-relaxed">
-          A gente é honesto: PR não é garantia. Editor decide. Mas no plano Resultado, você <strong>só paga o bônus de R$ 300 SE</strong> a matéria publicar. E nos primeiros 30 dias, se você não gostar do produto, devolvemos a mensalidade. Risco é nosso, não seu.
+          A gente é honesto: não oferecemos garantias absolutas, pois a decisão final é sempre do editor. O que a MarIA proporciona é a <strong>chance real de visibilidade jornalística</strong>. Nós organizamos a sua informação, fortalecemos o gancho e conectamos sua história com os jornalistas corretos, maximizando suas chances de sucesso.
         </p>
       </details>
 
