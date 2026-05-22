@@ -161,29 +161,29 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
 {/* =================== FAIXA DE LOGOS / "JÁ SAÍRAM EM" =================== */}
 <section className="bg-ink text-paper border-y-2 border-ink overflow-hidden" style={{ padding: '2.5rem 0' }}>
   <div className="container-seguro flex items-center justify-between" style={{ marginTop: '-1rem', marginBottom: '2.5rem' }}>
-    <span className="font-mono text-xs tracking-widest opacity-70">CLIENTES MARIA QUE JÁ SAÍRAM EM</span>
-    <span className="font-mono text-xs tracking-widest opacity-70">3.281 MATÉRIAS · ATUALIZADO HOJE</span>
+    <span className="font-mono text-xs tracking-widest opacity-70">MILHARES DE POSSÍVEIS</span>
+    <span className="font-mono text-xs tracking-widest opacity-70">CONEXÕES JORNALÍSTICAS EM POTENCIAL</span>
   </div>
   <div className="marquee-track gap-16 items-center text-paper/85">
-    <span className="display text-3xl opacity-80 whitespace-nowrap">Folha de S.Paulo</span>
-    <span className="display text-3xl opacity-80 whitespace-nowrap">· O Popular ·</span>
-    <span className="display text-3xl opacity-80 whitespace-nowrap">Estadão</span>
-    <span className="display text-3xl opacity-80 whitespace-nowrap">· Exame ·</span>
-    <span className="display text-3xl opacity-80 whitespace-nowrap">Pequenas Empresas Grandes Negócios</span>
-    <span className="display text-3xl opacity-80 whitespace-nowrap">· Diário da Manhã ·</span>
-    <span className="display text-3xl opacity-80 whitespace-nowrap">G1</span>
-    <span className="display text-3xl opacity-80 whitespace-nowrap">· Startupi ·</span>
+    <span className="display text-3xl opacity-80 whitespace-nowrap">Jornais Locais</span>
+    <span className="display text-3xl opacity-80 whitespace-nowrap">· Podcasts ·</span>
+    <span className="display text-3xl opacity-80 whitespace-nowrap">Revistas de Nicho</span>
+    <span className="display text-3xl opacity-80 whitespace-nowrap">· Emissoras de TV ·</span>
+    <span className="display text-3xl opacity-80 whitespace-nowrap">Portais de Notícias</span>
+    <span className="display text-3xl opacity-80 whitespace-nowrap">· Blogs Especializados ·</span>
+    <span className="display text-3xl opacity-80 whitespace-nowrap">Rádios Locais</span>
+    <span className="display text-3xl opacity-80 whitespace-nowrap">· Agências de Notícia ·</span>
     <span className="display text-3xl opacity-80 whitespace-nowrap">Valor Econômico</span>
     <span className="display text-3xl opacity-80 whitespace-nowrap">· Tribuna do Planalto ·</span>
     {/* duplicado pra loop infinito */}
-    <span className="display text-3xl opacity-80 whitespace-nowrap">Folha de S.Paulo</span>
-    <span className="display text-3xl opacity-80 whitespace-nowrap">· O Popular ·</span>
-    <span className="display text-3xl opacity-80 whitespace-nowrap">Estadão</span>
-    <span className="display text-3xl opacity-80 whitespace-nowrap">· Exame ·</span>
-    <span className="display text-3xl opacity-80 whitespace-nowrap">Pequenas Empresas Grandes Negócios</span>
-    <span className="display text-3xl opacity-80 whitespace-nowrap">· Diário da Manhã ·</span>
-    <span className="display text-3xl opacity-80 whitespace-nowrap">G1</span>
-    <span className="display text-3xl opacity-80 whitespace-nowrap">· Startupi ·</span>
+    <span className="display text-3xl opacity-80 whitespace-nowrap">Jornais Locais</span>
+    <span className="display text-3xl opacity-80 whitespace-nowrap">· Podcasts ·</span>
+    <span className="display text-3xl opacity-80 whitespace-nowrap">Revistas de Nicho</span>
+    <span className="display text-3xl opacity-80 whitespace-nowrap">· Emissoras de TV ·</span>
+    <span className="display text-3xl opacity-80 whitespace-nowrap">Portais de Notícias</span>
+    <span className="display text-3xl opacity-80 whitespace-nowrap">· Blogs Especializados ·</span>
+    <span className="display text-3xl opacity-80 whitespace-nowrap">Rádios Locais</span>
+    <span className="display text-3xl opacity-80 whitespace-nowrap">· Agências de Notícia ·</span>
   </div>
 </section>
 
@@ -299,73 +299,67 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
 
     <div className="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6">
       <div className="max-w-2xl">
-        <span className="tabloid mb-5 inline-block">Saiu na imprensa</span>
+        <span className="tabloid mb-5 inline-block">Potencial Real</span>
         <h2 className="masthead text-[clamp(2.2rem,5vw,4rem)] mt-4">
-          Histórias <span className="display-italic text-rose">de verdade</span> que viraram manchete.
+          Uma rede <span className="display-italic text-rose">em construção</span> para aproximar fontes e jornalistas.
         </h2>
       </div>
       <div className="text-right">
-        <div className="masthead text-6xl text-rose">3.281</div>
-        <p className="font-mono text-xs opacity-70">MATÉRIAS PUBLICADAS · ÚLTIMOS 12 MESES</p>
+        <div className="masthead text-5xl text-rose">Milhares</div>
+        <p className="font-mono text-xs opacity-70">DE POSSÍVEIS CONEXÕES JORNALÍSTICAS</p>
       </div>
     </div>
 
     <div className="grid lg:grid-cols-3 gap-6">
 
-      {/* Case 1 */}
       <article className="card-news rounded-xl p-6 flex flex-col">
         <div className="flex items-center gap-2 mb-4">
-          <span className="tabloid">Padaria · Goiânia</span>
+          <span className="tabloid">Pequenos Negócios</span>
         </div>
-        <h3 className="display text-2xl mb-3 leading-tight">"Saímos no Estadão e no caderno PME da Folha em 2 semanas."</h3>
+        <h3 className="display text-2xl mb-3 leading-tight">Sua história local nos veículos certos.</h3>
         <p className="text-sm text-ink/75 flex-1 mb-5">
-          A Padaria do Seu Joaquim completou 50 anos. Com a MarIA, viraram pauta nacional em 14 dias. Faturamento dobrou no mês seguinte.
+          Uma padaria tradicional completa 50 anos. A MarIA organiza a pauta e conecta com jornais do bairro e cadernos de gastronomia local.
         </p>
         <div className="news-rule mb-4"></div>
         <div className="flex items-center justify-between">
           <div>
-            <div className="font-semibold text-sm">Marcos Joaquim</div>
-            <div className="text-xs text-ink/60">Padaria do Seu Joaquim · 3ª geração</div>
+            <div className="font-semibold text-sm">Exemplo Prático</div>
           </div>
           <div className="text-2xl">🥖</div>
         </div>
       </article>
 
-      {/* Case 2 (destaque) */}
       <article className="card-news rounded-xl p-6 flex flex-col bg-mustard">
         <div className="flex items-center gap-2 mb-4">
-          <span className="tabloid" style={{ background: '#0F0A1A', color: '#F5B700' }}>ONG · São Paulo</span>
+          <span className="tabloid" style={{ background: '#0F0A1A', color: '#F5B700' }}>ONGs e Causas</span>
         </div>
-        <h3 className="display text-2xl mb-3 leading-tight">"Conseguimos 3 reportagens de TV em 1 mês. Triplicamos as doações."</h3>
+        <h3 className="display text-2xl mb-3 leading-tight">Mais visibilidade para o seu projeto social.</h3>
         <p className="text-sm text-ink/85 flex-1 mb-5">
-          ONG de costura solidária que ninguém conhecia. A MarIA encontrou o gancho certo (Dia da Mulher + economia circular) e conectou com 4 redações. Foi pro Bom Dia Brasil.
+          Um projeto precisa de visibilidade. A MarIA encontra o gancho certo e direciona a pauta para repórteres que cobrem impacto social e cidadania.
         </p>
         <div className="news-rule mb-4"></div>
         <div className="flex items-center justify-between">
           <div>
-            <div className="font-semibold text-sm">Patrícia Lemos</div>
-            <div className="text-xs text-ink/70">Instituto Linha Viva</div>
+            <div className="font-semibold text-sm">Exemplo Prático</div>
           </div>
           <div className="text-2xl">🧵</div>
         </div>
       </article>
 
-      {/* Case 3 */}
       <article className="card-news rounded-xl p-6 flex flex-col">
         <div className="flex items-center gap-2 mb-4">
-          <span className="tabloid">Startup · Anápolis</span>
+          <span className="tabloid">Startups e Tecnologia</span>
         </div>
-        <h3 className="display text-2xl mb-3 leading-tight">"Antes era spam pra 500 emails. Agora 1 release rende 3 matérias."</h3>
+        <h3 className="display text-2xl mb-3 leading-tight">Do disparo genérico para o nicho correto.</h3>
         <p className="text-sm text-ink/75 flex-1 mb-5">
-          Startup de agtech que mandava release pra base genérica e ouvia silêncio. Com matchmaking da MarIA, taxa de resposta passou de 0,4% pra 18%.
+          Uma agtech quer lançar seu produto. Em vez de spam, a MarIA faz o matchmaking com jornalistas focados em agronegócio e inovação.
         </p>
         <div className="news-rule mb-4"></div>
         <div className="flex items-center justify-between">
           <div>
-            <div className="font-semibold text-sm">Bruno Tavares</div>
-            <div className="text-xs text-ink/60">AgroPulse · CTO e cofundador</div>
+            <div className="font-semibold text-sm">Exemplo Prático</div>
           </div>
-          <div className="text-2xl">🌱</div>
+          <div className="text-2xl">🚀</div>
         </div>
       </article>
 

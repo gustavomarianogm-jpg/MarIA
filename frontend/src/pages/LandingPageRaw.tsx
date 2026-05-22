@@ -276,200 +276,73 @@ export function LandingPageRaw({ onNavigate }: { session?: unknown, onNavigate: 
 <section id="prova" className="py-24 md:py-32 relative grain">
   <div className="max-w-7xl mx-auto px-6">
 
-    <div className="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6">
+        <div className="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6">
       <div className="max-w-2xl">
-        <span className="tabloid mb-5 inline-block">Saiu na imprensa</span>
+        <span className="tabloid mb-5 inline-block">Potencial Real</span>
         <h2 className="masthead text-[clamp(2.2rem,5vw,4rem)] mt-4">
-          Histórias <span className="display-italic text-rose">de verdade</span> que viraram manchete.
+          Uma rede <span className="display-italic text-rose">em construção</span> para aproximar fontes e jornalistas.
         </h2>
       </div>
       <div className="text-right">
-        <div className="masthead text-6xl text-rose">3.281</div>
-        <p className="font-mono text-xs opacity-70">MATÉRIAS PUBLICADAS · ÚLTIMOS 12 MESES</p>
+        <div className="masthead text-5xl text-rose">Milhares</div>
+        <p className="font-mono text-xs opacity-70">DE POSSÍVEIS CONEXÕES JORNALÍSTICAS</p>
       </div>
     </div>
 
     <div className="grid lg:grid-cols-3 gap-6">
 
-      
       <article className="card-news rounded-xl p-6 flex flex-col">
         <div className="flex items-center gap-2 mb-4">
-          <span className="tabloid">Padaria · Goiânia</span>
+          <span className="tabloid">Pequenos Negócios</span>
         </div>
-        <h3 className="display text-2xl mb-3 leading-tight">"Saímos no Estadão e no caderno PME da Folha em 2 semanas."</h3>
+        <h3 className="display text-2xl mb-3 leading-tight">Sua história local nos veículos certos.</h3>
         <p className="text-sm text-ink/75 flex-1 mb-5">
-          A Padaria do Seu Joaquim completou 50 anos. Com a MarIA, viraram pauta nacional em 14 dias. Faturamento dobrou no mês seguinte.
+          Uma padaria tradicional completa 50 anos. A MarIA organiza a pauta e conecta com jornais do bairro e cadernos de gastronomia local.
         </p>
         <div className="news-rule mb-4"></div>
         <div className="flex items-center justify-between">
           <div>
-            <div className="font-semibold text-sm">Marcos Joaquim</div>
-            <div className="text-xs text-ink/60">Padaria do Seu Joaquim · 3ª geração</div>
+            <div className="font-semibold text-sm">Exemplo Prático</div>
           </div>
           <div className="text-2xl">🥖</div>
         </div>
       </article>
 
-      
       <article className="card-news rounded-xl p-6 flex flex-col bg-mustard">
         <div className="flex items-center gap-2 mb-4">
-          <span className="tabloid" style={{"background":"#0F0A1A","color":"#F5B700"}}>ONG · São Paulo</span>
+          <span className="tabloid" style={{ background: '#0F0A1A', color: '#F5B700' }}>ONGs e Causas</span>
         </div>
-        <h3 className="display text-2xl mb-3 leading-tight">"Conseguimos 3 reportagens de TV em 1 mês. Triplicamos as doações."</h3>
+        <h3 className="display text-2xl mb-3 leading-tight">Mais visibilidade para o seu projeto social.</h3>
         <p className="text-sm text-ink/85 flex-1 mb-5">
-          ONG de costura solidária que ninguém conhecia. A MarIA encontrou o gancho certo (Dia da Mulher + economia circular) e conectou com 4 redações. Foi pro Bom Dia Brasil.
+          Um projeto precisa de visibilidade. A MarIA encontra o gancho certo e direciona a pauta para repórteres que cobrem impacto social e cidadania.
         </p>
         <div className="news-rule mb-4"></div>
         <div className="flex items-center justify-between">
           <div>
-            <div className="font-semibold text-sm">Patrícia Lemos</div>
-            <div className="text-xs text-ink/70">Instituto Linha Viva</div>
+            <div className="font-semibold text-sm">Exemplo Prático</div>
           </div>
           <div className="text-2xl">🧵</div>
         </div>
       </article>
 
-      
       <article className="card-news rounded-xl p-6 flex flex-col">
         <div className="flex items-center gap-2 mb-4">
-          <span className="tabloid">Startup · Anápolis</span>
+          <span className="tabloid">Startups e Tecnologia</span>
         </div>
-        <h3 className="display text-2xl mb-3 leading-tight">"Antes era spam pra 500 emails. Agora 1 release rende 3 matérias."</h3>
+        <h3 className="display text-2xl mb-3 leading-tight">Do disparo genérico para o nicho correto.</h3>
         <p className="text-sm text-ink/75 flex-1 mb-5">
-          Startup de agtech que mandava release pra base genérica e ouvia silêncio. Com matchmaking da MarIA, taxa de resposta passou de 0,4% pra 18%.
+          Uma agtech quer lançar seu produto. Em vez de spam, a MarIA faz o matchmaking com jornalistas focados em agronegócio e inovação.
         </p>
         <div className="news-rule mb-4"></div>
         <div className="flex items-center justify-between">
           <div>
-            <div className="font-semibold text-sm">Bruno Tavares</div>
-            <div className="text-xs text-ink/60">AgroPulse · CTO e cofundador</div>
+            <div className="font-semibold text-sm">Exemplo Prático</div>
           </div>
-          <div className="text-2xl">🌱</div>
+          <div className="text-2xl">🚀</div>
         </div>
       </article>
 
     </div>
-  </div>
-</section>
-
-
-<section className="py-24 md:py-32 bg-paper relative">
-  <div className="max-w-6xl mx-auto px-6">
-    <div className="text-center mb-16">
-      <span className="tabloid mb-5 inline-block">Comparativo honesto</span>
-      <h2 className="masthead text-[clamp(2.2rem,5vw,4rem)] mt-4">
-        MarIA <span className="display-italic">vs.</span> o resto do mercado.
-      </h2>
-    </div>
-
-    <div className="card-news rounded-2xl overflow-hidden">
-      <div className="overflow-x-auto">
-        <table className="w-full text-left text-sm md:text-base">
-          <thead className="bg-ink text-paper">
-            <tr>
-              <th className="p-5 font-mono text-xs tracking-widest font-medium">CRITÉRIO</th>
-              <th className="p-5 font-display text-lg bg-rose text-paper">MarIA</th>
-              <th className="p-5 font-display text-lg">Assessoria tradicional</th>
-              <th className="p-5 font-display text-lg">Chat genérico</th>
-              <th className="p-5 font-display text-lg">DINO / Newswire</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-ink/15">
-            <tr>
-              <td className="p-5 font-semibold">Custo mensal</td>
-              <td className="p-5 bg-rose/5 font-semibold text-rose">R$ 297 + sucesso</td>
-              <td className="p-5 text-ink/70">R$ 3.000 a R$ 15.000</td>
-              <td className="p-5 text-ink/70">R$ 100 (sem entrega)</td>
-              <td className="p-5 text-ink/70">R$ 700 por release</td>
-            </tr>
-            <tr>
-              <td className="p-5 font-semibold">Foco em conexões reais?</td>
-              <td className="p-5 bg-rose/5 font-bold text-rose">✓ SIM</td>
-              <td className="p-5 text-ink/70">✗ Não</td>
-              <td className="p-5 text-ink/70">N/A</td>
-              <td className="p-5 text-ink/70">✗ Não</td>
-            </tr>
-            <tr>
-              <td className="p-5 font-semibold">Curadoria humana</td>
-              <td className="p-5 bg-rose/5 font-bold text-rose">✓ Jornalista real</td>
-              <td className="p-5 text-ink/70">✓ Sim</td>
-              <td className="p-5 text-ink/70">✗ Zero</td>
-              <td className="p-5 text-ink/70">✗ Distribuição automática</td>
-            </tr>
-            <tr>
-              <td className="p-5 font-semibold">Matchmaking com jornalista certo</td>
-              <td className="p-5 bg-rose/5 font-bold text-rose">✓ IA + rede própria</td>
-              <td className="p-5 text-ink/70">~ Depende do contato</td>
-              <td className="p-5 text-ink/70">✗ Você se vira</td>
-              <td className="p-5 text-ink/70">✗ Manda pra todo mundo</td>
-            </tr>
-            <tr>
-              <td className="p-5 font-semibold">Pensado pra PME / MEI / ONG</td>
-              <td className="p-5 bg-rose/5 font-bold text-rose">✓ Foco total</td>
-              <td className="p-5 text-ink/70">✗ Foco em grande empresa</td>
-              <td className="p-5 text-ink/70">~ Genérico</td>
-              <td className="p-5 text-ink/70">✗ Foco corporativo</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<section id="preco" className="py-24 md:py-32 bg-ink text-paper relative grain">
-  <div className="max-w-5xl mx-auto px-6">
-
-    <div className="text-center mb-16">
-      <span className="tabloid mb-5 inline-block" style={{"background":"#F5B700"}}>Preço justo</span>
-      <h2 className="masthead text-[clamp(2.2rem,5.5vw,4.5rem)] mt-4">
-        Um plano. <span className="display-italic text-mustard">Zero confusão.</span>
-      </h2>
-      
-    </div>
-
-    <div className="max-w-lg mx-auto">
-      <div className="card-news rounded-2xl p-8 text-ink relative" style={{ background: '#F5B700', boxShadow: '8px 8px 0 #E91E8C' }}>
-        <div className="absolute -top-4 left-8 stamp" style={{ background: '#E91E8C', color: '#FAF6F0', borderColor: '#FAF6F0' }}>
-          VERSÃO BETA
-        </div>
-
-        <div className="flex items-center justify-between mb-2 mt-2">
-          <h3 className="display text-3xl">Plano Beta MarIA</h3>
-        </div>
-        <p className="text-ink/80 text-sm mb-6">Acesso inicial à plataforma para criação de pauta, curadoria e conexão jornalística.</p>
-
-        <ul className="space-y-3 mb-8">
-          <li className="flex items-start gap-3 text-sm">
-            <svg className="w-5 h-5 text-ink flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/></svg>
-            <span><strong>1 pauta</strong> com apoio da MarIA</span>
-          </li>
-          <li className="flex items-start gap-3 text-sm">
-            <svg className="w-5 h-5 text-ink flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/></svg>
-            <span><strong>Curadoria humana</strong></span>
-          </li>
-          <li className="flex items-start gap-3 text-sm">
-            <svg className="w-5 h-5 text-ink flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/></svg>
-            <span><strong>Sugestão</strong> de gancho jornalístico</span>
-          </li>
-          <li className="flex items-start gap-3 text-sm">
-            <svg className="w-5 h-5 text-ink flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/></svg>
-            <span><strong>Direcionamento</strong> estratégico</span>
-          </li>
-          <li className="flex items-start gap-3 text-sm">
-            <svg className="w-5 h-5 text-ink flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/></svg>
-            <span>Possibilidade de <strong>conexão com jornalistas</strong> por tema</span>
-          </li>
-        </ul>
-
-        <a onClick={(e) => { e.preventDefault(); onNavigate('chat'); }} href="#" className="btn-primary w-full justify-center">Testar a MarIA →</a>
-      </div>
-    </div>
-
-        <p className="text-center text-xs font-mono opacity-60 mt-10">
-      ONG VERIFICADA · 50% DE DESCONTO · FALE COM A GENTE
-    </p>
   </div>
 </section>
 
