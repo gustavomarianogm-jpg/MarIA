@@ -28,12 +28,12 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
       <a href="#como-funciona" className="hover:text-rose transition-colors">Como funciona</a>
       <a href="#prova" className="hover:text-rose transition-colors">Quem já saiu</a>
       <a href="#preco" className="hover:text-rose transition-colors">Preço</a>
-      <a href="#jornalista" className="hover:text-rose transition-colors">Sou jornalista</a>
+      <button type="button" onClick={() => onNavigate('journalist-signup')} className="hover:text-rose transition-colors bg-transparent border-0 p-0 cursor-pointer font-inherit text-inherit">Sou jornalista</button>
     </div>
 
     <div className="flex items-center gap-3">
-      <a href="#login" className="hidden md:inline-flex text-sm font-medium hover:text-rose">Entrar</a>
-      <a href="#cta-hero" className="btn-primary" style={{ padding: '0.6rem 1.25rem', fontSize: '0.85rem', boxShadow: '3px 3px 0 #E91E8C' }}>
+      <span className="hidden md:inline-flex text-sm font-medium opacity-50 cursor-not-allowed select-none" title="Em breve">Login em breve</span>
+      <a href="#cta-hero" onClick={(e) => { e.preventDefault(); onNavigate('chat'); }} className="btn-primary" style={{ padding: '0.6rem 1.25rem', fontSize: '0.85rem', boxShadow: '3px 3px 0 #E91E8C' }}>
         Testar Grátis →
       </a>
     </div>
@@ -41,7 +41,7 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
 </nav>
 
 {/* =================== HERO =================== */}
-<section className="relative sec-hero grain pt-8 pb-12 lg:pt-12 lg:pb-20">
+<section className="relative sec-hero grain pt-8 pb-12 lg:pt-12 lg:pb-20 overflow-hidden">
   <div className="container-seguro grid xl:grid-cols-[1.15fr_1fr] gap-16 items-center relative">
 
     {/* Coluna esquerda: manchete */}
@@ -477,6 +477,12 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
             <span>Possibilidade de <strong>conexão com jornalistas</strong> por tema</span>
           </li>
         </ul>
+
+        {/* Preço — estética jornal preservada */}
+        <div className="border-t border-b border-ink/30 border-dashed py-5 my-6 text-center">
+          <p className="display text-5xl md:text-6xl font-bold leading-none">Grátis no Beta</p>
+          <p className="font-mono text-xs tracking-widest mt-3 opacity-75">DEPOIS: R$ 297 + SUCESSO</p>
+        </div>
 
         <a onClick={(e) => { e.preventDefault(); onNavigate('chat'); }} href="#" className="btn-primary w-full justify-center">Testar a MarIA →</a>
       </div>
