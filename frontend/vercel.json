@@ -7,9 +7,9 @@
   },
   "cleanUrls": true,
   "rewrites": [
-    { "source": "/trpc/(.*)", "destination": "/api/index.ts" },
-    { "source": "/api/(.*)", "destination": "/api/index.ts" },
-    { "source": "/(.*)", "destination": "/chat.html" }
+    { "source": "/trpc/(.*)", "destination": "/api/index" },
+    { "source": "/api/(.*)", "destination": "/api/index" },
+    { "source": "/(.*)", "destination": "/index.html" }
   ],
   "headers": [
     {
