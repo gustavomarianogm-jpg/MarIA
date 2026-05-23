@@ -14,7 +14,7 @@ type Tab = 'curadoria' | 'jornalistas';
 export function AdminPage() {
   const [activeTab, setActiveTab] = useState<Tab>('curadoria');
   const [statusFilter, setStatusFilter] = useState<string>('review');
-  const [selectedStory, setSelectedStory] = useState<any>(null);
+  const [selectedStory, setSelectedStory] = useState<unknown>(null);
   const [rejectFeedback, setRejectFeedback] = useState('');
   const [showRejectModal, setShowRejectModal] = useState(false);
   const [editMode, setEditMode] = useState(false);
@@ -32,7 +32,7 @@ export function AdminPage() {
   const [jTags, setJTags] = useState('');
 
   // ═══ Queries ═══
-  const storiesQuery = trpc.admin.listStories.useQuery({ status: statusFilter as any });
+  const storiesQuery = trpc.admin.listStories.useQuery({ status: statusFilter });
   const journalistsQuery = trpc.admin.listJournalists.useQuery(undefined, { enabled: activeTab === 'jornalistas' });
 
   const approveMutation = trpc.admin.approveStory.useMutation({
@@ -80,7 +80,7 @@ export function AdminPage() {
             <div>
               <CardTitle className="text-2xl">{selectedStory.title}</CardTitle>
               <p className="text-sm text-muted-foreground mt-1">
-                Cliente: {(selectedStory as any).users?.name || 'Desconhecido'} • {new Date(selectedStory.createdAt).toLocaleDateString('pt-BR')}
+                Cliente: {(selectedStory as unknown as { users?: { name?: string } }).users?.name || 'Desconhecido'} • {new Date(selectedStory.createdAt).toLocaleDateString('pt-BR')}
               </p>
             </div>
             <Badge variant={selectedStory.status === 'review' ? 'secondary' : 'default'}>
@@ -211,7 +211,7 @@ export function AdminPage() {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {storiesQuery.data.map((story: any) => (
+                  {storiesQuery.data.map((story: unknown) => (
                     <TableRow key={story.id}>
                       <TableCell className="font-medium max-w-xs truncate">{story.title}</TableCell>
                       <TableCell>{story.users?.name || '-'}</TableCell>
@@ -309,7 +309,7 @@ export function AdminPage() {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {journalistsQuery.data.map((j: any) => (
+                  {journalistsQuery.data.map((j: unknown) => (
                     <TableRow key={j.id}>
                       <TableCell className="font-medium">{j.name}</TableCell>
                       <TableCell className="text-muted-foreground">{j.email}</TableCell>

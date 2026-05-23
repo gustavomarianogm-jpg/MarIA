@@ -24,10 +24,14 @@ export function WaitlistPage() {
         setEmail('');
         setSegment('');
       }
-    } catch (err: any) {
-      alert(`Erro: ${err.message}`);
-    }
-  };
+} catch (err: unknown) {
+  if (err instanceof Error) {
+    alert(`Erro: ${err.message}`);
+  } else {
+    console.error(err);
+  }
+}
+}
 
   return (
     <div className="flex-1 w-full flex flex-col items-center p-4 pt-12 md:pt-24 bg-background">

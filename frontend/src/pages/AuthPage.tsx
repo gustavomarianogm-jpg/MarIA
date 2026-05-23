@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { supabase } from '@/utils/supabase';
 
-export function AuthPage({ onLogin, message }: { onLogin: () => void, message?: string }) {
+export function AuthPage({ message }: { message?: string }) {
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -17,9 +17,13 @@ export function AuthPage({ onLogin, message }: { onLogin: () => void, message?: 
       });
       if (error) throw error;
       alert('Link mágico enviado! Verifique seu e-mail.');
-    } catch (err: any) {
-      alert(`Erro no login: ${err.message}`);
-    } finally {
+    } catch (err: unknown) {
+  if (err instanceof Error) {
+    alert(`Erro no login: ${err.message}`);
+  } else {
+    console.error(err);
+  }
+} finally {
       setLoading(false);
     }
   };

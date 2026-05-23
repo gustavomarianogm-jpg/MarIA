@@ -3,7 +3,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { httpBatchLink } from '@trpc/client';
 import { trpc } from './utils/trpc';
 import { supabase } from './utils/supabase';
-import { WaitlistPage } from './pages/WaitlistPage';
+// import { WaitlistPage } from './pages/WaitlistPage'; // not used
 import { AuthPage } from './pages/AuthPage';
 import { DashboardPage } from './pages/DashboardPage';
 import { ChatPage } from './pages/ChatPage';
@@ -15,7 +15,7 @@ import { StoryPublicPage } from './pages/StoryPublicPage';
 import { TermsPage, PrivacyPage, HelpPage, ContactPage } from './pages/StaticPages';
 
 function App() {
-  const [session, setSession] = useState<any>(null);
+  const [session, setSession] = useState<unknown>(null);
   
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -106,7 +106,7 @@ function App() {
             import.meta.env.PROD ? (
               <LandingPageRaw 
                 session={session}
-                onNavigate={(route) => setCurrentRoute(route as any)} 
+                onNavigate={(route) => setCurrentRoute(route)} 
               />
             ) : (
               <LandingPage 
@@ -117,7 +117,7 @@ function App() {
                     setCurrentRoute('dash');
                   }
                 }}
-                onNavigate={(route) => setCurrentRoute(route as any)}
+                onNavigate={(route) => setCurrentRoute(route)}
               />
             )
           )}
@@ -127,7 +127,7 @@ function App() {
           )}
 
           {currentRoute === 'chat' && (
-            <ChatPage session={session} onNavigate={(route) => setCurrentRoute(route as any)} />
+            <ChatPage session={session} onNavigate={(route) => setCurrentRoute(route)} />
           )}
 
           {currentRoute === 'admin' && (
@@ -139,10 +139,10 @@ function App() {
           {currentRoute === 'story' && publicStoryId && <StoryPublicPage storyId={publicStoryId} />}
 
           {/* Static Pages */}
-          {currentRoute === 'terms' && <TermsPage onNavigate={(route) => setCurrentRoute(route as any)} />}
-          {currentRoute === 'privacy' && <PrivacyPage onNavigate={(route) => setCurrentRoute(route as any)} />}
-          {currentRoute === 'help' && <HelpPage onNavigate={(route) => setCurrentRoute(route as any)} />}
-          {currentRoute === 'contact' && <ContactPage onNavigate={(route) => setCurrentRoute(route as any)} />}
+          {currentRoute === 'terms' && <TermsPage onNavigate={(route) => setCurrentRoute(route)} />}
+          {currentRoute === 'privacy' && <PrivacyPage onNavigate={(route) => setCurrentRoute(route)} />}
+          {currentRoute === 'help' && <HelpPage onNavigate={(route) => setCurrentRoute(route)} />}
+          {currentRoute === 'contact' && <ContactPage onNavigate={(route) => setCurrentRoute(route)} />}
 
         </div>
       </QueryClientProvider>

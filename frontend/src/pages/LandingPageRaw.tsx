@@ -1,6 +1,6 @@
 import React from 'react';
 
-export function LandingPageRaw({ onNavigate, session }: { onNavigate: (route: string) => void, session?: any }) {
+export function LandingPageRaw({ onNavigate }: { onNavigate: (route: string) => void }) {
   return (
     <div className="relative overflow-x-hidden">
       

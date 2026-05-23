@@ -69,8 +69,8 @@ export async function chamarExtratora(historico: ChatMessage[]) {
 /**
  * Redatora – gera o release a partir do JSON estruturado.
  */
-export async function chamarRedatora(pauta: any) {
-  if (pauta.campos_faltantes?.length > 0) {
+export async function chamarRedatora(pauta: unknown) {
+  if ((pauta as any).campos_faltantes?.length > 0) {
     return {
       release: null,
       erro: `Campos faltantes: ${pauta.campos_faltantes.join(', ')}`,
@@ -85,7 +85,7 @@ export async function chamarRedatora(pauta: any) {
     messages: [
       {
         role: 'user',
-        content: `<pauta_data>\n${JSON.stringify(pauta, null, 2)}\n</pauta_data>`,
+        content: `<pauta_data>\n${JSON.stringify(pauta as any, null, 2)}\n</pauta_data>`,
       },
     ],
   });

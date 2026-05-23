@@ -3,7 +3,7 @@ import { supabase } from '@/utils/supabase';
 import { trpc } from '@/utils/trpc';
 
 export function DashboardPage() {
-  const [session, setSession] = useState<any>(null);
+  const [session, setSession] = useState<unknown>(null);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -12,7 +12,7 @@ export function DashboardPage() {
   }, []);
 
   // Busca perfil do usuário
-  const { data: userProfile, isLoading: isProfileLoading } = trpc.user.me.useQuery(undefined, {
+  const { data: userProfile } = trpc.user.me.useQuery(undefined, {
     enabled: !!session,
   });
 

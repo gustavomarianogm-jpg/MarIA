@@ -27,8 +27,12 @@ export function StoryPublicPage({ storyId }: StoryPublicPageProps) {
         setSourceContact(res.sourceContact);
       }
       setSubmitted(true);
-    } catch (err: any) {
-      alert(`Erro: ${err.message}`);
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        alert(`Erro: ${err.message}`);
+      } else {
+        console.error(err);
+      }
     }
   };
 

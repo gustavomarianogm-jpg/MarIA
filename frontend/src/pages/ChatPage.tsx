@@ -6,7 +6,7 @@ import styles from './ChatPage.module.css';
 
 type Message = { role: 'user' | 'assistant'; content: string };
 
-export function ChatPage({ session, onNavigate }: { session: any, onNavigate: (r: string) => void }) {
+export function ChatPage({ session, onNavigate }: { session: unknown, onNavigate: (r: string) => void }) {
   const userQuery = trpc.user.me.useQuery(undefined, { enabled: !!session });
   const userName = userQuery.data?.name?.split(' ')[0] || 'Visitante';
   const credits = userQuery.data?.credits || 0;
@@ -82,8 +82,13 @@ export function ChatPage({ session, onNavigate }: { session: any, onNavigate: (r
     try {
       const res = await chatMutation.mutateAsync({ messages: newMessages });
       setMessages([...newMessages, { role: 'assistant', content: res.text }]);
-    } catch (err: any) {
-      const errorMsg = err?.message || err?.data?.message || 'Erro de conexão. Tente novamente.';
+    } catch (err: unknown) {
+      let errorMsg = 'Erro de conexão. Tente novamente.';
+      if (err instanceof Error) {
+        errorMsg = err.message;
+      } else if (typeof (err as any).data?.message === 'string') {
+        errorMsg = (err as any).data.message;
+      }
       console.error('[ChatPage] Erro:', errorMsg, err);
       setMessages([...newMessages, { role: 'assistant', content: `⚠️ ${errorMsg}` }]);
     }
@@ -113,9 +118,16 @@ export function ChatPage({ session, onNavigate }: { session: any, onNavigate: (r
         // Not ready yet, show as regular release content
         setRelease(resposta);
       }
-    } catch (err: any) {
-      alert(err.message ?? 'Erro ao gerar release.');
-    } finally {
+    } catch (err: unknown) {
+        let errorMsg = 'Erro de conexão. Tente novamente.';
+        if (err instanceof Error) {
+          errorMsg = err.message;
+        } else if (typeof (err as any).data?.message === 'string') {
+          errorMsg = (err as any).data.message;
+        }
+        console.error('[ChatPage] Erro:', errorMsg, err);
+        alert(errorMsg ?? 'Erro ao gerar release.');
+      } finally {
       setIsProcessing(false);
     }
   };

@@ -47,9 +47,10 @@ export function JournalistSignupPage({ onBack }: JournalistSignupPageProps) {
         name, email, outlet, tags: selectedTags, city, state
       });
       setSuccess(true);
-    } catch (err: any) {
-      alert(`Erro: ${err.message}`);
-    }
+    } catch (err: unknown) {
+        const errorMsg = err instanceof Error ? err.message : 'Erro ao registrar.';
+        alert(`Erro: ${errorMsg}`);
+      }
   };
 
   if (success) {
