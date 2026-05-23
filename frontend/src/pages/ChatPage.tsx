@@ -186,10 +186,7 @@ export function ChatPage({
 
   if (release) {
     return (
-      <div
-        className={styles.pageFull}
-        style={{ paddingTop: isCongressMode ? '20px' : '60px' }}
-      >
+      <div className={styles.pageFull} style={{ paddingTop: '0px' }}>
         <div
           className={styles.chatOuter}
           style={{ maxWidth: '800px', margin: '20px auto' }}
@@ -222,10 +219,7 @@ export function ChatPage({
   }
 
   return (
-    <div
-      className={styles.pageFull}
-      style={{ paddingTop: isCongressMode ? '0px' : '60px' }}
-    >
+    <div className={styles.pageFull} style={{ paddingTop: '0px' }}>
       <div className={styles.chatOuter}>
         {/* Header */}
         <div
