@@ -13,5 +13,11 @@ export default defineConfig({
   },
   build: {
     chunkSizeWarningLimit: 3000,
+    rollupOptions: {
+      input: {
+        chat: path.resolve(__dirname, 'chat.html'),
+        main: path.resolve(__dirname, 'index.html'),
+      },
+    },
   },
 });
