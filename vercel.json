@@ -17,15 +17,11 @@
     {
       "source": "/",
       "has": [{ "type": "query", "key": "route" }],
-      "destination": "/index.html"
-    },
-    {
-      "source": "/",
-      "destination": "/landing.html"
+      "destination": "/app.html"
     },
     {
       "source": "/(.*)",
-      "destination": "/index.html"
+      "destination": "/app.html"
     }
   ],
   "headers": [
