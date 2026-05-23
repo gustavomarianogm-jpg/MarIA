@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MarIA — A assessora de imprensa que só cobra quando vira notícia</title>
+    <meta name="description" content="A primeira assessora de imprensa virtual do Brasil. Você só paga quando sua história vira matéria. Sem mensalidade inflada, sem promessa vazia." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,800;1,9..144,400&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <style>
+      body {font-family: 'Inter Tight', sans-serif; background: #FAF6F0; color: #0F0A1A; -webkit-font-smoothing: antialiased;}
+    </style>
+  </head>
+  <body class="bg-paper text-ink">
+    <div class="relative overflow-x-hidden">
+      <!-- =================== TOP BAR (estilo cabeçalho de jornal) =================== -->
+      <div class="bg-ink text-paper py-2 text-xs font-mono tracking-widest border-b border-paper/20">
+        <div class="max-w-7xl mx-auto px-6 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <span class="pulse-dot"></span>
+            <span class="opacity-80">EDIÇÃO Nº 001 · GOIÂNIA-GO · A 1ª ASSESSORIA QUE COBRA POR RESULTADO</span>
+          </div>
+          <div class="hidden md:block opacity-60">QUARTA · 20 · MAI · 2026</div>
+        </div>
+      </div>
+
+      <!-- =================== NAV =================== -->
+      <nav class="sticky top-0 z-50 bg-paper/90 backdrop-blur-md border-b border-ink/15">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+          <a href="#" class="flex items-center gap-2 group">
+            <div class="w-10 h-10 bg-ink text-paper flex items-center justify-center font-display font-bold text-xl rounded-full group-hover:bg-rose transition-colors">M</div>
+            <span class="display text-2xl">MarIA<span class="text-rose">.</span></span>
+          </a>
+          <div class="hidden md:flex items-center gap-8 text-sm font-medium">
+            <a href="#como-funciona" class="hover:text-rose transition-colors">Como funciona</a>
+            <a href="#prova" class="hover:text-rose transition-colors">Quem já saiu</a>
+            <a href="#preco" class="hover:text-rose transition-colors">Preço</a>
+            <a href="#jornalista" class="hover:text-rose transition-colors">Sou jornalista</a>
+          </div>
+          <div class="flex items-center gap-3">
+            <a href="#" class="hidden md:inline-flex text-sm font-medium hover:text-rose">Entrar</a>
+            <a href="#" class="btn-primary text-sm py-2.5 px-5" style="box-shadow:3px 3px 0 #E91E8C;">
+              Testar Grátis →
+            </a>
+          </div>
+        </div>
+      </nav>
+
+      <!-- =================== HERO =================== -->
+      <section class="relative pt-16 pb-24 md:pt-24 md:pb-32 grain">
+        <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-[1.15fr_1fr] gap-16 items-center relative">
+          <div class="space-y-8">
+            <div class="flex items-center gap-3 rise rise-1">
+              <span class="tabloid">Exclusiva</span>
+              <span class="font-mono text-xs text-ink/60">Caderno · NEGÓCIOS</span>
+            </div>
+            <h1 class="display text-[clamp(2.8rem,7vw,5.5rem)] rise rise-2">
+              Sua história merece <span class="display-italic text-rose">virar notícia</span> —
+              <span class="marker">não mais um release esquecido</span> na caixa de e-mail.
+            </h1>
+            <p class="text-lg md:text-xl text-ink/75 max-w-xl rise rise-3 leading-relaxed">
+              A MarIA é a primeira assessora de imprensa virtual do Brasil criada para transformar boas histórias em pautas jornalísticas, combinando inteligência artificial, curadoria humana e conexão com jornalistas reais. Sem burocracia. Sem disparo genérico. Com estratégia, curadoria e conexão real.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 rise rise-4" id="cta-hero">
+              <a href="#" class="btn-primary">Criar minha 1ª pauta grátis
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+              </a>
+              <a href="#como-funciona" class="btn-ghost">Como funciona</a>
+            </div>
+          </div>
+          <div class="relative">
+            <!-- Placeholder for illustration image or graphic -->
+            <div class="bg-ink/10 w-full h-64 flex items-center justify-center text-ink/30">
+              Ilustração da MarIA
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>
