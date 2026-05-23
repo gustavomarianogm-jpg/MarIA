@@ -484,7 +484,7 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
           <p className="font-mono text-xs tracking-widest mt-3 opacity-75">DEPOIS: R$ 297 + SUCESSO</p>
         </div>
 
-        <a onClick={(e) => { e.preventDefault(); onNavigate('chat'); }} href="#" onClick={(e) => { e.preventDefault(); onNavigate('chat'); }} className="btn-primary w-full justify-center">Testar a MarIA →</a>
+        <a onClick={(e) => { e.preventDefault(); onNavigate('chat'); }} href="#" className="btn-primary w-full justify-center">Testar a MarIA →</a>
       </div>
     </div>
 
