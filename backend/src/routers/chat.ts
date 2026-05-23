@@ -74,7 +74,7 @@ export const chatRouter = router({
           model: 'claude-sonnet-4-5',
           max_tokens: 500,
           system: personalizedPrompt,
-          messages: input.messages,
+          messages: input.messages as Anthropic.MessageParam[],
         });
 
         // @ts-ignore
@@ -151,7 +151,7 @@ Release gerado pela MarIA — A 1ª Assessora de Imprensa Virtual do Brasil`;
         const response = await anthropicClient.messages.create({
           model: 'claude-sonnet-4-5',
           max_tokens: 2000,
-          messages: [...input.messages, { role: 'user', content: pr }],
+          messages: [...input.messages, { role: 'user', content: pr }] as Anthropic.MessageParam[],
         });
 
         // @ts-ignore

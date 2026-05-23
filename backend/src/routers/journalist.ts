@@ -58,7 +58,7 @@ export const journalistRouter = router({
         // @ts-ignore
         const owner = Array.isArray(story.users) ? story.users[0] : story.users;
         if (owner && owner.email) {
-          import('../notify').then(({ notifyClientMatch }) => {
+          import('../notify.js').then(({ notifyClientMatch }) => {
             notifyClientMatch(owner.email, owner.name, story.title, [{
               name: journalist.name,
               score: 100,

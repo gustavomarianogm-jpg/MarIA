@@ -103,7 +103,7 @@ export const matchmakingRouter = router({
             };
           });
           
-          import('../notify').then(({ notifyClientMatch, notifyJournalistNewMatch }) => {
+          import('../notify.js').then(({ notifyClientMatch, notifyJournalistNewMatch }) => {
             // Notifica o cliente
             notifyClientMatch(user.email, user.name, storyOwner.title, topMatchesForEmail).catch(err => {
               console.error('[MATCH] Erro ao notificar cliente sobre match:', err);
