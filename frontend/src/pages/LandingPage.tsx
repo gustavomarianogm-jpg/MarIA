@@ -377,53 +377,53 @@ export function LandingPage({ onNavigate }: { session?: unknown, onNavigate: (r:
       </h2>
     </div>
 
-    <div className="card-news rounded-3xl overflow-hidden shadow-xl mt-4">
-      <div className="overflow-x-auto">
-        <table className="w-full text-left text-base md:text-lg">
+    <div className="card-news rounded-2xl overflow-hidden mt-8">
+      <div className="overflow-x-auto p-4 md:p-8 lg:p-12">
+        <table className="w-full text-left text-sm md:text-base">
           <thead className="bg-ink text-paper">
             <tr>
-              <th className="p-6 md:p-8 font-mono text-sm tracking-widest font-medium border-b-2 border-rose">CRITÉRIO</th>
-              <th className="p-6 md:p-8 font-display text-2xl md:text-3xl bg-rose text-paper border-b-2 border-rose">MarIA</th>
-              <th className="p-6 md:p-8 font-display text-xl md:text-2xl border-b-2 border-ink/20">Assessoria tradicional</th>
-              <th className="p-6 md:p-8 font-display text-xl md:text-2xl border-b-2 border-ink/20">Chat genérico</th>
-              <th className="p-6 md:p-8 font-display text-xl md:text-2xl border-b-2 border-ink/20">DINO / Newswire</th>
+              <th className="px-6 py-10 md:px-8 md:py-14 font-mono text-xs tracking-widest font-medium">CRITÉRIO</th>
+              <th className="px-6 py-10 md:px-8 md:py-14 font-display text-lg bg-rose text-paper">MarIA</th>
+              <th className="px-6 py-10 md:px-8 md:py-14 font-display text-lg">Assessoria tradicional</th>
+              <th className="px-6 py-10 md:px-8 md:py-14 font-display text-lg">Chat genérico</th>
+              <th className="px-6 py-10 md:px-8 md:py-14 font-display text-lg">DINO / Newswire</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-ink/15">
             <tr>
-              <td className="p-6 md:p-8 font-semibold text-ink">Custo mensal</td>
-              <td className="p-6 md:p-8 bg-rose/5 font-bold text-rose text-xl">R$ 297 + sucesso</td>
-              <td className="p-6 md:p-8 text-ink/70">R$ 3.000 a R$ 15.000</td>
-              <td className="p-6 md:p-8 text-ink/70">R$ 100 (sem entrega)</td>
-              <td className="p-6 md:p-8 text-ink/70">R$ 700 por release</td>
+              <td className="px-6 py-10 md:px-8 md:py-14 font-semibold">Custo mensal</td>
+              <td className="px-6 py-10 md:px-8 md:py-14 bg-rose/5 font-semibold text-rose">R$ 297 + sucesso</td>
+              <td className="px-6 py-10 md:px-8 md:py-14 text-ink/70">R$ 3.000 a R$ 15.000</td>
+              <td className="px-6 py-10 md:px-8 md:py-14 text-ink/70">R$ 100 (sem entrega)</td>
+              <td className="px-6 py-10 md:px-8 md:py-14 text-ink/70">R$ 700 por release</td>
             </tr>
             <tr>
-              <td className="p-6 md:p-8 font-semibold text-ink">Foco em conexões reais?</td>
-              <td className="p-6 md:p-8 bg-rose/5 font-bold text-rose text-xl">✓ SIM</td>
-              <td className="p-6 md:p-8 text-ink/70">✗ Não</td>
-              <td className="p-6 md:p-8 text-ink/70">N/A</td>
-              <td className="p-6 md:p-8 text-ink/70">✗ Não</td>
+              <td className="px-6 py-10 md:px-8 md:py-14 font-semibold">Foco em conexões reais?</td>
+              <td className="px-6 py-10 md:px-8 md:py-14 bg-rose/5 font-bold text-rose">✓ SIM</td>
+              <td className="px-6 py-10 md:px-8 md:py-14 text-ink/70">✗ Não</td>
+              <td className="px-6 py-10 md:px-8 md:py-14 text-ink/70">N/A</td>
+              <td className="px-6 py-10 md:px-8 md:py-14 text-ink/70">✗ Não</td>
             </tr>
             <tr>
-              <td className="p-6 md:p-8 font-semibold text-ink">Curadoria humana</td>
-              <td className="p-6 md:p-8 bg-rose/5 font-bold text-rose text-xl">✓ Jornalista real</td>
-              <td className="p-6 md:p-8 text-ink/70">✓ Sim</td>
-              <td className="p-6 md:p-8 text-ink/70">✗ Zero</td>
-              <td className="p-6 md:p-8 text-ink/70">✗ Distribuição automática</td>
+              <td className="px-6 py-10 md:px-8 md:py-14 font-semibold">Curadoria humana</td>
+              <td className="px-6 py-10 md:px-8 md:py-14 bg-rose/5 font-bold text-rose">✓ Jornalista real</td>
+              <td className="px-6 py-10 md:px-8 md:py-14 text-ink/70">✓ Sim</td>
+              <td className="px-6 py-10 md:px-8 md:py-14 text-ink/70">✗ Zero</td>
+              <td className="px-6 py-10 md:px-8 md:py-14 text-ink/70">✗ Distribuição automática</td>
             </tr>
             <tr>
-              <td className="p-6 md:p-8 font-semibold text-ink">Matchmaking com jornalista certo</td>
-              <td className="p-6 md:p-8 bg-rose/5 font-bold text-rose text-xl">✓ IA + rede própria</td>
-              <td className="p-6 md:p-8 text-ink/70">~ Depende do contato</td>
-              <td className="p-6 md:p-8 text-ink/70">✗ Você se vira</td>
-              <td className="p-6 md:p-8 text-ink/70">✗ Manda pra todo mundo</td>
+              <td className="px-6 py-10 md:px-8 md:py-14 font-semibold">Matchmaking com jornalista certo</td>
+              <td className="px-6 py-10 md:px-8 md:py-14 bg-rose/5 font-bold text-rose">✓ IA + rede própria</td>
+              <td className="px-6 py-10 md:px-8 md:py-14 text-ink/70">~ Depende do contato</td>
+              <td className="px-6 py-10 md:px-8 md:py-14 text-ink/70">✗ Você se vira</td>
+              <td className="px-6 py-10 md:px-8 md:py-14 text-ink/70">✗ Manda pra todo mundo</td>
             </tr>
             <tr>
-              <td className="p-6 md:p-8 font-semibold text-ink">Pensado pra PME / MEI / ONG</td>
-              <td className="p-6 md:p-8 bg-rose/5 font-bold text-rose text-xl">✓ Foco total</td>
-              <td className="p-6 md:p-8 text-ink/70">✗ Foco em grande empresa</td>
-              <td className="p-6 md:p-8 text-ink/70">~ Genérico</td>
-              <td className="p-6 md:p-8 text-ink/70">✗ Foco corporativo</td>
+              <td className="px-6 py-10 md:px-8 md:py-14 font-semibold">Pensado pra PME / MEI / ONG</td>
+              <td className="px-6 py-10 md:px-8 md:py-14 bg-rose/5 font-bold text-rose">✓ Foco total</td>
+              <td className="px-6 py-10 md:px-8 md:py-14 text-ink/70">✗ Foco em grande empresa</td>
+              <td className="px-6 py-10 md:px-8 md:py-14 text-ink/70">~ Genérico</td>
+              <td className="px-6 py-10 md:px-8 md:py-14 text-ink/70">✗ Foco corporativo</td>
             </tr>
           </tbody>
         </table>

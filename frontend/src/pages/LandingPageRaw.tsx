@@ -1,11 +1,11 @@
 import React from 'react';
 
-export function LandingPageRaw({ onNavigate }: { session?: unknown, onNavigate: (r: string) => void }) {
+export function LandingPageRaw({ onNavigate, session }: { onNavigate: (route: string) => void, session?: any }) {
   return (
-    <div className="landing-body">
+    <div className="relative overflow-x-hidden">
       
 
-
+{/* =================== TOP BAR (estilo cabeçalho de jornal) =================== */}
 <div className="bg-ink text-paper py-2 text-xs font-mono tracking-widest border-b border-paper/20">
   <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
     <div className="flex items-center gap-3">
@@ -16,7 +16,7 @@ export function LandingPageRaw({ onNavigate }: { session?: unknown, onNavigate: 
   </div>
 </div>
 
-
+{/* =================== NAV =================== */}
 <nav className="sticky top-0 z-50 bg-paper/90 backdrop-blur-md border-b border-ink/15">
   <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
     <a href="#" className="flex items-center gap-2 group">
@@ -32,19 +32,19 @@ export function LandingPageRaw({ onNavigate }: { session?: unknown, onNavigate: 
     </div>
 
     <div className="flex items-center gap-3">
-      <a href="#login" className="hidden md:inline-flex text-sm font-medium hover:text-rose">Entrar</a>
-      <a onClick={(e) => { e.preventDefault(); onNavigate('chat'); }} href="#cta-hero" className="btn-primary text-sm py-2.5 px-5" style={{"boxShadow":"3px 3px 0 #E91E8C"}}>
+      <a onClick={(e) => { e.preventDefault(); onNavigate('dash'); }} href="#" className="hidden md:inline-flex text-sm font-medium hover:text-rose">Entrar</a>
+      <a onClick={(e) => { e.preventDefault(); onNavigate('dash'); }} href="#" className="btn-primary text-sm py-2.5 px-5" style={{"boxShadow":"3px 3px 0 #E91E8C"}}>
         Testar Grátis →
       </a>
     </div>
   </div>
 </nav>
 
-
+{/* =================== HERO =================== */}
 <section className="relative pt-16 pb-24 md:pt-24 md:pb-32 grain">
   <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-[1.15fr_1fr] gap-16 items-center relative">
 
-    
+    {/* Coluna esquerda: manchete */}
     <div className="space-y-8">
       <div className="flex items-center gap-3 rise rise-1">
         <span className="tabloid">Exclusiva</span>
@@ -61,7 +61,7 @@ export function LandingPageRaw({ onNavigate }: { session?: unknown, onNavigate: 
       </p>
 
       <div className="flex flex-col sm:flex-row gap-4 rise rise-4" id="cta-hero">
-        <a onClick={(e) => { e.preventDefault(); onNavigate('chat'); }} href="#" className="btn-primary">
+        <a onClick={(e) => { e.preventDefault(); onNavigate('dash'); }} href="#" className="btn-primary">
           Criar minha 1ª pauta grátis
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
         </a>
@@ -86,15 +86,15 @@ export function LandingPageRaw({ onNavigate }: { session?: unknown, onNavigate: 
       </div>
     </div>
 
-    
+    {/* Coluna direita: chat MarIA + selo recorte */}
     <div className="relative">
 
-      
+      {/* Selo retrô */}
       <div className="absolute -top-6 -right-2 z-20 stamp">
         Como uma manchete · de verdade
       </div>
 
-      
+      {/* Card editorial */}
       <div className="card-news rounded-2xl p-7 relative z-10 rise rise-3">
         <div className="flex items-center justify-between mb-5">
           <div className="flex items-center gap-3">
@@ -127,7 +127,7 @@ export function LandingPageRaw({ onNavigate }: { session?: unknown, onNavigate: 
         </div>
       </div>
 
-      
+      {/* Card de matéria publicada (atrás) */}
       <div className="card-news rounded-xl p-5 absolute -bottom-10 -left-4 md:-left-10 w-64 z-0 rise rise-4" style={{"transform":"rotate(-3deg)","background":"#F5B700"}}>
         <div className="flex items-center gap-2 mb-2 text-xs font-mono">
           <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path d="M2 5a2 2 0 012-2h12a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V5z"/></svg>
@@ -140,43 +140,42 @@ export function LandingPageRaw({ onNavigate }: { session?: unknown, onNavigate: 
   </div>
 </section>
 
-
+{/* =================== FAIXA DE LOGOS / "JÁ SAÍRAM EM" =================== */}
 <section className="bg-ink text-paper py-8 border-y-2 border-ink overflow-hidden">
   <div className="max-w-7xl mx-auto px-6 mb-5 flex items-center justify-between">
-    <span className="font-mono text-xs tracking-widest opacity-70">CLIENTES MARIA QUE JÁ SAÍRAM EM</span>
-    <span className="font-mono text-xs tracking-widest opacity-70">3.281 MATÉRIAS · ATUALIZADO HOJE</span>
+    <span className="font-mono text-xs tracking-widest opacity-70">MILHARES DE POSSÍVEIS</span>
+    <span className="font-mono text-xs tracking-widest opacity-70">CONEXÕES JORNALÍSTICAS EM POTENCIAL</span>
   </div>
   <div className="marquee-track gap-16 items-center text-paper/85">
-    <span className="display text-3xl opacity-80 whitespace-nowrap">Folha de S.Paulo</span>
-    <span className="display text-3xl opacity-80 whitespace-nowrap">· O Popular ·</span>
-    <span className="display text-3xl opacity-80 whitespace-nowrap">Estadão</span>
-    <span className="display text-3xl opacity-80 whitespace-nowrap">· Exame ·</span>
-    <span className="display text-3xl opacity-80 whitespace-nowrap">Pequenas Empresas Grandes Negócios</span>
-    <span className="display text-3xl opacity-80 whitespace-nowrap">· Diário da Manhã ·</span>
-    <span className="display text-3xl opacity-80 whitespace-nowrap">G1</span>
-    <span className="display text-3xl opacity-80 whitespace-nowrap">· Startupi ·</span>
+    <span className="display text-3xl opacity-80 whitespace-nowrap">Jornais Locais</span>
+    <span className="display text-3xl opacity-80 whitespace-nowrap">· Podcasts ·</span>
+    <span className="display text-3xl opacity-80 whitespace-nowrap">Revistas de Nicho</span>
+    <span className="display text-3xl opacity-80 whitespace-nowrap">· Emissoras de TV ·</span>
+    <span className="display text-3xl opacity-80 whitespace-nowrap">Portais de Notícias</span>
+    <span className="display text-3xl opacity-80 whitespace-nowrap">· Blogs Especializados ·</span>
+    <span className="display text-3xl opacity-80 whitespace-nowrap">Rádios Locais</span>
+    <span className="display text-3xl opacity-80 whitespace-nowrap">· Agências de Notícia ·</span>
     <span className="display text-3xl opacity-80 whitespace-nowrap">Valor Econômico</span>
     <span className="display text-3xl opacity-80 whitespace-nowrap">· Tribuna do Planalto ·</span>
-    
-    <span className="display text-3xl opacity-80 whitespace-nowrap">Folha de S.Paulo</span>
-    <span className="display text-3xl opacity-80 whitespace-nowrap">· O Popular ·</span>
-    <span className="display text-3xl opacity-80 whitespace-nowrap">Estadão</span>
-    <span className="display text-3xl opacity-80 whitespace-nowrap">· Exame ·</span>
-    <span className="display text-3xl opacity-80 whitespace-nowrap">Pequenas Empresas Grandes Negócios</span>
-    <span className="display text-3xl opacity-80 whitespace-nowrap">· Diário da Manhã ·</span>
-    <span className="display text-3xl opacity-80 whitespace-nowrap">G1</span>
-    <span className="display text-3xl opacity-80 whitespace-nowrap">· Startupi ·</span>
+    {/* duplicado pra loop infinito */}
+    <span className="display text-3xl opacity-80 whitespace-nowrap">Jornais Locais</span>
+    <span className="display text-3xl opacity-80 whitespace-nowrap">· Podcasts ·</span>
+    <span className="display text-3xl opacity-80 whitespace-nowrap">Revistas de Nicho</span>
+    <span className="display text-3xl opacity-80 whitespace-nowrap">· Emissoras de TV ·</span>
+    <span className="display text-3xl opacity-80 whitespace-nowrap">Portais de Notícias</span>
+    <span className="display text-3xl opacity-80 whitespace-nowrap">· Blogs Especializados ·</span>
+    <span className="display text-3xl opacity-80 whitespace-nowrap">Rádios Locais</span>
+    <span className="display text-3xl opacity-80 whitespace-nowrap">· Agências de Notícia ·</span>
   </div>
 </section>
 
-
+{/* =================== A DOR (problema/agitação) =================== */}
 <section className="py-24 md:py-32 grain relative">
   <div className="max-w-5xl mx-auto px-6">
     <div className="text-center mb-16">
       <span className="tabloid mb-5 inline-block">A real dura</span>
       <h2 className="masthead text-[clamp(2.2rem,5vw,4rem)] mt-4">
-        Nem toda boa história chega até os <span className="display-italic text-coral">jornalistas certos</span>.
-      </h2>
+        Nem toda boa história chega até os <span className="display-italic text-coral">jornalistas certos</span>. </h2>
       <p className="text-lg text-ink/80 mt-4 max-w-2xl mx-auto"> A MarIA nasceu para reduzir essa distância: organiza a informação, fortalece o gancho jornalístico e conecta histórias relevantes com profissionais que cobrem o tema. </p>
     </div>
 
@@ -202,14 +201,14 @@ export function LandingPageRaw({ onNavigate }: { session?: unknown, onNavigate: 
       <p className="display text-2xl md:text-3xl max-w-3xl mx-auto leading-snug">
         A MarIA não vende release. Vende <span className="marker">a chance real da sua história sair</span> num veículo de credibilidade.
       </p>
-    </div>
+        </div>
   </div>
 </section>
 
-
+{/* =================== COMO FUNCIONA =================== */}
 <section id="como-funciona" className="py-24 md:py-32 bg-ink text-paper relative overflow-hidden">
 
-  
+  {/* Decoração */}
   <div className="absolute top-10 right-10 opacity-20 hidden lg:block">
     <svg width="200" height="200" viewBox="0 0 100 100" fill="none" stroke="#FAF6F0" strokeWidth="0.5">
       <circle cx="50" cy="50" r="45"/>
@@ -230,7 +229,7 @@ export function LandingPageRaw({ onNavigate }: { session?: unknown, onNavigate: 
 
     <div className="grid lg:grid-cols-3 gap-8">
 
-      
+      {/* Passo 1 */}
       <div className="relative">
         <div className="masthead text-9xl text-rose/40 leading-none">01</div>
         <div className="-mt-12 md:-mt-16 relative z-10 space-y-4 pl-2">
@@ -243,7 +242,7 @@ export function LandingPageRaw({ onNavigate }: { session?: unknown, onNavigate: 
         </div>
       </div>
 
-      
+      {/* Passo 2 */}
       <div className="relative">
         <div className="masthead text-9xl text-mustard/50 leading-none">02</div>
         <div className="-mt-12 md:-mt-16 relative z-10 space-y-4 pl-2">
@@ -256,7 +255,7 @@ export function LandingPageRaw({ onNavigate }: { session?: unknown, onNavigate: 
         </div>
       </div>
 
-      
+      {/* Passo 3 */}
       <div className="relative">
         <div className="masthead text-9xl text-coral/60 leading-none">03</div>
         <div className="-mt-12 md:-mt-16 relative z-10 space-y-4 pl-2">
@@ -273,11 +272,11 @@ export function LandingPageRaw({ onNavigate }: { session?: unknown, onNavigate: 
   </div>
 </section>
 
-
+{/* =================== PROVA / CASES =================== */}
 <section id="prova" className="py-24 md:py-32 relative grain">
   <div className="max-w-7xl mx-auto px-6">
 
-        <div className="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6">
+    <div className="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6">
       <div className="max-w-2xl">
         <span className="tabloid mb-5 inline-block">Potencial Real</span>
         <h2 className="masthead text-[clamp(2.2rem,5vw,4rem)] mt-4">
@@ -290,56 +289,56 @@ export function LandingPageRaw({ onNavigate }: { session?: unknown, onNavigate: 
       </div>
     </div>
 
-    <div className="grid lg:grid-cols-3 gap-8">
+    <div className="grid lg:grid-cols-3 gap-6">
 
-      <article className="card-news rounded-2xl p-8 lg:p-10 flex flex-col min-h-[420px]">
-        <div className="flex items-center gap-2 mb-6">
-          <span className="tabloid text-sm px-3 py-1.5">Pequenos Negócios</span>
+      <article className="card-news rounded-xl p-6 flex flex-col">
+        <div className="flex items-center gap-2 mb-4">
+          <span className="tabloid">Pequenos Negócios</span>
         </div>
-        <h3 className="display text-3xl lg:text-4xl mb-4 leading-tight">Sua história local nos veículos certos.</h3>
-        <p className="text-base lg:text-lg text-ink/75 flex-1 mb-8 leading-relaxed">
+        <h3 className="display text-2xl mb-3 leading-tight">Sua história local nos veículos certos.</h3>
+        <p className="text-sm text-ink/75 flex-1 mb-5">
           Uma padaria tradicional completa 50 anos. A MarIA organiza a pauta e conecta com jornais do bairro e cadernos de gastronomia local.
         </p>
-        <div className="news-rule mb-6"></div>
+        <div className="news-rule mb-4"></div>
         <div className="flex items-center justify-between">
           <div>
-            <div className="font-semibold text-base">Exemplo Prático</div>
+            <div className="font-semibold text-sm">Exemplo Prático</div>
           </div>
-          <div className="text-4xl">🥖</div>
+          <div className="text-2xl">🥖</div>
         </div>
       </article>
 
-      <article className="card-news rounded-2xl p-8 lg:p-10 flex flex-col min-h-[420px]" style={{ background: '#F5B700' }}>
-        <div className="flex items-center gap-2 mb-6">
-          <span className="tabloid text-sm px-3 py-1.5" style={{ background: '#0F0A1A', color: '#F5B700' }}>ONGs e Causas</span>
+      <article className="card-news rounded-xl p-6 flex flex-col bg-mustard">
+        <div className="flex items-center gap-2 mb-4">
+          <span className="tabloid" style={{"background":"#0F0A1A","color":"#F5B700"}}>ONGs e Causas</span>
         </div>
-        <h3 className="display text-3xl lg:text-4xl mb-4 leading-tight">Mais visibilidade para o seu projeto social.</h3>
-        <p className="text-base lg:text-lg text-ink/85 flex-1 mb-8 leading-relaxed">
+        <h3 className="display text-2xl mb-3 leading-tight">Mais visibilidade para o seu projeto social.</h3>
+        <p className="text-sm text-ink/85 flex-1 mb-5">
           Um projeto precisa de visibilidade. A MarIA encontra o gancho certo e direciona a pauta para repórteres que cobrem impacto social e cidadania.
         </p>
-        <div className="news-rule mb-6"></div>
+        <div className="news-rule mb-4"></div>
         <div className="flex items-center justify-between">
           <div>
-            <div className="font-semibold text-base">Exemplo Prático</div>
+            <div className="font-semibold text-sm">Exemplo Prático</div>
           </div>
-          <div className="text-4xl">🧵</div>
+          <div className="text-2xl">🧵</div>
         </div>
       </article>
 
-      <article className="card-news rounded-2xl p-8 lg:p-10 flex flex-col min-h-[420px]">
-        <div className="flex items-center gap-2 mb-6">
-          <span className="tabloid text-sm px-3 py-1.5">Startups e Tecnologia</span>
+      <article className="card-news rounded-xl p-6 flex flex-col">
+        <div className="flex items-center gap-2 mb-4">
+          <span className="tabloid">Startups e Tecnologia</span>
         </div>
-        <h3 className="display text-3xl lg:text-4xl mb-4 leading-tight">Do disparo genérico para o nicho correto.</h3>
-        <p className="text-base lg:text-lg text-ink/75 flex-1 mb-8 leading-relaxed">
+        <h3 className="display text-2xl mb-3 leading-tight">Do disparo genérico para o nicho correto.</h3>
+        <p className="text-sm text-ink/75 flex-1 mb-5">
           Uma agtech quer lançar seu produto. Em vez de spam, a MarIA faz o matchmaking com jornalistas focados em agronegócio e inovação.
         </p>
-        <div className="news-rule mb-6"></div>
+        <div className="news-rule mb-4"></div>
         <div className="flex items-center justify-between">
           <div>
-            <div className="font-semibold text-base">Exemplo Prático</div>
+            <div className="font-semibold text-sm">Exemplo Prático</div>
           </div>
-          <div className="text-4xl">🚀</div>
+          <div className="text-2xl">🚀</div>
         </div>
       </article>
 
@@ -347,7 +346,128 @@ export function LandingPageRaw({ onNavigate }: { session?: unknown, onNavigate: 
   </div>
 </section>
 
+{/* =================== COMPARATIVO =================== */}
+<section className="py-24 md:py-32 bg-paper relative">
+  <div className="max-w-6xl mx-auto px-6">
+    <div className="text-center mb-16">
+      <span className="tabloid mb-5 inline-block">Comparativo honesto</span>
+      <h2 className="masthead text-[clamp(2.2rem,5vw,4rem)] mt-4">
+        MarIA <span className="display-italic">vs.</span> o resto do mercado.
+      </h2>
+    </div>
 
+    <div className="card-news rounded-2xl overflow-hidden">
+      <div className="overflow-x-auto">
+        <table className="w-full text-left text-sm md:text-base">
+          <thead className="bg-ink text-paper">
+            <tr>
+              <th className="p-5 font-mono text-xs tracking-widest font-medium">CRITÉRIO</th>
+              <th className="p-5 font-display text-lg bg-rose text-paper">MarIA</th>
+              <th className="p-5 font-display text-lg">Assessoria tradicional</th>
+              <th className="p-5 font-display text-lg">Chat genérico</th>
+              <th className="p-5 font-display text-lg">DINO / Newswire</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-ink/15">
+            <tr>
+              <td className="p-5 font-semibold">Custo mensal</td>
+              <td className="p-5 bg-rose/5 font-semibold text-rose">R$ 297 + sucesso</td>
+              <td className="p-5 text-ink/70">R$ 3.000 a R$ 15.000</td>
+              <td className="p-5 text-ink/70">R$ 100 (sem entrega)</td>
+              <td className="p-5 text-ink/70">R$ 700 por release</td>
+            </tr>
+            <tr>
+              <td className="p-5 font-semibold">Foco em conexões reais?</td>
+              <td className="p-5 bg-rose/5 font-bold text-rose">✓ SIM</td>
+              <td className="p-5 text-ink/70">✗ Não</td>
+              <td className="p-5 text-ink/70">N/A</td>
+              <td className="p-5 text-ink/70">✗ Não</td>
+            </tr>
+            <tr>
+              <td className="p-5 font-semibold">Curadoria humana</td>
+              <td className="p-5 bg-rose/5 font-bold text-rose">✓ Jornalista real</td>
+              <td className="p-5 text-ink/70">✓ Sim</td>
+              <td className="p-5 text-ink/70">✗ Zero</td>
+              <td className="p-5 text-ink/70">✗ Distribuição automática</td>
+            </tr>
+            <tr>
+              <td className="p-5 font-semibold">Matchmaking com jornalista certo</td>
+              <td className="p-5 bg-rose/5 font-bold text-rose">✓ IA + rede própria</td>
+              <td className="p-5 text-ink/70">~ Depende do contato</td>
+              <td className="p-5 text-ink/70">✗ Você se vira</td>
+              <td className="p-5 text-ink/70">✗ Manda pra todo mundo</td>
+            </tr>
+            <tr>
+              <td className="p-5 font-semibold">Pensado pra PME / MEI / ONG</td>
+              <td className="p-5 bg-rose/5 font-bold text-rose">✓ Foco total</td>
+              <td className="p-5 text-ink/70">✗ Foco em grande empresa</td>
+              <td className="p-5 text-ink/70">~ Genérico</td>
+              <td className="p-5 text-ink/70">✗ Foco corporativo</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+{/* =================== PREÇO =================== */}
+<section id="preco" className="py-24 md:py-32 bg-ink text-paper relative grain">
+  <div className="max-w-5xl mx-auto px-6">
+
+    <div className="text-center mb-16">
+      <span className="tabloid mb-5 inline-block" style={{"background":"#F5B700"}}>Preço justo</span>
+      <h2 className="masthead text-[clamp(2.2rem,5.5vw,4.5rem)] mt-4">
+        Um plano. <span className="display-italic text-mustard">Zero confusão.</span>
+      </h2>
+      
+    </div>
+
+    <div className="max-w-lg mx-auto">
+      <div className="card-news rounded-2xl p-8 text-ink relative" style={{"background":"#F5B700","boxShadow":"8px 8px 0 #E91E8C"}}>
+        <div className="absolute -top-4 left-8 stamp" style={{"background":"#E91E8C","color":"#FAF6F0","borderColor":"#FAF6F0"}}>
+          VERSÃO BETA
+        </div>
+
+        <div className="flex items-center justify-between mb-2 mt-2">
+          <h3 className="display text-3xl">Plano Beta MarIA</h3>
+        </div>
+        <p className="text-ink/80 text-sm mb-6">Acesso inicial à plataforma para criação de pauta, curadoria e conexão jornalística.</p>
+
+        <ul className="space-y-3 mb-8">
+          <li className="flex items-start gap-3 text-sm">
+            <svg className="w-5 h-5 text-ink flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/></svg>
+            <span><strong>1 pauta</strong> com apoio da MarIA</span>
+          </li>
+          <li className="flex items-start gap-3 text-sm">
+            <svg className="w-5 h-5 text-ink flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/></svg>
+            <span><strong>Curadoria humana</strong></span>
+          </li>
+          <li className="flex items-start gap-3 text-sm">
+            <svg className="w-5 h-5 text-ink flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/></svg>
+            <span><strong>Sugestão</strong> de gancho jornalístico</span>
+          </li>
+          <li className="flex items-start gap-3 text-sm">
+            <svg className="w-5 h-5 text-ink flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/></svg>
+            <span><strong>Direcionamento</strong> estratégico</span>
+          </li>
+          <li className="flex items-start gap-3 text-sm">
+            <svg className="w-5 h-5 text-ink flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/></svg>
+            <span>Possibilidade de <strong>conexão com jornalistas</strong> por tema</span>
+          </li>
+        </ul>
+
+        <a onClick={(e) => { e.preventDefault(); onNavigate('chat'); }} href="#" className="btn-primary w-full justify-center">Testar a MarIA →</a>
+      </div>
+    </div>
+
+        <p className="text-center text-xs font-mono opacity-60 mt-10">
+      ONG VERIFICADA · 50% DE DESCONTO · FALE COM A GENTE
+    </p>
+  </div>
+</section>
+
+{/* =================== OBJEÇÕES (FAQ) =================== */}
 <section className="py-24 md:py-32 bg-paper">
   <div className="max-w-4xl mx-auto px-6">
 
@@ -424,10 +544,10 @@ export function LandingPageRaw({ onNavigate }: { session?: unknown, onNavigate: 
   </div>
 </section>
 
-
+{/* =================== CTA FINAL =================== */}
 <section className="py-24 md:py-32 bg-rose text-paper relative overflow-hidden grain">
 
-  
+  {/* Estrelas decorativas */}
   <div className="absolute top-10 left-10 opacity-30">
     <span className="display text-4xl">✦</span>
   </div>
@@ -447,7 +567,7 @@ export function LandingPageRaw({ onNavigate }: { session?: unknown, onNavigate: 
     </p>
 
     <div className="flex flex-col sm:flex-row gap-4 justify-center mt-12">
-      <a onClick={(e) => { e.preventDefault(); onNavigate('chat'); }} href="#" className="btn-primary" style={{"background":"#FAF6F0","color":"#0F0A1A","boxShadow":"5px 5px 0 #0F0A1A"}}>
+      <a onClick={(e) => { e.preventDefault(); onNavigate('dash'); }} href="#" className="btn-primary" style={{"background":"#FAF6F0","color":"#0F0A1A","boxShadow":"5px 5px 0 #0F0A1A"}}>
         Criar minha pauta grátis
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
       </a>
@@ -462,7 +582,7 @@ export function LandingPageRaw({ onNavigate }: { session?: unknown, onNavigate: 
   </div>
 </section>
 
-
+{/* =================== FOOTER =================== */}
 <footer className="bg-ink text-paper py-16 border-t-2 border-paper/20">
   <div className="max-w-7xl mx-auto px-6">
 
@@ -488,7 +608,7 @@ export function LandingPageRaw({ onNavigate }: { session?: unknown, onNavigate: 
       <div>
         <h4 className="font-mono text-xs tracking-widest mb-4 opacity-60">JORNALISTAS</h4>
         <ul className="space-y-2 text-sm">
-          <li><a onClick={(e) => { e.preventDefault(); onNavigate('chat'); }} href="#" className="hover:text-rose">Cadastrar-se grátis</a></li>
+          <li><a href="#" className="hover:text-rose">Cadastrar-se grátis</a></li>
           <li><a href="#" className="hover:text-rose">Banco de fontes</a></li>
           <li><a href="#" className="hover:text-rose">Selo MarIA Verified</a></li>
         </ul>

@@ -1,0 +1,8 @@
+- [ ] Remover imports/variáveis não usados (App.tsx, ReleaseMarkdown.tsx, AuthPage.tsx, DashboardPage.tsx, WaitlistPage.tsx, etc.)
+- [ ] Substituir usos de `any` por tipos explícitos ou `unknown` (App.tsx, pipeline.ts, AdminPage.tsx, AuthPage.tsx, ChatPage.tsx, DashboardPage.tsx, JournalistSignupPage.tsx, StoryPublicPage.tsx, WaitlistPage.tsx)
+- [ ] Separar funções/constantes auxiliares de arquivos UI para cumprir `react-refresh/only-export-components` (badge.tsx, button.tsx, tabs.tsx)
+- [ ] Corrigir `setState` síncrono dentro de `useEffect` em ChatPage.tsx (mover mensagem inicial para initializer ou efeito separado)
+- [ ] Adicionar dependência faltante ao hook em ChatPage.tsx (`userQuery.data?.name`)
+- [ ] Executar prettier (já configurado) e garantir atributos JSX corretos
+- [ ] Atualizar scripts de lint (já ok) e garantir que `npm run lint` passe sem erros
+- [ ] Commit e push das alterações

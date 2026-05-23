@@ -41,12 +41,17 @@ export function ChatPage({ session, onNavigate }: { session: any, onNavigate: (r
 
   useEffect(() => {
     if (session && userQuery.data?.name && messages.length === 1 && messages[0].role === 'assistant' && !messages[0].content.includes(userName)) {
-      setMessages([{
-        role: 'assistant',
-        content: `Olá, **${userName}**! 👋 Sou a **MarIA**, sua assessora de imprensa virtual. Que história incrível você quer contar hoje?`
-      }]);
+        // Wrap state update in a timeout to avoid synchronous setState in effect
+        setTimeout(() => {
+            setMessages([
+                {
+                    role: 'assistant',
+                    content: `Olá, **${userName}**! 👋 Sou a **MarIA**, sua assessora de imprensa virtual. Que história incrível você quer contar hoje?`
+                }
+            ]);
+        }, 0);
     }
-  }, [userName, session, messages]);
+  }, [userName, session, messages, userQuery.data?.name]);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
