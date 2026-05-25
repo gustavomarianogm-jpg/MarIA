@@ -30,7 +30,7 @@ function formatHistory(history: ChatMessage[]) {
  */
 export async function chamarEntrevistadora(historico: ChatMessage[]) {
   const response = await anthropic.messages.create({
-    model: 'claude-3-5-sonnet-20240620', // modelo de conversa (pode ser ajustado)
+    model: 'claude-sonnet-4-5-20250929', // modelo de conversa (pode ser ajustado)
     max_tokens: 1500,
     temperature: 0.7,
     system: PROMPT_ENTREVISTADORA,
