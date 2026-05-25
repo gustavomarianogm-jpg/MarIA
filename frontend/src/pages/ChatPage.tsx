@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { processarTurnoChat } from '@/lib/pipeline';
+
 import { trpc } from '@/utils/trpc';
 import { ReleaseMarkdown } from '@/components/ReleaseMarkdown';
 import styles from './ChatPage.module.css';
@@ -134,27 +134,22 @@ export function ChatPage({
     setInput(text);
   };
 
+  const generateReleaseMutation = trpc.chat.generateRelease.useMutation();
+
   const handleGenerateRelease = async () => {
     if (checkGuestLimit()) return;
     setIsProcessing(true);
     try {
-      // Process the chat messages using the pipeline
-      const { resposta, prontoParaRelease } =
-        await processarTurnoChat(messages);
+      // Chama o backend para gerar o release, consumir créditos e salvar no DB
+      const res = await generateReleaseMutation.mutateAsync({ messages });
 
       if (session) {
-        userQuery.refetch(); // Refetch credits after generating release
+        userQuery.refetch(); // Atualiza os créditos
       } else if (!isCongressMode) {
         localStorage.setItem('maria_guest_release', 'true');
       }
 
-      if (prontoParaRelease) {
-        // Release is ready to be displayed as generated release text
-        setGeneratedReleaseText(resposta);
-      } else {
-        // Not ready yet, show as regular release content
-        setRelease(resposta);
-      }
+      setRelease(res.text);
     } catch (err: unknown) {
       let errorMsg = 'Erro de conexão. Tente novamente.';
       if (err instanceof Error) {
