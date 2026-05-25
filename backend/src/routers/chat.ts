@@ -71,7 +71,7 @@ export const chatRouter = router({
         }
 
         const response = await anthropic.messages.create({
-          model: 'claude-3-5-sonnet-20240620',
+          model: 'claude-3-haiku-20240307',
           max_tokens: 500,
           system: personalizedPrompt,
           messages: input.messages as Anthropic.MessageParam[],
@@ -149,7 +149,7 @@ Release gerado pela MarIA — A 1ª Assessora de Imprensa Virtual do Brasil`;
         }
 
         const response = await anthropicClient.messages.create({
-          model: 'claude-3-5-sonnet-20240620',
+          model: 'claude-3-haiku-20240307',
           max_tokens: 2000,
           messages: [...input.messages, { role: 'user', content: pr }] as Anthropic.MessageParam[],
         });
@@ -199,7 +199,7 @@ Release gerado pela MarIA — A 1ª Assessora de Imprensa Virtual do Brasil`;
                     if (!anthropicClient) return;
                     
                     const tagsResponse = await anthropicClient.messages.create({
-                      model: 'claude-3-5-sonnet-20240620',
+                      model: 'claude-3-haiku-20240307',
                       max_tokens: 150,
                       messages: [
                         { role: 'user', content: `Analise este release e extraia de 3 a 5 tags/categorias que representem os temas principais. Responda APENAS um JSON array de strings em minúsculas, sem explicação. Exemplo: ["tecnologia", "startup", "fintech"]\n\nRelease:\n${releaseText}` }
@@ -281,7 +281,7 @@ Release gerado pela MarIA — A 1ª Assessora de Imprensa Virtual do Brasil`;
             if (!anthropicClient) return;
 
             const tagsResponse = await anthropicClient.messages.create({
-              model: 'claude-3-5-sonnet-20240620',
+              model: 'claude-3-haiku-20240307',
               max_tokens: 150,
               messages: [
                 { role: 'user', content: `Analise este release e extraia de 3 a 5 tags/categorias que representem os temas principais. Responda APENAS um JSON array de strings em minúsculas, sem explicação. Exemplo: ["tecnologia", "startup", "fintech"]\n\nRelease:\n${releaseText}` }
