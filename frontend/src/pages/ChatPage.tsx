@@ -264,13 +264,16 @@ export function ChatPage({
               }}
             >
               <div
+                onClick={handleGenerateRelease}
                 style={{
                   width: '6px',
                   height: '6px',
                   borderRadius: '50%',
                   background: '#4ADE80',
                   display: 'inline-block',
+                  cursor: 'pointer',
                 }}
+                title="Forçar Geração de Release (Debug)"
               ></div>
               Assessora Virtual • Online
             </div>
