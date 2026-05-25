@@ -38,9 +38,7 @@ function App() {
 
   const [queryClient] = useState(() => new QueryClient());
   const [trpcClient] = useState(() => {
-    let trpcUrl = import.meta.env.PROD
-      ? '/trpc'
-      : import.meta.env.VITE_API_URL || 'http://localhost:4000/trpc';
+    let trpcUrl = import.meta.env.VITE_API_URL || 'http://localhost:4000/trpc';
 
     if (trpcUrl && !trpcUrl.endsWith('/trpc')) {
       trpcUrl = trpcUrl.replace(/\/+$/, '') + '/trpc';
