@@ -1,0 +1,11 @@
+const fs = require('fs');
+let p = 'c:/Users/guilh/Downloads/MarIA-main/frontend/src/pages/LandingPage.tsx';
+let c = fs.readFileSync(p, 'utf8');
+c = c.replace(/container-seguro-estreito/g, 'max-w-5xl mx-auto px-6');
+c = c.replace(/container-seguro/g, 'max-w-7xl mx-auto px-6');
+c = c.replace(/xl:grid-cols-\[1\.15fr_1fr\]/g, 'lg:grid-cols-[1.15fr_1fr]');
+c = c.replace(/xl:-left-12/g, 'md:-left-10');
+c = c.replace(/<section className="relative sec-hero grain pt-8 pb-12 lg:pt-12 lg:pb-20">/g, '<section className="relative pt-16 pb-24 md:pt-24 md:pb-32 grain">');
+c = c.replace(/<div className="flex flex-col md:flex-row gap-8 justify-center">/g, '<div className="grid md:grid-cols-3 gap-6">');
+c = c.replace(/<div className="card-news rounded-xl p-6 flex-1 min-w-0">/g, '<div className="card-news rounded-xl p-6">');
+fs.writeFileSync(p, c);

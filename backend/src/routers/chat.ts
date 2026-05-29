@@ -71,7 +71,7 @@ export const chatRouter = router({
         }
 
         const response = await anthropic.messages.create({
-          model: 'claude-sonnet-4-5-20250929',
+          model: 'claude-3-5-sonnet-20241022',
           max_tokens: 500,
           system: personalizedPrompt,
           messages: input.messages as Anthropic.MessageParam[],
@@ -149,7 +149,7 @@ Release gerado pela MarIA — A 1ª Assessora de Imprensa Virtual do Brasil`;
         }
 
         const response = await anthropicClient.messages.create({
-          model: 'claude-sonnet-4-5-20250929',
+          model: 'claude-3-5-sonnet-20241022',
           max_tokens: 2000,
           messages: [...input.messages, { role: 'user', content: pr }] as Anthropic.MessageParam[],
         });
@@ -161,6 +161,15 @@ Release gerado pela MarIA — A 1ª Assessora de Imprensa Virtual do Brasil`;
 
         // Guest logic
         if (!ctx.user) {
+          // Trava de segurança contra spam de geração gratuita
+          const clientIp = (ctx.req?.headers['x-forwarded-for'] as string) || ctx.req?.socket?.remoteAddress || 'unknown';
+          if (!(global as any).guestRateLimit) (global as any).guestRateLimit = new Map();
+          const requests = (global as any).guestRateLimit.get(clientIp) || 0;
+          if (requests >= 1) {
+            throw new Error('Limite de demonstração excedido. Crie uma conta gratuita para gerar mais pautas!');
+          }
+          (global as any).guestRateLimit.set(clientIp, requests + 1);
+
           try {
             const { data: conv } = await supabase.from('conversations').insert({
               userId: null,
@@ -199,14 +208,15 @@ Release gerado pela MarIA — A 1ª Assessora de Imprensa Virtual do Brasil`;
                     if (!anthropicClient) return;
                     
                     const tagsResponse = await anthropicClient.messages.create({
-                      model: 'claude-sonnet-4-5-20250929',
+                      model: 'claude-3-5-sonnet-20241022',
                       max_tokens: 150,
                       messages: [
                         { role: 'user', content: `Analise este release e extraia de 3 a 5 tags/categorias que representem os temas principais. Responda APENAS um JSON array de strings em minúsculas, sem explicação. Exemplo: ["tecnologia", "startup", "fintech"]\n\nRelease:\n${releaseText}` }
                       ]
                     });
                     // @ts-ignore
-                    const tagsText = tagsResponse.content[0].text.trim();
+                    let tagsText = tagsResponse.content[0].text.trim();
+                    tagsText = tagsText.replace(/```json/g, '').replace(/```/g, '').trim();
                     const tags = JSON.parse(tagsText);
                     if (Array.isArray(tags)) {
                       await supabase
@@ -281,14 +291,15 @@ Release gerado pela MarIA — A 1ª Assessora de Imprensa Virtual do Brasil`;
             if (!anthropicClient) return;
 
             const tagsResponse = await anthropicClient.messages.create({
-              model: 'claude-sonnet-4-5-20250929',
+              model: 'claude-3-5-sonnet-20241022',
               max_tokens: 150,
               messages: [
                 { role: 'user', content: `Analise este release e extraia de 3 a 5 tags/categorias que representem os temas principais. Responda APENAS um JSON array de strings em minúsculas, sem explicação. Exemplo: ["tecnologia", "startup", "fintech"]\n\nRelease:\n${releaseText}` }
               ]
             });
             // @ts-ignore
-            const tagsText = tagsResponse.content[0].text.trim();
+            let tagsText = tagsResponse.content[0].text.trim();
+            tagsText = tagsText.replace(/```json/g, '').replace(/```/g, '').trim();
             const tags = JSON.parse(tagsText);
             if (Array.isArray(tags)) {
               await supabase
