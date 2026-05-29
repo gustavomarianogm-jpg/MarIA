@@ -7,7 +7,7 @@ export function LandingPage({
   onNavigate: (r: string) => void;
 }) {
   return (
-    <div className="landing-body relative overflow-clip">
+    <div className="landing-body relative">
       {/* =================== TOP BAR (estilo cabeçalho de jornal) =================== */}
       <div
         className="bg-ink text-paper text-xs font-mono tracking-widest border-b border-paper/20"
@@ -66,13 +66,11 @@ export function LandingPage({
 
           <div className="flex items-center gap-3">
             <a
-              href="#login"
-              className="hidden md:inline-flex text-sm font-medium hover:text-rose"
-            >
-              Entrar
-            </a>
-            <a
-              href="#cta-hero"
+              onClick={(e) => {
+                e.preventDefault();
+                onNavigate('chat');
+              }}
+              href="#"
               className="btn-primary"
               style={{
                 padding: '0.6rem 1.25rem',
@@ -80,18 +78,30 @@ export function LandingPage({
                 boxShadow: '3px 3px 0 #E91E8C',
               }}
             >
-              Testar Grátis →
+              Entrar →
             </a>
           </div>
         </div>
       </nav>
 
       {/* =================== HERO =================== */}
-      <section className="relative sec-hero grain pt-8 pb-12 lg:pt-12 lg:pb-20">
-        <div className="container-seguro grid xl:grid-cols-[1.15fr_1fr] gap-16 items-center relative">
+      <section
+        className="relative grain"
+        style={{ paddingTop: '5rem', paddingBottom: '5rem' }}
+      >
+        <div
+          className="max-w-7xl mx-auto px-6 grid xl:grid-cols-[1.15fr_1fr] items-center relative"
+          style={{ gap: '4rem' }}
+        >
           {/* Coluna esquerda: manchete */}
-          <div className="space-y-8">
-            <div className="flex items-center gap-3 rise rise-1">
+          <div
+            className="space-y-8"
+            style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}
+          >
+            <div
+              className="flex items-center rise rise-1"
+              style={{ gap: '0.75rem' }}
+            >
               <span className="tabloid">Exclusiva</span>
               <span className="font-mono text-xs text-ink/60">
                 Caderno · NEGÓCIOS
@@ -109,25 +119,18 @@ export function LandingPage({
               na caixa de e-mail.
             </h1>
 
-            <p
-              className="text-xl md:text-2xl text-ink/80 leading-relaxed rise rise-2"
-              style={{ marginTop: '3.5rem' }}
-            >
+            <p className="text-lg md:text-xl text-ink/75 max-w-xl rise rise-3 leading-relaxed">
               A MarIA é a primeira assessora de imprensa virtual do Brasil
-              criada para transformar
-              <br className="hidden md:block" />
-              boas histórias em pautas jornalísticas, combinando inteligência
-              artificial,
-              <br className="hidden md:block" />
-              curadoria humana e conexão com jornalistas reais. Sem burocracia.
-              <br className="hidden md:block" />
-              Sem disparo genérico. Com estratégia, curadoria e conexão real.
+              criada para transformar boas histórias em pautas jornalísticas,
+              combinando inteligência artificial, curadoria humana e conexão com
+              jornalistas reais. Sem burocracia. Sem disparo genérico. Com
+              estratégia, curadoria e conexão real.
             </p>
 
             <div
-              className="flex flex-col sm:flex-row gap-6 rise rise-4"
+              className="flex flex-col sm:flex-row rise rise-4"
               id="cta-hero"
-              style={{ marginTop: '3.5rem' }}
+              style={{ gap: '1.5rem' }}
             >
               <a
                 onClick={(e) => {
@@ -168,8 +171,8 @@ export function LandingPage({
             </div>
 
             <div
-              className="flex flex-wrap items-center gap-4 md:gap-6 text-sm font-medium text-ink/70 rise rise-5"
-              style={{ marginTop: '2.5rem' }}
+              className="flex flex-wrap items-center text-sm font-medium text-ink/70 rise rise-5"
+              style={{ gap: '1.5rem' }}
             >
               <div className="flex items-center gap-2 text-sm">
                 <svg
@@ -219,89 +222,190 @@ export function LandingPage({
           {/* Coluna direita: chat MarIA + selo recorte */}
           <div className="relative chat-overflow-fix">
             {/* Selo retrô */}
-            <div className="absolute -top-6 -right-2 z-20 stamp">
+            <div
+              className="absolute -top-6 -right-2 z-20 stamp"
+              style={{
+                transform: 'rotate(-6deg)',
+                border: '2px dashed #0F0A1A',
+                padding: '0.3rem 0.75rem',
+                fontFamily: "'JetBrains Mono', monospace",
+                fontSize: '0.7rem',
+                letterSpacing: '0.1em',
+                textTransform: 'uppercase',
+                background: '#F5B700',
+                color: '#0F0A1A',
+                fontWeight: 500,
+                display: 'inline-block',
+              }}
+            >
               Como uma manchete · de verdade
             </div>
 
             {/* Card editorial */}
-            <div className="card-news rounded-3xl raw-chat-box relative z-10 rise rise-3 flex flex-col justify-between">
-              <div className="raw-chat-header-pad pt-2">
+            <div
+              className="card-news rounded-3xl raw-chat-box relative z-10 rise rise-3 flex flex-col justify-between"
+              style={{
+                background: 'white',
+                border: '1.5px solid #0F0A1A',
+                boxShadow: '6px 6px 0 #0F0A1A',
+                minHeight: '550px',
+                padding: '2.5rem',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'between',
+              }}
+            >
+              <div
+                className="raw-chat-header-pad pt-2"
+                style={{
+                  paddingLeft: '0.5rem',
+                  paddingRight: '0.5rem',
+                }}
+              >
                 <div className="flex items-center justify-between mb-8">
                   <div className="flex items-center gap-4">
-                    <div className="rounded-full bg-ink text-paper flex items-center justify-center font-display font-bold raw-chat-icon">
+                    <div
+                      className="rounded-full bg-ink text-paper flex items-center justify-center font-display font-bold raw-chat-icon"
+                      style={{
+                        background: '#0F0A1A',
+                        color: '#FAF6F0',
+                        width: '2.5rem',
+                        height: '2.5rem',
+                        fontSize: '1.125rem',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        borderRadius: '50%',
+                      }}
+                    >
                       M
                     </div>
                     <div>
-                      <div className="font-semibold raw-chat-name">
+                      <div
+                        className="font-semibold raw-chat-name"
+                        style={{
+                          fontSize: '0.875rem',
+                          fontWeight: 600,
+                          color: '#0F0A1A',
+                        }}
+                      >
                         MarIA · online agora
                       </div>
-                      <div className="text-ink/60 font-mono mt-1 uppercase raw-chat-role">
+                      <div
+                        className="text-ink/60 font-mono mt-1 uppercase raw-chat-role"
+                        style={{
+                          fontSize: '0.65rem',
+                          marginTop: '0.25rem',
+                          color: 'rgba(15, 10, 26, 0.6)',
+                        }}
+                      >
                         Jornalista · 15+ anos de redação
                       </div>
                     </div>
                   </div>
-                  <span className="pulse-dot raw-pulse-fix"></span>
+                  <span
+                    className="pulse-dot raw-pulse-fix"
+                    style={{ marginRight: '0.5rem' }}
+                  ></span>
                 </div>
               </div>
 
-              <div className="raw-space-y flex-1 flex flex-col justify-center px-2">
+              <div
+                className="raw-space-y flex-1 flex flex-col justify-center px-2"
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '1rem',
+                }}
+              >
                 <div
                   className="bubble-maria"
                   style={{
-                    fontSize: '1rem',
-                    padding: '1rem 1.25rem',
-                    maxWidth: '100%',
+                    background: '#0F0A1A',
+                    color: '#FAF6F0',
+                    borderRadius: '18px 18px 18px 4px',
+                    padding: '0.9rem 1.1rem',
+                    maxWidth: '90%',
+                    fontSize: '0.92rem',
+                    lineHeight: '1.45',
+                    border: 'none',
+                    boxShadow: 'none',
                   }}
                 >
-                  Oi, Marcos! 👋 Vi que sua padaria
-                  <br />
-                  completou 50 anos. Isso é OURO pra
-                  <br />
-                  uma pauta. Vamos contar essa
-                  <br />
-                  história?
+                  Oi, Marcos! 👋 Vi que sua padaria completou 50 anos. Isso é
+                  OURO pra uma pauta. Vamos contar essa história?
                 </div>
                 <div
                   className="bubble-user"
                   style={{
-                    fontSize: '1rem',
-                    padding: '1rem 1.25rem',
-                    maxWidth: '100%',
+                    background: '#FF6B35',
+                    color: '#FAF6F0',
+                    borderRadius: '18px 18px 4px 18px',
+                    padding: '0.9rem 1.1rem',
+                    maxWidth: '85%',
+                    fontSize: '0.92rem',
+                    lineHeight: '1.45',
+                    marginLeft: 'auto',
+                    border: 'none',
+                    boxShadow: 'none',
                   }}
                 >
-                  Sério? Achei que ninguém ia se
-                  <br />
-                  importar com isso.
+                  Sério? Achei que ninguém ia se importar com isso.
                 </div>
                 <div
                   className="bubble-maria"
                   style={{
-                    fontSize: '1rem',
-                    padding: '1rem 1.25rem',
-                    maxWidth: '100%',
+                    background: '#0F0A1A',
+                    color: '#FAF6F0',
+                    borderRadius: '18px 18px 18px 4px',
+                    padding: '0.9rem 1.1rem',
+                    maxWidth: '90%',
+                    fontSize: '0.92rem',
                     lineHeight: '1.45',
+                    border: 'none',
+                    boxShadow: 'none',
                   }}
                 >
-                  Marcos, jornalista de pequeno negócio
-                  <br />
-                  acorda procurando história assim.
-                  <br />
-                  Tradição que sobreviveu pandemia +<br />
-                  fermentação natural = manchete. Me
-                  <br />
-                  conta: qual foi o momento mais difícil
-                  <br />
+                  Marcos, jornalista de pequeno negócio acorda procurando
+                  história assim. Tradição que sobreviveu pandemia + fermentação
+                  natural = manchete. Me conta: qual foi o momento mais difícil
                   que vocês passaram?
                 </div>
               </div>
 
               <div className="px-2 mt-8">
-                <div className="raw-dashed-line"></div>
+                <div
+                  className="raw-dashed-line"
+                  style={{
+                    borderTop: '2px dashed #0F0A1A',
+                    marginBottom: '1rem',
+                  }}
+                ></div>
                 <div className="flex items-center justify-between">
-                  <span className="font-mono text-ink/60 raw-chat-footer-text">
+                  <span
+                    className="font-mono text-ink/60 raw-chat-footer-text"
+                    style={{
+                      fontSize: '0.68rem',
+                      letterSpacing: '-0.02em',
+                      color: 'rgba(15, 10, 26, 0.6)',
+                    }}
+                  >
                     ↓ release pronto em ~7 min
                   </span>
-                  <span className="tabloid raw-chat-footer-btn">
+                  <span
+                    className="tabloid raw-chat-footer-btn"
+                    style={{
+                      background: '#F5B700',
+                      color: '#0F0A1A',
+                      padding: '0.4rem 0.6rem',
+                      display: 'inline-block',
+                      fontFamily: "'JetBrains Mono', monospace",
+                      fontSize: '0.65rem',
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.12em',
+                      fontWeight: 800,
+                    }}
+                  >
                     3.281 JÁ PUBLICARAM
                   </span>
                 </div>
@@ -318,6 +422,8 @@ export function LandingPage({
                 width: '320px',
                 padding: '1.75rem',
                 bottom: '-5.5rem',
+                border: '1.5px solid #0F0A1A',
+                boxShadow: '6px 6px 0 #0F0A1A',
               }}
             >
               <div className="flex items-center gap-2 mb-3 text-xs font-mono">
@@ -420,43 +526,87 @@ export function LandingPage({
       </section>
 
       {/* =================== A DOR (problema/agitação) =================== */}
-      <section className="sec-dura grain relative">
-        <div className="container-seguro-estreito">
-          <div className="text-center mb-16">
-            <span className="tabloid mb-5 inline-block">A real dura</span>
-            <h2 className="masthead text-[clamp(2.2rem,5vw,4rem)] mt-4">
+      <section
+        className="grain relative"
+        style={{ paddingTop: '6rem', paddingBottom: '6rem' }}
+      >
+        <div className="max-w-5xl mx-auto px-6">
+          <div className="text-center mb-16" style={{ marginBottom: '4rem' }}>
+            <span
+              className="tabloid mb-5 inline-block"
+              style={{ marginBottom: '1.25rem' }}
+            >
+              A real dura
+            </span>
+            <h2
+              className="masthead text-[clamp(2.2rem,5vw,4rem)] mt-4"
+              style={{ marginTop: '1rem' }}
+            >
               Nem toda boa história chega até os{' '}
               <span className="display-italic text-coral">
                 jornalistas certos
               </span>
               .
             </h2>
-            <p className="text-lg text-ink/80 mt-4 max-w-2xl mx-auto">
+            <p
+              className="text-lg text-ink/80 mt-4 max-w-2xl mx-auto"
+              style={{ marginTop: '1rem' }}
+            >
               A MarIA nasceu para reduzir essa distância: organiza a informação,
               fortalece o gancho jornalístico e conecta histórias relevantes com
               profissionais que cobrem o tema.
             </p>
           </div>
 
-          <div className="flex flex-col md:flex-row gap-8 justify-center">
-            <div className="card-news rounded-xl p-6 flex-1 min-w-0">
-              <div className="masthead text-5xl text-rose mb-3">300</div>
-              <p className="font-semibold mb-2">e-mails por dia</p>
+          <div className="grid md:grid-cols-3 gap-6" style={{ gap: '1.5rem' }}>
+            <div className="card-news rounded-xl p-6">
+              <div
+                className="masthead text-5xl text-rose mb-3"
+                style={{ marginBottom: '0.75rem' }}
+              >
+                300
+              </div>
+              <p
+                className="font-semibold mb-2"
+                style={{ marginBottom: '0.5rem' }}
+              >
+                e-mails por dia
+              </p>
               <p className="text-sm text-ink/70">
                 recebe um jornalista. 95% vão direto pra lixeira sem nem ser
                 abertos.
               </p>
             </div>
-            <div className="card-news rounded-xl p-6 flex-1 min-w-0">
-              <div className="masthead text-5xl text-rose mb-3">R$ 3k</div>
-              <p className="font-semibold mb-2">é o piso mensal</p>
+            <div className="card-news rounded-xl p-6">
+              <div
+                className="masthead text-5xl text-rose mb-3"
+                style={{ marginBottom: '0.75rem' }}
+              >
+                R$ 3k
+              </div>
+              <p
+                className="font-semibold mb-2"
+                style={{ marginBottom: '0.5rem' }}
+              >
+                é o piso mensal
+              </p>
               <p className="text-sm text-ink/70">
                 de uma assessoria tradicional. Inacessível pra PME, MEI ou ONG.
               </p>
             </div>
-            <div className="card-news rounded-xl p-6 flex-1 min-w-0">
-              <div className="masthead text-5xl text-rose mb-3">IA</div>
-              <p className="font-semibold mb-2">sozinha gera texto.</p>
+            <div className="card-news rounded-xl p-6">
+              <div
+                className="masthead text-5xl text-rose mb-3"
+                style={{ marginBottom: '0.75rem' }}
+              >
+                IA
+              </div>
+              <p
+                className="font-semibold mb-2"
+                style={{ marginBottom: '0.5rem' }}
+              >
+                sozinha gera texto.
+              </p>
               <p className="text-sm text-ink/70">
                 A MarIA cria contexto, estratégia e conexão. A diferença está na
                 curadoria jornalística e no direcionamento da pauta para quem
@@ -465,7 +615,7 @@ export function LandingPage({
             </div>
           </div>
 
-          <div className="mt-16 text-center">
+          <div className="mt-16 text-center" style={{ marginTop: '4rem' }}>
             <p className="display text-2xl md:text-3xl max-w-3xl mx-auto leading-snug">
               A MarIA não vende release. Vende{' '}
               <span className="marker">a chance real da sua história sair</span>{' '}
@@ -478,7 +628,8 @@ export function LandingPage({
       {/* =================== COMO FUNCIONA =================== */}
       <section
         id="como-funciona"
-        className="sec-passos bg-ink text-paper relative overflow-hidden"
+        className="bg-ink text-paper relative overflow-hidden"
+        style={{ paddingTop: '6rem', paddingBottom: '6rem' }}
       >
         {/* Decoração */}
         <div className="absolute top-10 right-10 opacity-20 hidden lg:block">
@@ -506,23 +657,39 @@ export function LandingPage({
           </svg>
         </div>
 
-        <div className="container-seguro">
-          <div className="mb-20 max-w-3xl">
-            <span className="tabloid mb-5 inline-block">O método</span>
-            <h2 className="masthead text-[clamp(2.4rem,5.5vw,4.5rem)] mt-4">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="mb-20 max-w-3xl" style={{ marginBottom: '5rem' }}>
+            <span
+              className="tabloid mb-5 inline-block"
+              style={{ marginBottom: '1.25rem' }}
+            >
+              O método
+            </span>
+            <h2
+              className="masthead text-[clamp(2.4rem,5.5vw,4.5rem)] mt-4"
+              style={{ marginTop: '1rem' }}
+            >
               3 passos.{' '}
               <span className="display-italic text-mustard">7 minutos.</span>{' '}
               Uma chance real de sair na imprensa.
             </h2>
           </div>
 
-          <div className="grid lg:grid-cols-3 gap-8">
+          <div className="grid lg:grid-cols-3 gap-8" style={{ gap: '2rem' }}>
             {/* Passo 1 */}
             <div className="relative">
               <div className="masthead text-9xl text-rose/40 leading-none">
                 01
               </div>
-              <div className="-mt-12 md:-mt-16 relative z-10 space-y-4 pl-2">
+              <div
+                className="-mt-12 md:-mt-16 relative z-10 space-y-4 pl-2"
+                style={{
+                  marginTop: '-4rem',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '1rem',
+                }}
+              >
                 <h3 className="display text-3xl">Conversa com a MarIA</h3>
                 <p className="text-paper/75 leading-relaxed">
                   Sem formulário chato. A MarIA te entrevista por chat, igual
@@ -548,7 +715,15 @@ export function LandingPage({
               <div className="masthead text-9xl text-mustard/50 leading-none">
                 02
               </div>
-              <div className="-mt-12 md:-mt-16 relative z-10 space-y-4 pl-2">
+              <div
+                className="-mt-12 md:-mt-16 relative z-10 space-y-4 pl-2"
+                style={{
+                  marginTop: '-4rem',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '1rem',
+                }}
+              >
                 <h3 className="display text-3xl">
                   Curadoria de jornalista real
                 </h3>
@@ -576,7 +751,15 @@ export function LandingPage({
               <div className="masthead text-9xl text-coral/60 leading-none">
                 03
               </div>
-              <div className="-mt-12 md:-mt-16 relative z-10 space-y-4 pl-2">
+              <div
+                className="-mt-12 md:-mt-16 relative z-10 space-y-4 pl-2"
+                style={{
+                  marginTop: '-4rem',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '1rem',
+                }}
+              >
                 <h3 className="display text-3xl">
                   Conexão com quem cobre o tema
                 </h3>
@@ -603,12 +786,27 @@ export function LandingPage({
       </section>
 
       {/* =================== PROVA / CASES =================== */}
-      <section id="prova" className="sec-prova relative grain">
-        <div className="container-seguro">
-          <div className="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6">
+      <section
+        id="prova"
+        className="relative grain"
+        style={{ paddingTop: '6rem', paddingBottom: '6rem' }}
+      >
+        <div className="max-w-7xl mx-auto px-6">
+          <div
+            className="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6"
+            style={{ marginBottom: '4rem', gap: '1.5rem' }}
+          >
             <div className="max-w-2xl">
-              <span className="tabloid mb-5 inline-block">Potencial Real</span>
-              <h2 className="masthead text-[clamp(2.2rem,5vw,4rem)] mt-4">
+              <span
+                className="tabloid mb-5 inline-block"
+                style={{ marginBottom: '1.25rem' }}
+              >
+                Potencial Real
+              </span>
+              <h2
+                className="masthead text-[clamp(2.2rem,5vw,4rem)] mt-4"
+                style={{ marginTop: '1rem' }}
+              >
                 Uma rede{' '}
                 <span className="display-italic text-rose">em construção</span>{' '}
                 para aproximar fontes e jornalistas.
@@ -622,22 +820,34 @@ export function LandingPage({
             </div>
           </div>
 
-          <div className="grid lg:grid-cols-3 gap-8">
+          <div className="grid lg:grid-cols-3 gap-8" style={{ gap: '2rem' }}>
             <article className="card-news rounded-2xl p-8 lg:p-10 flex flex-col min-h-[420px]">
-              <div className="flex items-center gap-2 mb-6">
+              <div
+                className="flex items-center gap-2 mb-6"
+                style={{ marginBottom: '1.5rem', gap: '0.5rem' }}
+              >
                 <span className="tabloid text-sm px-3 py-1.5">
                   Pequenos Negócios
                 </span>
               </div>
-              <h3 className="display text-3xl lg:text-4xl mb-4 leading-tight">
+              <h3
+                className="display text-3xl lg:text-4xl mb-4 leading-tight"
+                style={{ marginBottom: '1rem' }}
+              >
                 Sua história local nos veículos certos.
               </h3>
-              <p className="text-base lg:text-lg text-ink/75 flex-1 mb-8 leading-relaxed">
+              <p
+                className="text-base lg:text-lg text-ink/75 flex-1 mb-8 leading-relaxed"
+                style={{ marginBottom: '2rem' }}
+              >
                 Uma padaria tradicional completa 50 anos. A MarIA organiza a
                 pauta e conecta com jornais do bairro e cadernos de gastronomia
                 local.
               </p>
-              <div className="news-rule mb-6"></div>
+              <div
+                className="news-rule mb-6"
+                style={{ marginBottom: '1.5rem' }}
+              ></div>
               <div className="flex items-center justify-between">
                 <div>
                   <div className="font-semibold text-base">Exemplo Prático</div>
@@ -650,7 +860,10 @@ export function LandingPage({
               className="card-news rounded-2xl p-8 lg:p-10 flex flex-col min-h-[420px]"
               style={{ background: '#F5B700' }}
             >
-              <div className="flex items-center gap-2 mb-6">
+              <div
+                className="flex items-center gap-2 mb-6"
+                style={{ marginBottom: '1.5rem', gap: '0.5rem' }}
+              >
                 <span
                   className="tabloid text-sm px-3 py-1.5"
                   style={{ background: '#0F0A1A', color: '#F5B700' }}
@@ -658,15 +871,24 @@ export function LandingPage({
                   ONGs e Causas
                 </span>
               </div>
-              <h3 className="display text-3xl lg:text-4xl mb-4 leading-tight">
+              <h3
+                className="display text-3xl lg:text-4xl mb-4 leading-tight"
+                style={{ marginBottom: '1rem' }}
+              >
                 Mais visibilidade para o seu projeto social.
               </h3>
-              <p className="text-base lg:text-lg text-ink/85 flex-1 mb-8 leading-relaxed">
+              <p
+                className="text-base lg:text-lg text-ink/85 flex-1 mb-8 leading-relaxed"
+                style={{ marginBottom: '2rem' }}
+              >
                 Um projeto precisa de visibilidade. A MarIA encontra o gancho
                 certo e direciona a pauta para repórteres que cobrem impacto
                 social e cidadania.
               </p>
-              <div className="news-rule mb-6"></div>
+              <div
+                className="news-rule mb-6"
+                style={{ marginBottom: '1.5rem' }}
+              ></div>
               <div className="flex items-center justify-between">
                 <div>
                   <div className="font-semibold text-base">Exemplo Prático</div>
@@ -676,19 +898,31 @@ export function LandingPage({
             </article>
 
             <article className="card-news rounded-2xl p-8 lg:p-10 flex flex-col min-h-[420px]">
-              <div className="flex items-center gap-2 mb-6">
+              <div
+                className="flex items-center gap-2 mb-6"
+                style={{ marginBottom: '1.5rem', gap: '0.5rem' }}
+              >
                 <span className="tabloid text-sm px-3 py-1.5">
                   Startups e Tecnologia
                 </span>
               </div>
-              <h3 className="display text-3xl lg:text-4xl mb-4 leading-tight">
+              <h3
+                className="display text-3xl lg:text-4xl mb-4 leading-tight"
+                style={{ marginBottom: '1rem' }}
+              >
                 Do disparo genérico para o nicho correto.
               </h3>
-              <p className="text-base lg:text-lg text-ink/75 flex-1 mb-8 leading-relaxed">
+              <p
+                className="text-base lg:text-lg text-ink/75 flex-1 mb-8 leading-relaxed"
+                style={{ marginBottom: '2rem' }}
+              >
                 Uma agtech quer lançar seu produto. Em vez de spam, a MarIA faz
                 o matchmaking com jornalistas focados em agronegócio e inovação.
               </p>
-              <div className="news-rule mb-6"></div>
+              <div
+                className="news-rule mb-6"
+                style={{ marginBottom: '1.5rem' }}
+              ></div>
               <div className="flex items-center justify-between">
                 <div>
                   <div className="font-semibold text-base">Exemplo Prático</div>
@@ -701,19 +935,31 @@ export function LandingPage({
       </section>
 
       {/* =================== COMPARATIVO =================== */}
-      <section className="sec-comparativo bg-paper relative">
-        <div className="container-seguro">
-          <div className="text-center mb-16">
-            <span className="tabloid mb-5 inline-block">
+      <section
+        className="bg-paper relative"
+        style={{ paddingTop: '6rem', paddingBottom: '6rem' }}
+      >
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-16" style={{ marginBottom: '4rem' }}>
+            <span
+              className="tabloid mb-5 inline-block"
+              style={{ marginBottom: '1.25rem' }}
+            >
               Comparativo honesto
             </span>
-            <h2 className="masthead text-[clamp(2.2rem,5vw,4rem)] mt-4">
+            <h2
+              className="masthead text-[clamp(2.2rem,5vw,4rem)] mt-4"
+              style={{ marginTop: '1rem' }}
+            >
               MarIA <span className="display-italic">vs.</span> o resto do
               mercado.
             </h2>
           </div>
 
-          <div className="card-news rounded-3xl overflow-hidden shadow-xl mt-4">
+          <div
+            className="card-news rounded-3xl overflow-hidden shadow-xl mt-4"
+            style={{ marginTop: '1rem' }}
+          >
             <div className="overflow-x-auto">
               <table className="w-full text-left text-base md:text-lg">
                 <thead className="bg-ink text-paper">
@@ -817,17 +1063,21 @@ export function LandingPage({
       {/* =================== PREÇO =================== */}
       <section
         id="preco"
-        className="sec-preco bg-ink text-paper relative grain"
+        className="bg-ink text-paper relative grain"
+        style={{ paddingTop: '6rem', paddingBottom: '6rem' }}
       >
-        <div className="container-seguro-estreito">
-          <div className="text-center mb-16">
+        <div className="max-w-5xl mx-auto px-6">
+          <div className="text-center mb-16" style={{ marginBottom: '4rem' }}>
             <span
               className="tabloid mb-5 inline-block"
-              style={{ background: '#F5B700' }}
+              style={{ background: '#F5B700', marginBottom: '1.25rem' }}
             >
               Preço justo
             </span>
-            <h2 className="masthead text-[clamp(2.2rem,5.5vw,4.5rem)] mt-4">
+            <h2
+              className="masthead text-[clamp(2.2rem,5.5vw,4.5rem)] mt-4"
+              style={{ marginTop: '1rem' }}
+            >
               Um plano.{' '}
               <span className="display-italic text-mustard">
                 Zero confusão.
@@ -838,7 +1088,11 @@ export function LandingPage({
           <div className="max-w-lg mx-auto">
             <div
               className="card-news rounded-2xl p-8 text-ink relative"
-              style={{ background: '#F5B700', boxShadow: '8px 8px 0 #E91E8C' }}
+              style={{
+                background: '#F5B700',
+                boxShadow: '8px 8px 0 #E91E8C',
+                padding: '2rem',
+              }}
             >
               <div
                 className="absolute -top-4 left-8 stamp"
@@ -851,15 +1105,29 @@ export function LandingPage({
                 VERSÃO BETA
               </div>
 
-              <div className="flex items-center justify-between mb-2 mt-2">
+              <div
+                className="flex items-center justify-between mb-2 mt-2"
+                style={{ marginBottom: '0.5rem', marginTop: '0.5rem' }}
+              >
                 <h3 className="display text-3xl">Plano Beta MarIA</h3>
               </div>
-              <p className="text-ink/80 text-sm mb-6">
+              <p
+                className="text-ink/80 text-sm mb-6"
+                style={{ marginBottom: '1.5rem' }}
+              >
                 Acesso inicial à plataforma para criação de pauta, curadoria e
                 conexão jornalística.
               </p>
 
-              <ul className="space-y-3 mb-8">
+              <ul
+                className="space-y-3 mb-8"
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '0.75rem',
+                  marginBottom: '2rem',
+                }}
+              >
                 <li className="flex items-start gap-3 text-sm">
                   <svg
                     className="w-5 h-5 text-ink flex-shrink-0 mt-0.5"
@@ -956,27 +1224,46 @@ export function LandingPage({
             </div>
           </div>
 
-          <p className="text-center text-xs font-mono opacity-60 mt-10">
+          <p
+            className="text-center text-xs font-mono opacity-60 mt-10"
+            style={{ marginTop: '2.5rem' }}
+          >
             ONG VERIFICADA · 50% DE DESCONTO · FALE COM A GENTE
           </p>
         </div>
       </section>
 
       {/* =================== OBJEÇÕES (FAQ) =================== */}
-      <section className="sec-faq bg-paper">
-        <div className="container-seguro-estreito">
-          <div className="mb-16">
-            <span className="tabloid mb-5 inline-block">
+      <section
+        className="bg-paper"
+        style={{ paddingTop: '6rem', paddingBottom: '6rem' }}
+      >
+        <div className="max-w-4xl mx-auto px-6">
+          <div className="mb-16" style={{ marginBottom: '4rem' }}>
+            <span
+              className="tabloid mb-5 inline-block"
+              style={{ marginBottom: '1.25rem' }}
+            >
               Perguntas honestas
             </span>
-            <h2 className="masthead text-[clamp(2.2rem,5vw,4rem)] mt-4">
+            <h2
+              className="masthead text-[clamp(2.2rem,5vw,4rem)] mt-4"
+              style={{ marginTop: '1rem' }}
+            >
               Tudo que você quer perguntar{' '}
               <span className="display-italic text-rose">antes de testar</span>.
             </h2>
           </div>
 
-          <div className="space-y-4">
-            <details className="card-news rounded-xl p-6 group" open>
+          <div
+            className="space-y-4"
+            style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}
+          >
+            <details
+              className="card-news rounded-xl p-6 group"
+              style={{ padding: '1.5rem', marginBottom: 0 }}
+              open
+            >
               <summary className="font-display text-xl font-semibold cursor-pointer flex items-center justify-between">
                 <span>
                   Por que não usar só o Chat genérico pra escrever meu release?
@@ -985,7 +1272,10 @@ export function LandingPage({
                   +
                 </span>
               </summary>
-              <p className="text-ink/75 mt-4 leading-relaxed">
+              <p
+                className="text-ink/75 mt-4 leading-relaxed"
+                style={{ marginTop: '1rem' }}
+              >
                 Porque o Chat genérico te entrega o texto. E aí? Você fica com
                 um release na mão sem saber pra quem mandar. A MarIA não é só a
                 IA — é a <strong>rede curada de jornalistas brasileiros</strong>{' '}
@@ -994,14 +1284,20 @@ export function LandingPage({
               </p>
             </details>
 
-            <details className="card-news rounded-xl p-6 group">
+            <details
+              className="card-news rounded-xl p-6 group"
+              style={{ padding: '1.5rem', marginBottom: 0 }}
+            >
               <summary className="font-display text-xl font-semibold cursor-pointer flex items-center justify-between">
                 <span>E se ninguém publicar minha matéria?</span>
                 <span className="text-rose text-3xl group-open:rotate-45 transition-transform">
                   +
                 </span>
               </summary>
-              <p className="text-ink/75 mt-4 leading-relaxed">
+              <p
+                className="text-ink/75 mt-4 leading-relaxed"
+                style={{ marginTop: '1rem' }}
+              >
                 A gente é honesto: não oferecemos garantias absolutas, pois a
                 decisão final é sempre do editor. O que a MarIA proporciona é a{' '}
                 <strong>chance real de visibilidade jornalística</strong>. Nós
@@ -1011,7 +1307,10 @@ export function LandingPage({
               </p>
             </details>
 
-            <details className="card-news rounded-xl p-6 group">
+            <details
+              className="card-news rounded-xl p-6 group"
+              style={{ padding: '1.5rem', marginBottom: 0 }}
+            >
               <summary className="font-display text-xl font-semibold cursor-pointer flex items-center justify-between">
                 <span>
                   Vocês mandam pra TODOS os jornalistas? Vai virar spam?
@@ -1020,7 +1319,10 @@ export function LandingPage({
                   +
                 </span>
               </summary>
-              <p className="text-ink/75 mt-4 leading-relaxed">
+              <p
+                className="text-ink/75 mt-4 leading-relaxed"
+                style={{ marginTop: '1rem' }}
+              >
                 O oposto. A MarIA seleciona <strong>até 20 jornalistas</strong>{' '}
                 que cobrem exatamente seu tema. Pauta de inovação em padaria vai
                 pra colunista de pequenos negócios, não pra editor de política.
@@ -1028,7 +1330,10 @@ export function LandingPage({
               </p>
             </details>
 
-            <details className="card-news rounded-xl p-6 group">
+            <details
+              className="card-news rounded-xl p-6 group"
+              style={{ padding: '1.5rem', marginBottom: 0 }}
+            >
               <summary className="font-display text-xl font-semibold cursor-pointer flex items-center justify-between">
                 <span>
                   Minha empresa é muito pequena pra isso. Faz sentido?
@@ -1037,7 +1342,10 @@ export function LandingPage({
                   +
                 </span>
               </summary>
-              <p className="text-ink/75 mt-4 leading-relaxed">
+              <p
+                className="text-ink/75 mt-4 leading-relaxed"
+                style={{ marginTop: '1rem' }}
+              >
                 Faz <em>todo</em> o sentido. A MarIA foi feita exatamente pra
                 MEI, PME, autônomo e ONG — gente que sempre foi invisível porque
                 assessoria tradicional cobra R$ 3.000+/mês. Pequenez não é
@@ -1045,14 +1353,20 @@ export function LandingPage({
               </p>
             </details>
 
-            <details className="card-news rounded-xl p-6 group">
+            <details
+              className="card-news rounded-xl p-6 group"
+              style={{ padding: '1.5rem', marginBottom: 0 }}
+            >
               <summary className="font-display text-xl font-semibold cursor-pointer flex items-center justify-between">
                 <span>Quanto tempo até sair uma matéria?</span>
                 <span className="text-rose text-3xl group-open:rotate-45 transition-transform">
                   +
                 </span>
               </summary>
-              <p className="text-ink/75 mt-4 leading-relaxed">
+              <p
+                className="text-ink/75 mt-4 leading-relaxed"
+                style={{ marginTop: '1rem' }}
+              >
                 Honestamente? Varia muito por gancho. Pautas com timing forte
                 (data comemorativa, lançamento, número novo) saem em 1-3
                 semanas. Pautas frias podem levar 2 meses. Média histórica:{' '}
@@ -1060,14 +1374,20 @@ export function LandingPage({
               </p>
             </details>
 
-            <details className="card-news rounded-xl p-6 group">
+            <details
+              className="card-news rounded-xl p-6 group"
+              style={{ padding: '1.5rem', marginBottom: 0 }}
+            >
               <summary className="font-display text-xl font-semibold cursor-pointer flex items-center justify-between">
                 <span>Posso cancelar quando quiser?</span>
                 <span className="text-rose text-3xl group-open:rotate-45 transition-transform">
                   +
                 </span>
               </summary>
-              <p className="text-ink/75 mt-4 leading-relaxed">
+              <p
+                className="text-ink/75 mt-4 leading-relaxed"
+                style={{ marginTop: '1rem' }}
+              >
                 Sempre. Sem fidelidade, sem taxa de cancelamento, sem letrinha
                 miúda. 2 cliques no painel. Acreditamos que o produto bom prende
                 sozinho.
@@ -1090,17 +1410,27 @@ export function LandingPage({
           <span className="display text-8xl">∞</span>
         </div>
 
-        <div className="container-seguro-estreito text-center relative z-10">
+        <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
           <h2 className="masthead text-[clamp(2.5rem,7vw,5.5rem)] leading-[0.9]">
             Sua história <span className="display-italic">não merece</span>{' '}
             morrer numa caixa de e-mail.
           </h2>
-          <p className="text-xl md:text-2xl mt-8 max-w-2xl mx-auto opacity-90">
+          <p
+            className="text-xl md:text-2xl mt-8 max-w-2xl mx-auto opacity-90"
+            style={{
+              marginTop: '2rem',
+              marginLeft: 'auto',
+              marginRight: 'auto',
+            }}
+          >
             Teste grátis a MarIA. Faça sua primeira pauta. Se gostar, vira
             cliente. Se não gostar, fica sem nada perdido.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mt-12">
+          <div
+            className="flex flex-col sm:flex-row gap-4 justify-center mt-12"
+            style={{ marginTop: '3rem' }}
+          >
             <a
               href="#"
               className="btn-primary"
@@ -1131,7 +1461,10 @@ export function LandingPage({
             </a>
           </div>
 
-          <p className="font-mono text-xs opacity-70 mt-8 tracking-wider">
+          <p
+            className="font-mono text-xs opacity-70 mt-8 tracking-wider"
+            style={{ marginTop: '2rem' }}
+          >
             🇧🇷 FEITO EM GOIÂNIA · APOIADO PELO PROGRAMA CENTELHA-GO ·
             LGPD-COMPLIANT
           </p>
@@ -1139,11 +1472,20 @@ export function LandingPage({
       </section>
 
       {/* =================== FOOTER =================== */}
-      <footer className="bg-ink text-paper py-16 border-t-2 border-paper/20">
-        <div className="container-seguro">
-          <div className="grid md:grid-cols-4 gap-12 mb-12">
+      <footer
+        className="bg-ink text-paper py-16 border-t-2 border-paper/20"
+        style={{ paddingTop: '4rem', paddingBottom: '4rem' }}
+      >
+        <div className="max-w-7xl mx-auto px-6">
+          <div
+            className="grid md:grid-cols-4 gap-12 mb-12"
+            style={{ gap: '3rem', marginBottom: '3rem' }}
+          >
             <div>
-              <div className="flex items-center gap-2 mb-4">
+              <div
+                className="flex items-center gap-2 mb-4"
+                style={{ marginBottom: '1rem' }}
+              >
                 <div className="w-10 h-10 bg-paper text-ink flex items-center justify-center font-display font-bold text-xl rounded-full">
                   M
                 </div>
@@ -1158,7 +1500,10 @@ export function LandingPage({
             </div>
 
             <div>
-              <h4 className="font-mono text-xs tracking-widest mb-4 opacity-60">
+              <h4
+                className="font-mono text-xs tracking-widest mb-4 opacity-60"
+                style={{ marginBottom: '1rem' }}
+              >
                 PRODUTO
               </h4>
               <ul className="space-y-2 text-sm">
@@ -1186,7 +1531,10 @@ export function LandingPage({
             </div>
 
             <div>
-              <h4 className="font-mono text-xs tracking-widest mb-4 opacity-60">
+              <h4
+                className="font-mono text-xs tracking-widest mb-4 opacity-60"
+                style={{ marginBottom: '1rem' }}
+              >
                 JORNALISTAS
               </h4>
               <ul className="space-y-2 text-sm">
@@ -1209,7 +1557,10 @@ export function LandingPage({
             </div>
 
             <div>
-              <h4 className="font-mono text-xs tracking-widest mb-4 opacity-60">
+              <h4
+                className="font-mono text-xs tracking-widest mb-4 opacity-60"
+                style={{ marginBottom: '1rem' }}
+              >
                 EMPRESA
               </h4>
               <ul className="space-y-2 text-sm">
@@ -1240,17 +1591,21 @@ export function LandingPage({
           <div
             className="news-rule mb-6"
             style={{
+              marginBottom: '1.5rem',
               backgroundImage:
                 'linear-gradient(to right, #FAF6F0 50%, transparent 50%)',
             }}
           ></div>
 
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-mono opacity-60">
+          <div
+            className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-mono opacity-60"
+            style={{ gap: '1rem' }}
+          >
             <p>
               © 2026 MarIA · Plataforma de Inteligência de Conexão Jornalística
               · CNPJ XX.XXX.XXX/0001-XX
             </p>
-            <div className="flex gap-6">
+            <div className="flex gap-6" style={{ gap: '1.5rem' }}>
               <a href="#" className="hover:text-rose">
                 Termos
               </a>

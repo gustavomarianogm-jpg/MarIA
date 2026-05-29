@@ -140,7 +140,14 @@ button { font-family: var(--font-sans), 'Poppins', 'Segoe UI', sans-serif; }
 }
 .mob-btn:hover { background: #F5F0FF; color: var(--color-plum); }
 
-html, body { max-width: 100%; overflow-x: hidden; }
+html { max-width: 100%; }
+body { max-width: 100%; overflow-x: hidden; }
+
+.mx-auto { margin-left: auto !important; margin-right: auto !important; }
+.p-5 { padding: 1.25rem !important; }
+.p-6 { padding: 1.5rem !important; }
+.p-8 { padding: 2rem !important; }
+.p-10 { padding: 2.5rem !important; }
 
 @media(max-width: 768px) {
   .nav-links { display: none; }
