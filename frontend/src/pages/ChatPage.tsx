@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { trpc } from '@/utils/trpc';
 import { ReleaseMarkdown } from '@/components/ReleaseMarkdown';
+import './ChatStyles.css';
 
 type ChatMessage = {
   id: string;
@@ -256,7 +257,6 @@ export function ChatPage({
           </div>
         </div>
         <div className="flex items-center gap-2" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-          <button onClick={() => setIsPaywallOpen(true)} style={{ background: '#E91E8C', color: 'white', border: 'none', padding: '4px 8px', borderRadius: '4px', fontSize: '10px', fontWeight: 'bold', cursor: 'pointer' }}>TESTAR MODAL</button>
           {isCongressMode && <span className="chat-stamp hidden sm:inline-block">Demo</span>}
           {session && <span className="chat-stamp hidden sm:inline-block">{credits} créditos</span>}
         </div>
