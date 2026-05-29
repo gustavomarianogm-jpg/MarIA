@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,800;1,9..144,400&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 @import "tailwindcss";
-@source "./pages/**/*.tsx";
+@source "./pages";
 @plugin "@tailwindcss/typography";
 @import "tw-animate-css";
 @import "@fontsource/poppins/400.css";
@@ -11,13 +11,10 @@
 @import "@fontsource/poppins/900.css";
 @import "@fontsource/roboto-mono/400.css";
 @import "./Global.css";
-@import "./LandingGlobal.css";
-@import "./styles/layout-fixes.css";
-@import "./pages/LandingPage.css";
 
 @custom-variant dark (&:is(.dark *));
 
-@theme {
+@theme inline {
     --font-heading: 'Poppins', sans-serif;
     --font-sans: var(--font-inter);
     --font-inter: 'Inter Tight', system-ui, sans-serif;
@@ -153,4 +150,307 @@
   html {
     @apply font-sans;
     }
+}
+/* === MARÍA LANDING PAGE STYLES === */
+
+:root {
+  --grain: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.12 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.landing-body {
+  font-family: 'Inter Tight', sans-serif;
+  background: #FAF6F0;
+  color: #0F0A1A;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Textura grain sutil */
+.grain::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: var(--grain);
+  opacity: 0.35;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+}
+
+/* Display serif */
+.display {
+  font-family: 'Fraunces', serif;
+  font-optical-sizing: auto;
+  letter-spacing: -0.035em;
+  line-height: 0.95;
+  font-weight: 600;
+}
+
+.display-italic {
+  font-style: italic;
+  font-weight: 400;
+}
+
+.marker {
+  background: linear-gradient(180deg, transparent 60%, rgba(245,183,0,0.45) 60%);
+  padding: 0 0.05em;
+}
+
+.news-rule {
+  background-image: linear-gradient(to right, #0F0A1A 50%, transparent 50%);
+  background-size: 8px 1px;
+  background-repeat: repeat-x;
+  background-position: bottom;
+  height: 1px;
+}
+
+.card-news {
+  background: white;
+  border: 1.5px solid #0F0A1A;
+  box-shadow: 6px 6px 0 #0F0A1A;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.card-news:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 8px 8px 0 #0F0A1A;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #0F0A1A;
+  color: #FAF6F0;
+  padding: 1rem 1.75rem;
+  border: 1.5px solid #0F0A1A;
+  font-weight: 600;
+  font-size: 1.05rem;
+  box-shadow: 5px 5px 0 #E91E8C;
+  transition: all 0.2s ease;
+}
+.btn-primary:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 7px 7px 0 #E91E8C;
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #0F0A1A;
+  padding: 1rem 1.5rem;
+  border: 1.5px solid #0F0A1A;
+  font-weight: 600;
+  background: transparent;
+  transition: all 0.2s ease;
+}
+.btn-ghost:hover {
+  background: #0F0A1A;
+  color: #FAF6F0;
+}
+
+.stamp {
+  transform: rotate(-6deg);
+  border: 2px dashed #0F0A1A;
+  padding: 0.3rem 0.75rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: #F5B700;
+  color: #0F0A1A;
+  font-weight: 500;
+  display: inline-block;
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.rise { animation: rise 0.8s ease forwards; opacity: 0; }
+.rise-1 { animation-delay: 0.05s; }
+.rise-2 { animation-delay: 0.2s; }
+.rise-3 { animation-delay: 0.35s; }
+.rise-4 { animation-delay: 0.5s; }
+.rise-5 { animation-delay: 0.65s; }
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 38s linear infinite;
+}
+
+.pulse-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: #E91E8C;
+  box-shadow: 0 0 0 0 rgba(233, 30, 140, 0.6);
+  animation: pulse-landing 1.8s infinite;
+}
+@keyframes pulse-landing {
+  0% { box-shadow: 0 0 0 0 rgba(233, 30, 140, 0.6); }
+  70% { box-shadow: 0 0 0 14px rgba(233, 30, 140, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(233, 30, 140, 0); }
+}
+
+.masthead {
+  font-family: 'Fraunces', serif;
+  font-weight: 800;
+  font-variation-settings: "opsz" 144;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+}
+
+.bubble-maria {
+  background: #0F0A1A;
+  color: #FAF6F0;
+  border-radius: 18px 18px 18px 4px;
+  padding: 0.9rem 1.1rem;
+  max-width: 90%;
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+.bubble-user {
+  background: #FF6B35;
+  color: #FAF6F0;
+  border-radius: 18px 18px 4px 18px;
+  padding: 0.9rem 1.1rem;
+  max-width: 85%;
+  align-self: flex-end;
+  font-size: 0.92rem;
+  line-height: 1.45;
+  margin-left: auto;
+}
+
+.clip-dashed {
+  border: 2px dashed #0F0A1A;
+}
+
+.tabloid {
+  background: #F5B700;
+  color: #0F0A1A;
+  padding: 4px 10px;
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 600;
+}
+
+
+/* Manual Tailwind fallbacks for arbitrary classes */
+@media (min-width: 1024px) {
+  .lg\:grid-cols-\[1\.15fr_1fr\] { grid-template-columns: 1.15fr 1fr; }
+  .lg\:grid-cols-\[1fr_1\.15fr\] { grid-template-columns: 1fr 1.15fr; }
+}
+
+.text-\[clamp\(2\.8rem\,7vw\,5\.5rem\)\] { font-size: clamp(2.8rem, 7vw, 5.5rem); }
+.text-\[10px\] { font-size: 10px; }
+.text-\[clamp\(2\.2rem\,5vw\,4rem\)\] { font-size: clamp(2.2rem, 5vw, 4rem); }
+.text-\[clamp\(2\.4rem\,5\.5vw\,4\.5rem\)\] { font-size: clamp(2.4rem, 5.5vw, 4.5rem); }
+.text-\[clamp\(2\.2rem\,5\.5vw\,4\.5rem\)\] { font-size: clamp(2.2rem, 5.5vw, 4.5rem); }
+.text-\[clamp\(2\.5rem\,7vw\,5\.5rem\)\] { font-size: clamp(2.5rem, 7vw, 5.5rem); }
+.leading-\[0\.9\] { line-height: 0.9; }
+
+
+/* Manual max-w fallbacks missing from Tailwind v4 */
+.max-w-xl { max-width: 36rem; }
+.max-w-2xl { max-width: 42rem; }
+.max-w-3xl { max-width: 48rem; }
+.max-w-4xl { max-width: 56rem; }
+.max-w-5xl { max-width: 64rem; }
+.max-w-6xl { max-width: 72rem; }
+.max-w-7xl { max-width: 80rem; }
+
+
+.max-w-xs { max-width: 20rem; }
+.max-w-sm { max-width: 24rem; }
+.max-w-md { max-width: 28rem; }
+.max-w-lg { max-width: 32rem; }
+
+/* =========================================================================
+   MARÍA LAYOUT FIXES (BURLANDO TAILWIND E OVERRIDES)
+   ========================================================================= */
+
+/* CONTAINER SEGURO PARA MARGENS IGUAIS (Ignora overrides de padding e garante centralização e limites) */
+.container-seguro {
+  width: 100% !important;
+  max-width: 1280px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: clamp(1rem, 2vw, 2rem) !important;
+  padding-right: clamp(1rem, 2vw, 2rem) !important;
+  box-sizing: border-box !important;
+}
+
+/* CONTAINER SEGURO MAIS ESTREITO (Para seções como A Real Dura e Preço) */
+.container-seguro-estreito {
+  width: 100% !important;
+  max-width: 1024px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: clamp(1rem, 2vw, 2rem) !important;
+  padding-right: clamp(1rem, 2vw, 2rem) !important;
+  box-sizing: border-box !important;
+}
+
+/* TAMANHOS DE SEÇÃO CUSTOMIZADOS */
+.sec-hero { padding-top: 7rem !important; padding-bottom: 12rem !important; }
+.sec-dura { padding-top: 14rem !important; padding-bottom: 14rem !important; }
+.sec-passos { padding-top: 8rem !important; padding-bottom: 8rem !important; }
+.sec-prova { padding-top: 12rem !important; padding-bottom: 12rem !important; }
+.sec-comparativo { padding-top: 11rem !important; padding-bottom: 11rem !important; margin-top: 6rem !important; }
+.sec-preco { padding-top: 10rem !important; padding-bottom: 10rem !important; }
+.sec-faq { padding-top: 9rem !important; padding-bottom: 9rem !important; }
+.sec-cta { padding-top: 12rem !important; padding-bottom: 12rem !important; }
+
+/* REPARO DO CHAT PARA NÃO QUEBRAR A TELA */
+.chat-overflow-fix {
+  max-width: 100% !important;
+  min-width: 0 !important;
+}
+.chat-overflow-fix * {
+  white-space: normal !important;
+}
+
+/* RAW CSS CLASSES PARA BURLAR O TAILWIND */
+.raw-chat-icon {
+  width: 2.5rem !important;
+  height: 2.5rem !important;
+  font-size: 1.125rem !important;
+}
+.raw-chat-name {
+  font-size: 0.875rem !important;
+}
+.raw-chat-role {
+  font-size: 0.65rem !important;
+}
+.raw-chat-header-pad {
+  padding-left: 0.5rem !important;
+  padding-right: 0.5rem !important;
+}
+.raw-dashed-line {
+  border-top: 2px dashed var(--color-ink) !important;
+  margin-bottom: 1rem !important;
+}
+.raw-pulse-fix {
+  margin-right: 0.5rem !important;
+}
+.raw-chat-footer-text {
+  font-size: 0.68rem !important;
+  letter-spacing: -0.02em !important;
+}
+.raw-chat-footer-btn {
+  font-size: 0.65rem !important;
+  padding: 0.4rem 0.6rem !important;
+  font-weight: 800 !important;
+}
+.raw-chat-box {
+  min-height: 550px !important;
+  padding: 2.5rem !important;
+}
+.raw-space-y > * + * {
+  margin-top: 1rem !important;
 }
