@@ -8,7 +8,7 @@ interface ReleaseMarkdownProps {
   role?: 'user' | 'assistant';
 }
 
-export function ReleaseMarkdown({ content, variant = 'chat', role = 'assistant' }: ReleaseMarkdownProps) {
+export function ReleaseMarkdown({ content, variant = 'chat' }: ReleaseMarkdownProps) {
   let baseClasses = "";
   if (variant === 'release') {
     baseClasses = "prose max-w-none prose-slate prose-lg font-serif text-slate-800 leading-relaxed";

@@ -19,7 +19,7 @@ import {
 } from './pages/StaticPages';
 
 function AppContent() {
-  const [session, setSession] = useState<any>(null);
+  const [session, setSession] = useState<unknown>(null);
   const navigate = useNavigate();
   const location = useLocation();
 

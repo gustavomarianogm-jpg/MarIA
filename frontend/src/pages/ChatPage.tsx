@@ -21,7 +21,6 @@ export function ChatPage({
   onNavigate: (r: string) => void;
 }) {
   const userQuery = trpc.user.me.useQuery(undefined, { enabled: !!session });
-  const userName = userQuery.data?.name?.split(' ')[0] || 'Visitante';
   const credits = userQuery.data?.credits || 0;
   
   const isCongressMode = new URLSearchParams(window.location.search).get('congresso') === 'true';
@@ -32,7 +31,7 @@ export function ChatPage({
       try { return JSON.parse(saved); } catch { /* ignore */ }
     }
     return [{
-      id: Date.now().toString(),
+      id: crypto.randomUUID(),
       role: 'assistant',
       content: 'Oi! 👋 Sou a MarIA, jornalista. Tô aqui pra transformar a sua história em uma matéria que jornalista quer publicar. Antes de a gente começar: me conta seu nome e o que você faz?'
     }];
@@ -56,7 +55,6 @@ export function ChatPage({
 
   const userMessageCount = messages.filter((m) => m.role === 'user').length;
   const currentStep = Math.min(userMessageCount, 7);
-  const canGenerateRelease = currentStep >= 7 || messages.some((m) => m.content.includes('Gerar release'));
 
   useEffect(() => {
     localStorage.setItem('maria_chat_messages_v2', JSON.stringify(messages));
@@ -93,7 +91,7 @@ export function ChatPage({
     }
 
     const newUserMsg: ChatMessage = {
-      id: Date.now().toString(),
+      id: crypto.randomUUID(),
       role: 'user',
       content: contentToSend,
       files: mappedFiles,
@@ -110,16 +108,17 @@ export function ChatPage({
 
     try {
       const res = await chatMutation.mutateAsync({ messages: apiMessages });
-      const newAssistantMsg: ChatMessage = { id: Date.now().toString(), role: 'assistant', content: res.text };
+      const newAssistantMsg: ChatMessage = { id: crypto.randomUUID(), role: 'assistant', content: res.text };
       setMessages([...newMessages, newAssistantMsg]);
       
       // If we hit step 7, prompt release generation
       if (currentStep + 1 >= 7) {
         handleGenerateRelease([...newMessages, newAssistantMsg]);
       }
-    } catch (err: any) {
-      const errorMsg = err.data?.message || err.message || 'Erro de conexão.';
-      setMessages([...newMessages, { id: Date.now().toString(), role: 'assistant', content: `⚠️ ${errorMsg}` }]);
+    } catch (err: unknown) {
+      const e = err as { data?: { message?: string }, message?: string };
+      const errorMsg = e.data?.message || e.message || 'Erro de conexão.';
+      setMessages([...newMessages, { id: crypto.randomUUID(), role: 'assistant', content: `⚠️ ${errorMsg}` }]);
     }
   };
 
@@ -133,15 +132,16 @@ export function ChatPage({
       else if (!isCongressMode) localStorage.setItem('maria_guest_release', 'true');
 
       setMessages(prev => [...prev, { 
-        id: Date.now().toString(), 
+        id: crypto.randomUUID(), 
         role: 'assistant', 
         content: res.text,
         isFinalRelease: true 
       }]);
       setReleaseReady(true);
       setTimeout(() => setIsPaywallOpen(true), 2600); // Auto-open paywall
-    } catch (err: any) {
-      alert(err.data?.message || err.message || 'Erro ao gerar release.');
+    } catch (err: unknown) {
+      const e = err as { data?: { message?: string }, message?: string };
+      alert(e.data?.message || e.message || 'Erro ao gerar release.');
     }
   };
 
@@ -176,7 +176,7 @@ export function ChatPage({
       setIsRecording(true);
       setRecSeconds(0);
       recIntervalRef.current = window.setInterval(() => setRecSeconds(s => s + 1), 1000);
-    } catch (err) {
+    } catch {
       alert('Não consegui acessar o microfone. Verifique a permissão do navegador.');
     }
   };
