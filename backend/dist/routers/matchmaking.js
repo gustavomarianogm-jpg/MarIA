@@ -124,7 +124,7 @@ exports.matchmakingRouter = (0, trpc_1.router)({
                         outlet: journalist?.outlet
                     };
                 });
-                Promise.resolve().then(() => __importStar(require('../notify'))).then(({ notifyClientMatch, notifyJournalistNewMatch }) => {
+                Promise.resolve().then(() => __importStar(require('../notify.js'))).then(({ notifyClientMatch, notifyJournalistNewMatch }) => {
                     // Notifica o cliente
                     notifyClientMatch(user.email, user.name, storyOwner.title, topMatchesForEmail).catch(err => {
                         console.error('[MATCH] Erro ao notificar cliente sobre match:', err);

@@ -89,7 +89,7 @@ exports.journalistRouter = (0, trpc_1.router)({
             // @ts-ignore
             const owner = Array.isArray(story.users) ? story.users[0] : story.users;
             if (owner && owner.email) {
-                Promise.resolve().then(() => __importStar(require('../notify'))).then(({ notifyClientMatch }) => {
+                Promise.resolve().then(() => __importStar(require('../notify.js'))).then(({ notifyClientMatch }) => {
                     notifyClientMatch(owner.email, owner.name, story.title, [{
                             name: journalist.name,
                             score: 100,

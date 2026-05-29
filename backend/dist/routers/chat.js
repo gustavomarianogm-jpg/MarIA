@@ -72,7 +72,7 @@ exports.chatRouter = (0, trpc_1.router)({
                 throw new Error('A chave da API do Anthropic (Claude) não está configurada.');
             }
             const response = await anthropic.messages.create({
-                model: 'claude-3-5-sonnet-20240620',
+                model: 'claude-3-5-sonnet-20241022',
                 max_tokens: 500,
                 system: personalizedPrompt,
                 messages: input.messages,
@@ -145,7 +145,7 @@ Release gerado pela MarIA — A 1ª Assessora de Imprensa Virtual do Brasil`;
                 throw new Error('A chave da API do Anthropic (Claude) não está configurada no servidor.');
             }
             const response = await anthropicClient.messages.create({
-                model: 'claude-3-5-sonnet-20240620',
+                model: 'claude-3-5-sonnet-20241022',
                 max_tokens: 2000,
                 messages: [...input.messages, { role: 'user', content: pr }],
             });
@@ -155,6 +155,15 @@ Release gerado pela MarIA — A 1ª Assessora de Imprensa Virtual do Brasil`;
             const releaseTitle = titleMatch ? titleMatch[1] : 'Nova pauta';
             // Guest logic
             if (!ctx.user) {
+                // Trava de segurança contra spam de geração gratuita
+                const clientIp = ctx.req?.headers['x-forwarded-for'] || ctx.req?.socket?.remoteAddress || 'unknown';
+                if (!global.guestRateLimit)
+                    global.guestRateLimit = new Map();
+                const requests = global.guestRateLimit.get(clientIp) || 0;
+                if (requests >= 1) {
+                    throw new Error('Limite de demonstração excedido. Crie uma conta gratuita para gerar mais pautas!');
+                }
+                global.guestRateLimit.set(clientIp, requests + 1);
                 try {
                     const { data: conv } = await supabase_1.supabase.from('conversations').insert({
                         userId: null,
@@ -189,14 +198,15 @@ Release gerado pela MarIA — A 1ª Assessora de Imprensa Virtual do Brasil`;
                                     if (!anthropicClient)
                                         return;
                                     const tagsResponse = await anthropicClient.messages.create({
-                                        model: 'claude-3-5-sonnet-20240620',
+                                        model: 'claude-3-5-sonnet-20241022',
                                         max_tokens: 150,
                                         messages: [
                                             { role: 'user', content: `Analise este release e extraia de 3 a 5 tags/categorias que representem os temas principais. Responda APENAS um JSON array de strings em minúsculas, sem explicação. Exemplo: ["tecnologia", "startup", "fintech"]\n\nRelease:\n${releaseText}` }
                                         ]
                                     });
                                     // @ts-ignore
-                                    const tagsText = tagsResponse.content[0].text.trim();
+                                    let tagsText = tagsResponse.content[0].text.trim();
+                                    tagsText = tagsText.replace(/```json/g, '').replace(/```/g, '').trim();
                                     const tags = JSON.parse(tagsText);
                                     if (Array.isArray(tags)) {
                                         await supabase_1.supabase
@@ -265,14 +275,15 @@ Release gerado pela MarIA — A 1ª Assessora de Imprensa Virtual do Brasil`;
                     if (!anthropicClient)
                         return;
                     const tagsResponse = await anthropicClient.messages.create({
-                        model: 'claude-3-5-sonnet-20240620',
+                        model: 'claude-3-5-sonnet-20241022',
                         max_tokens: 150,
                         messages: [
                             { role: 'user', content: `Analise este release e extraia de 3 a 5 tags/categorias que representem os temas principais. Responda APENAS um JSON array de strings em minúsculas, sem explicação. Exemplo: ["tecnologia", "startup", "fintech"]\n\nRelease:\n${releaseText}` }
                         ]
                     });
                     // @ts-ignore
-                    const tagsText = tagsResponse.content[0].text.trim();
+                    let tagsText = tagsResponse.content[0].text.trim();
+                    tagsText = tagsText.replace(/```json/g, '').replace(/```/g, '').trim();
                     const tags = JSON.parse(tagsText);
                     if (Array.isArray(tags)) {
                         await supabase_1.supabase

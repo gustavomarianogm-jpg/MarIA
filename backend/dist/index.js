@@ -36,17 +36,58 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.appRouter = void 0;
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const trpcExpress = __importStar(require("@trpc/server/adapters/express"));
 const trpc_1 = require("./trpc");
+const waitlist_1 = require("./routers/waitlist");
+const user_1 = require("./routers/user");
+const stories_1 = require("./routers/stories");
+const chat_1 = require("./routers/chat");
+const admin_1 = require("./routers/admin");
+const matchmaking_1 = require("./routers/matchmaking");
+const journalist_1 = require("./routers/journalist");
+// Monta o appRouter AQUI, depois que todos os módulos já foram carregados
+// Isso evita dependência circular (trpc.ts importava os routers que importavam trpc.ts)
+exports.appRouter = (0, trpc_1.router)({
+    healthcheck: trpc_1.publicProcedure.query(() => {
+        return { status: 'ok', timestamp: new Date() };
+    }),
+    waitlist: waitlist_1.waitlistRouter,
+    user: user_1.userRouter,
+    stories: stories_1.storiesRouter,
+    chat: chat_1.chatRouter,
+    admin: admin_1.adminRouter,
+    matchmaking: matchmaking_1.matchmakingRouter,
+    journalist: journalist_1.journalistRouter,
+});
 const app = (0, express_1.default)();
 // Permite chamadas do frontend no Vercel e do localhost
-app.use((0, cors_1.default)({ origin: '*' }));
+const allowedOrigins = [
+    'http://localhost:3000',
+    'http://localhost:5173',
+    'https://mar-ia-mhjz.vercel.app',
+    process.env.ALLOWED_ORIGIN
+].filter(Boolean);
+app.use((0, cors_1.default)({
+    origin: function (origin, callback) {
+        if (!origin)
+            return callback(null, true);
+        if (allowedOrigins.includes(origin) ||
+            origin.endsWith('.vercel.app')) {
+            callback(null, true);
+        }
+        else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    credentials: true
+}));
 app.use(express_1.default.json());
 // tRPC endpoint
 app.use('/trpc', trpcExpress.createExpressMiddleware({
-    router: trpc_1.appRouter,
+    router: exports.appRouter,
     createContext: trpc_1.createContext,
 }));
 app.get('/', (req, res) => {
