@@ -244,7 +244,7 @@ export function ChatPage({
         {/* HEADER */}
         <header className="border-b-2 border-ink bg-paper px-4 py-3 flex items-center justify-between flex-shrink-0" style={{ borderBottom: '2px solid #0F0A1A', padding: '0.75rem 1rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexShrink: 0 }}>
         <div className="flex items-center gap-3" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-          <button onClick={() => onNavigate('dash')} className="chat-input-btn" style={{width:'38px', height:'38px'}} aria-label="Voltar">
+          <button onClick={() => onNavigate(session && !isCongressMode ? 'dash' : 'landing')} className="chat-input-btn" style={{width:'38px', height:'38px'}} aria-label="Voltar">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24" style={{ width: '1rem', height: '1rem' }}><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7"/></svg>
           </button>
           
