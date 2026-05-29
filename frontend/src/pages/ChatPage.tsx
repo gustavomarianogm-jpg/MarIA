@@ -311,7 +311,28 @@ export function ChatPage({
 
                 {!isCongressMode && (
                   <div className="flex gap-2 mt-4 justify-end">
-                    <button onClick={() => setIsPaywallOpen(true)} className="chat-quick-chip bg-ink text-paper border-ink hover:bg-rose hover:border-rose hover:text-white shadow-[4px_4px_0_#E91E8C] hover:translate-y-[2px] hover:shadow-[2px_2px_0_#E91E8C] transition-all">
+                    <button 
+                      onClick={() => setIsPaywallOpen(true)} 
+                      className="chat-quick-chip transition-all"
+                      style={{
+                        backgroundColor: '#0F0A1A', 
+                        color: '#FAF6F0', 
+                        borderColor: '#0F0A1A',
+                        boxShadow: '4px 4px 0 #E91E8C'
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.backgroundColor = '#E91E8C';
+                        e.currentTarget.style.borderColor = '#E91E8C';
+                        e.currentTarget.style.boxShadow = '2px 2px 0 #0F0A1A';
+                        e.currentTarget.style.transform = 'translateY(2px)';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.backgroundColor = '#0F0A1A';
+                        e.currentTarget.style.borderColor = '#0F0A1A';
+                        e.currentTarget.style.boxShadow = '4px 4px 0 #E91E8C';
+                        e.currentTarget.style.transform = 'none';
+                      }}
+                    >
                       Enviar para imprensa →
                     </button>
                   </div>
