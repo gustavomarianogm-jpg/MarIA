@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export default async function handler(req: any, res: any) {
   try {
-    const appModule = await import('../backend/dist/index.js');
+    const appModule = await import('../../backend/dist/index.js');
     const app = appModule.default?.default || appModule.default || appModule;
 
     if (typeof app !== 'function') {
