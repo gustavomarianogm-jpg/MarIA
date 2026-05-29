@@ -11,7 +11,7 @@
 @import "@fontsource/poppins/900.css";
 @import "@fontsource/roboto-mono/400.css";
 @import "./Global.css";
-
+@import "./pages/LandingPage.css";
 
 @custom-variant dark (&:is(.dark *));
 
