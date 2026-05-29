@@ -284,21 +284,39 @@ export function ChatPage({
         {messages.map((m) => (
           <div key={m.id} className={m.role === 'user' ? 'chat-bubble-user' : 'chat-bubble-maria'} style={m.isFinalRelease ? { maxWidth: '92%' } : {}}>
             {m.isFinalRelease ? (
-              <>
-                <div className="font-mono text-[10px] tracking-wider mb-2" style={{color:'#F5B700'}}>✓ RELEASE PRONTO</div>
-                <div className="bg-paper text-ink rounded-lg p-3 mt-1" style={{border:'1.5px solid #F5B700'}}>
-                  <div className="font-display text-base mb-1 font-semibold">Sua história está pronta para a imprensa</div>
-                  <div className="border-b border-ink border-dashed my-2"></div>
-                  <div className="text-xs leading-relaxed text-ink/80 prose prose-sm max-w-none">
+              <div className="w-full my-4">
+                <div className="font-mono text-[10px] tracking-wider mb-3 text-mustard uppercase font-bold flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-mustard"></span>
+                  Release Finalizado
+                </div>
+                
+                <div className="bg-white rounded-xl shadow-md p-6 sm:p-8 mt-2 relative overflow-hidden border border-ink/10">
+                  <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-rose to-plum"></div>
+                  <div className="absolute top-0 right-8 w-8 h-10 bg-mustard opacity-20 -skew-x-12"></div>
+                  
+                  <div className="flex items-center gap-3 mb-8">
+                    <div className="w-10 h-10 rounded-full bg-ink flex items-center justify-center text-paper">
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10l6 6v10a2 2 0 01-2 2z"/></svg>
+                    </div>
+                    <div>
+                      <div className="font-display text-lg font-bold text-ink leading-none">Documento Oficial</div>
+                      <div className="font-mono text-[10px] text-ink/50 mt-1 uppercase tracking-widest">Pronto para envio</div>
+                    </div>
+                  </div>
+                  
+                  <div className="text-ink/90">
                     <ReleaseMarkdown content={m.content} variant="release" />
                   </div>
                 </div>
+
                 {!isCongressMode && (
-                  <div className="flex gap-2 mt-3">
-                    <button onClick={() => setIsPaywallOpen(true)} className="chat-quick-chip" style={{background:'#F5B700'}}>Enviar para imprensa →</button>
+                  <div className="flex gap-2 mt-4 justify-end">
+                    <button onClick={() => setIsPaywallOpen(true)} className="chat-quick-chip bg-ink text-paper border-ink hover:bg-rose hover:border-rose hover:text-white shadow-[4px_4px_0_#E91E8C] hover:translate-y-[2px] hover:shadow-[2px_2px_0_#E91E8C] transition-all">
+                      Enviar para imprensa →
+                    </button>
                   </div>
                 )}
-              </>
+              </div>
             ) : m.isAudio ? (
               <div className="chat-audio-msg">
                 <svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M19 11a7 7 0 01-14 0m7 7v4m0-4a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"/></svg>
