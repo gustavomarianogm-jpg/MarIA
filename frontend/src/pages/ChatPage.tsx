@@ -180,7 +180,7 @@ export function ChatPage({
       setRecSeconds(0);
       recIntervalRef.current = window.setInterval(() => setRecSeconds(s => s + 1), 1000);
     } catch {
-      alert('Não consegui acessar o microfone. Verifique a permissão do navegador.');
+      alert('⚠️ Não foi possível acessar o microfone.\n\nSe você negou o acesso antes, clique no ícone de cadeado (🔒) na barra de endereços do navegador, permita o uso do microfone e recarregue a página.');
     }
   };
 
