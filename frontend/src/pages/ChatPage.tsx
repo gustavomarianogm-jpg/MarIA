@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { trpc } from '@/utils/trpc';
 import { ReleaseMarkdown } from '@/components/ReleaseMarkdown';
-import './ChatPage.css';
 
 type ChatMessage = {
   id: string;
