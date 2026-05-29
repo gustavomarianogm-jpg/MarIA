@@ -139,7 +139,9 @@ export function ChatPage({
         isFinalRelease: true 
       }]);
       setReleaseReady(true);
-      setTimeout(() => setIsPaywallOpen(true), 2600); // Auto-open paywall
+      if (!isCongressMode) {
+        setTimeout(() => setIsPaywallOpen(true), 2600); // Auto-open paywall
+      }
     } catch (err: unknown) {
       const e = err as { data?: { message?: string }, message?: string };
       alert(e.data?.message || e.message || 'Erro ao gerar release.');
@@ -291,9 +293,11 @@ export function ChatPage({
                     <ReleaseMarkdown content={m.content} variant="release" />
                   </div>
                 </div>
-                <div className="flex gap-2 mt-3">
-                  <button onClick={() => setIsPaywallOpen(true)} className="chat-quick-chip" style={{background:'#F5B700'}}>Enviar para imprensa →</button>
-                </div>
+                {!isCongressMode && (
+                  <div className="flex gap-2 mt-3">
+                    <button onClick={() => setIsPaywallOpen(true)} className="chat-quick-chip" style={{background:'#F5B700'}}>Enviar para imprensa →</button>
+                  </div>
+                )}
               </>
             ) : m.isAudio ? (
               <div className="chat-audio-msg">
