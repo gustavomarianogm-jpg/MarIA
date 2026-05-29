@@ -78,7 +78,7 @@ export function LandingPage({
                 boxShadow: '3px 3px 0 #E91E8C',
               }}
             >
-              Entrar →
+              Testar grátis →
             </a>
           </div>
         </div>

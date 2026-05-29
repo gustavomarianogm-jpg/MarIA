@@ -172,7 +172,7 @@ function AppContent() {
                     className={`nav-btn ${['/dash', '/chat'].includes(location.pathname) ? 'active' : ''}`}
                     onClick={() => navigate('/dash')}
                   >
-                    Entrar
+                    Testar grátis
                   </button>
                 )}
               </div>

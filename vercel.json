@@ -9,7 +9,7 @@
   "rewrites": [
     { "source": "/trpc/(.*)", "destination": "/api/index.ts" },
     { "source": "/api/(.*)", "destination": "/api/index.ts" },
-    { "source": "/(.*)", "destination": "/chat.html" }
+    { "source": "/(.*)", "destination": "/index.html" }
   ],
   "headers": [
     {
