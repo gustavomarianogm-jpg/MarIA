@@ -163,7 +163,10 @@
   -webkit-font-smoothing: antialiased;
 }
 
-/* Textura grain sutil */
+/* Textura grain sutil.
+   `position: relative` no próprio .grain garante que o ::before ancore no
+   elemento certo mesmo quando o consumidor esquece de aplicar `relative`. */
+.grain { position: relative; }
 .grain::before {
   content: '';
   position: absolute;
@@ -172,6 +175,7 @@
   opacity: 0.35;
   pointer-events: none;
   mix-blend-mode: multiply;
+  z-index: 0;
 }
 
 /* Display serif */
@@ -188,13 +192,26 @@
   font-weight: 400;
 }
 
-.marker {
+/* Highlight de texto. `.marker` colide com o nome do variant nativo do Tailwind
+   (marker:*); `.text-highlight` é o nome canônico — `.marker` fica como alias
+   até a migração dos consumidores. */
+.marker,
+.text-highlight {
   background: linear-gradient(180deg, transparent 60%, rgba(245,183,0,0.45) 60%);
   padding: 0 0.05em;
 }
 
 .news-rule {
   background-image: linear-gradient(to right, #0F0A1A 50%, transparent 50%);
+  background-size: 8px 1px;
+  background-repeat: repeat-x;
+  background-position: bottom;
+  height: 1px;
+}
+
+/* Mesma régua sobre fundo escuro (ink). */
+.news-rule-light {
+  background-image: linear-gradient(to right, #FAF6F0 50%, transparent 50%);
   background-size: 8px 1px;
   background-repeat: repeat-x;
   background-position: bottom;
@@ -260,16 +277,34 @@
   display: inline-block;
 }
 
+/* Variante compacta usada no chat (rotação menor para não estourar o header). */
+.stamp-sm {
+  transform: rotate(-4deg);
+  font-size: 0.62rem;
+  padding: 0.2rem 0.6rem;
+}
+
 @keyframes rise {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 }
-.rise { animation: rise 0.8s ease forwards; opacity: 0; }
-.rise-1 { animation-delay: 0.05s; }
-.rise-2 { animation-delay: 0.2s; }
-.rise-3 { animation-delay: 0.35s; }
-.rise-4 { animation-delay: 0.5s; }
-.rise-5 { animation-delay: 0.65s; }
+
+/* `.rise` parte de opacity:0 — sob prefers-reduced-motion o conteúdo tem de
+   nascer visível, senão a seção fica permanentemente invisível. */
+@media (prefers-reduced-motion: no-preference) {
+  .rise { animation: rise 0.8s ease forwards; opacity: 0; }
+  .rise-1 { animation-delay: 0.05s; }
+  .rise-2 { animation-delay: 0.2s; }
+  .rise-3 { animation-delay: 0.35s; }
+  .rise-4 { animation-delay: 0.5s; }
+  .rise-5 { animation-delay: 0.65s; }
+}
+
+/* Sombras hard (neo-brutalismo) — definem o caráter visual do produto. */
+.shadow-hard { box-shadow: 6px 6px 0 #0F0A1A; }
+.shadow-hard-lg { box-shadow: 8px 8px 0 #0F0A1A; }
+.shadow-hard-rose { box-shadow: 5px 5px 0 #E91E8C; }
+.shadow-hard-rose-lg { box-shadow: 7px 7px 0 #E91E8C; }
 
 @keyframes marquee {
   from { transform: translateX(0); }
@@ -298,7 +333,7 @@
   font-weight: 800;
   font-variation-settings: "opsz" 144;
   letter-spacing: -0.04em;
-  line-height: 1.1;
+  line-height: 0.9;
 }
 
 .bubble-maria {

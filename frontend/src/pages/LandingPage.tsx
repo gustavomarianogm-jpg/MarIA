@@ -1,5 +1,55 @@
 import React from 'react';
 
+const WHATSAPP_URL = 'https://wa.me/5562993350000';
+
+const DIAS = [
+  'DOMINGO',
+  'SEGUNDA',
+  'TERÇA',
+  'QUARTA',
+  'QUINTA',
+  'SEXTA',
+  'SÁBADO',
+];
+const MESES = [
+  'JAN',
+  'FEV',
+  'MAR',
+  'ABR',
+  'MAI',
+  'JUN',
+  'JUL',
+  'AGO',
+  'SET',
+  'OUT',
+  'NOV',
+  'DEZ',
+];
+
+/** Data da tarja superior — editorial de jornal, precisa ser a de hoje. */
+function formatTopBarDate(): string {
+  const hoje = new Date();
+  return `${DIAS[hoje.getDay()]} · ${hoje.getDate()} · ${MESES[hoje.getMonth()]} · ${hoje.getFullYear()}`;
+}
+
+/**
+ * Veículos da esteira. O track é renderizado duas vezes porque a animação
+ * `marquee` usa `translateX(-50%)`: o loop só é imperceptível se a segunda
+ * metade for idêntica à primeira. Nunca duplicar à mão no JSX.
+ */
+const VEICULOS = [
+  'Jornais Locais',
+  '· Podcasts ·',
+  'Revistas de Nicho',
+  '· Emissoras de TV ·',
+  'Portais de Notícias',
+  '· Blogs Especializados ·',
+  'Rádios Locais',
+  '· Agências de Notícia ·',
+  'Valor Econômico',
+  '· Tribuna do Planalto ·',
+];
+
 export function LandingPage({
   onNavigate,
 }: {
@@ -21,9 +71,7 @@ export function LandingPage({
               RESULTADO
             </span>
           </div>
-          <div className="hidden md:block opacity-60">
-            QUARTA · 20 · MAI · 2026
-          </div>
+          <div className="hidden md:block opacity-60">{formatTopBarDate()}</div>
         </div>
       </div>
 
@@ -59,7 +107,14 @@ export function LandingPage({
             <a href="#preco" className="hover:text-rose transition-colors">
               Preço
             </a>
-            <a href="#jornalista" className="hover:text-rose transition-colors">
+            <a
+              onClick={(e) => {
+                e.preventDefault();
+                onNavigate('journalist-signup');
+              }}
+              href="/journalist-signup"
+              className="hover:text-rose transition-colors"
+            >
               Sou jornalista
             </a>
           </div>
@@ -466,62 +521,18 @@ export function LandingPage({
             CONEXÕES JORNALÍSTICAS EM POTENCIAL
           </span>
         </div>
-        <div className="marquee-track gap-16 items-center text-paper/85">
-          <span className="display text-3xl opacity-80 whitespace-nowrap">
-            Jornais Locais
-          </span>
-          <span className="display text-3xl opacity-80 whitespace-nowrap">
-            · Podcasts ·
-          </span>
-          <span className="display text-3xl opacity-80 whitespace-nowrap">
-            Revistas de Nicho
-          </span>
-          <span className="display text-3xl opacity-80 whitespace-nowrap">
-            · Emissoras de TV ·
-          </span>
-          <span className="display text-3xl opacity-80 whitespace-nowrap">
-            Portais de Notícias
-          </span>
-          <span className="display text-3xl opacity-80 whitespace-nowrap">
-            · Blogs Especializados ·
-          </span>
-          <span className="display text-3xl opacity-80 whitespace-nowrap">
-            Rádios Locais
-          </span>
-          <span className="display text-3xl opacity-80 whitespace-nowrap">
-            · Agências de Notícia ·
-          </span>
-          <span className="display text-3xl opacity-80 whitespace-nowrap">
-            Valor Econômico
-          </span>
-          <span className="display text-3xl opacity-80 whitespace-nowrap">
-            · Tribuna do Planalto ·
-          </span>
-          {/* duplicado pra loop infinito */}
-          <span className="display text-3xl opacity-80 whitespace-nowrap">
-            Jornais Locais
-          </span>
-          <span className="display text-3xl opacity-80 whitespace-nowrap">
-            · Podcasts ·
-          </span>
-          <span className="display text-3xl opacity-80 whitespace-nowrap">
-            Revistas de Nicho
-          </span>
-          <span className="display text-3xl opacity-80 whitespace-nowrap">
-            · Emissoras de TV ·
-          </span>
-          <span className="display text-3xl opacity-80 whitespace-nowrap">
-            Portais de Notícias
-          </span>
-          <span className="display text-3xl opacity-80 whitespace-nowrap">
-            · Blogs Especializados ·
-          </span>
-          <span className="display text-3xl opacity-80 whitespace-nowrap">
-            Rádios Locais
-          </span>
-          <span className="display text-3xl opacity-80 whitespace-nowrap">
-            · Agências de Notícia ·
-          </span>
+        <div
+          className="marquee-track gap-16 items-center text-paper/85"
+          aria-hidden="true"
+        >
+          {[...VEICULOS, ...VEICULOS].map((veiculo, i) => (
+            <span
+              key={i}
+              className="display text-3xl opacity-80 whitespace-nowrap"
+            >
+              {veiculo}
+            </span>
+          ))}
         </div>
       </section>
 
@@ -1432,6 +1443,10 @@ export function LandingPage({
             style={{ marginTop: '3rem' }}
           >
             <a
+              onClick={(e) => {
+                e.preventDefault();
+                onNavigate('chat');
+              }}
               href="#"
               className="btn-primary"
               style={{
@@ -1453,7 +1468,9 @@ export function LandingPage({
               </svg>
             </a>
             <a
-              href="#"
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="btn-ghost"
               style={{ borderColor: '#FAF6F0', color: '#FAF6F0' }}
             >
@@ -1539,7 +1556,14 @@ export function LandingPage({
               </h4>
               <ul className="space-y-2 text-sm">
                 <li>
-                  <a href="#" className="hover:text-rose">
+                  <a
+                    onClick={(e) => {
+                      e.preventDefault();
+                      onNavigate('journalist-signup');
+                    }}
+                    href="/journalist-signup"
+                    className="hover:text-rose"
+                  >
                     Cadastrar-se grátis
                   </a>
                 </li>
@@ -1575,7 +1599,14 @@ export function LandingPage({
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-rose">
+                  <a
+                    onClick={(e) => {
+                      e.preventDefault();
+                      onNavigate('contact');
+                    }}
+                    href="/contact"
+                    className="hover:text-rose"
+                  >
                     Contato
                   </a>
                 </li>
@@ -1606,13 +1637,34 @@ export function LandingPage({
               · CNPJ XX.XXX.XXX/0001-XX
             </p>
             <div className="flex gap-6" style={{ gap: '1.5rem' }}>
-              <a href="#" className="hover:text-rose">
+              <a
+                onClick={(e) => {
+                  e.preventDefault();
+                  onNavigate('terms');
+                }}
+                href="/terms"
+                className="hover:text-rose"
+              >
                 Termos
               </a>
-              <a href="#" className="hover:text-rose">
+              <a
+                onClick={(e) => {
+                  e.preventDefault();
+                  onNavigate('privacy');
+                }}
+                href="/privacy"
+                className="hover:text-rose"
+              >
                 Privacidade
               </a>
-              <a href="#" className="hover:text-rose">
+              <a
+                onClick={(e) => {
+                  e.preventDefault();
+                  onNavigate('privacy');
+                }}
+                href="/privacy"
+                className="hover:text-rose"
+              >
                 LGPD
               </a>
             </div>
